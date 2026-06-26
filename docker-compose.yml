@@ -4,6 +4,10 @@ services:
   caddy:
     image: caddy:2-alpine
     restart: unless-stopped
+    environment:
+      DOMAIN: ${DOMAIN:?DOMAIN is required}
+      EMAIL: ${EMAIL:?EMAIL is required}
+      WIKI_UPSTREAM: ${WIKI_UPSTREAM:-wikijs:3000}
     depends_on:
       wikijs:
         condition: service_started
