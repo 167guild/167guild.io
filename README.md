@@ -1,6 +1,6 @@
 # 🐉 167guild.io
 
-A beautiful, self-hosted D&D world wiki for the 167 Guild — powered by Wiki.js, PostgreSQL, and Caddy.
+A self-hosted D&D world wiki for the 167 Guild — powered by Wiki.js, PostgreSQL, and Caddy.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -8,7 +8,7 @@ A beautiful, self-hosted D&D world wiki for the 167 Guild — powered by Wiki.js
 
 ## Overview
 
-167guild.io is a private, self-hosted knowledge portal for the 167 Guild D&D campaign. It preserves lore, session history, characters, maps, artwork, and world context while giving the Dungeon Master a private space for hidden world notes.
+167guild.io is a self-hosted knowledge portal for the 167 Guild D&D campaign. It preserves lore, session history, characters, maps, and world context.
 
 This repository is also intended as a **reusable template** for future self-hosted knowledge platforms.
 
@@ -18,12 +18,12 @@ This repository is also intended as a **reusable template** for future self-host
 
 | Component     | Role                                      |
 |---------------|-------------------------------------------|
-| **Wiki.js**   | Wiki engine, authentication, content mgmt |
+| **Wiki.js**   | Wiki engine and content management        |
 | **PostgreSQL** | Primary database                         |
 | **Caddy**     | Reverse proxy, automatic HTTPS           |
-| **Docker Compose** | Local and production orchestration  |
+| **Docker Compose** | Local orchestration                 |
 
-See [`.github/specs/architecture.spec.md`](.github/specs/architecture.spec.md) for the full architecture specification.
+See [`docs/architecture.md`](docs/architecture.md) for the architecture overview.
 
 ---
 
@@ -108,21 +108,13 @@ task setup     # Initial setup
 
 ## Specifications
 
-All project decisions are driven by specifications located in [`.github/specs/`](.github/specs/):
+Project specifications are located in [`.github/specs/`](.github/specs/):
 
 | Specification | Description |
 |---|---|
 | [vision.spec.md](.github/specs/vision.spec.md) | Project goals and guiding principles |
 | [architecture.spec.md](.github/specs/architecture.spec.md) | System design and component overview |
 | [repository.spec.md](.github/specs/repository.spec.md) | Repository standards and structure |
-| [infrastructure.spec.md](.github/specs/infrastructure.spec.md) | Infrastructure design |
-| [deployment.spec.md](.github/specs/deployment.spec.md) | Deployment process |
-| [authentication.spec.md](.github/specs/authentication.spec.md) | Authentication design |
-| [authorization.spec.md](.github/specs/authorization.spec.md) | Authorization and roles |
-| [permissions.spec.md](.github/specs/permissions.spec.md) | Permission matrix |
-| [content-model.spec.md](.github/specs/content-model.spec.md) | Wiki content structure |
-| [design-system.spec.md](.github/specs/design-system.spec.md) | Visual design principles |
-| [roadmap.spec.md](.github/specs/roadmap.spec.md) | Project roadmap |
 
 ---
 
