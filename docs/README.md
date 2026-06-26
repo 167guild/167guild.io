@@ -76,3 +76,100 @@ healthcheck:
 ```
 
 `wikijs` declares `condition: service_healthy` on `postgres`, so it will not start until the health check passes.
+
+---
+
+## Wiki.js Application
+
+### Purpose
+
+Wiki.js is the wiki engine and content management layer for the 167 Guild knowledge portal. It manages wiki pages, user authentication, authorization, media uploads, version history, and search.
+
+### Responsibilities
+
+- Content management and page rendering
+- User authentication (future: Google OAuth)
+- Authorization and group-based permissions
+- Media and file uploads
+- Full-text search
+- Version history
+
+### Directory Layout
+
+```text
+config/
+└── wikijs/
+    └── config.yml       # Application-level configuration overrides
+
+volumes:
+└── wikijs_data          # named Docker volume — persists uploads and application data
+```
+
+Application configuration overrides live in `config/wikijs/config.yml`, mounted read-only into the container at `/wiki/config`. The named volume `wikijs_data` is mounted at `/wiki/data` and persists across container recreation.
+
+### Environment Variables
+
+| Variable        | Description                                            | Example                    |
+|-----------------|--------------------------------------------------------|----------------------------|
+| `APP_ENV`       | Application environment (`development` or `production`)| `development`              |
+| `WIKI_BASE_URL` | Public base URL for the wiki                           | `http://localhost:3000`    |
+| `DB_HOST`       | Hostname of the PostgreSQL service                     | `postgres`                 |
+| `DB_PORT`       | Port of the PostgreSQL service                         | `5432`                     |
+| `POSTGRES_DB`   | Database name (shared with PostgreSQL service)         | `wikidb`                   |
+| `POSTGRES_USER` | Database username (shared with PostgreSQL service)     | `wikijs`                   |
+| `POSTGRES_PASSWORD` | Database password — **required**                   | *(secret)*                 |
+
+Configure these values in `.env` (copied from `.env.example`). Never commit real credentials.
+
+### Startup Sequence
+
+Wiki.js waits for PostgreSQL to pass its health check before starting:
+
+```
+postgres (healthy)
+    └─→ wikijs (starts, runs health check)
+            └─→ caddy (healthy wikijs required before proxying)
+```
+
+The service declares `condition: service_healthy` on `postgres` so it will not attempt to connect to the database until PostgreSQL is fully ready.
+
+### Health Check
+
+The service polls the `/healthz` endpoint to confirm the application is accepting requests:
+
+```yaml
+healthcheck:
+  test: ["CMD-SHELL", "wget -q --spider http://localhost:3000/healthz || exit 1"]
+  interval: 30s
+  timeout: 10s
+  retries: 5
+  start_period: 60s
+```
+
+`caddy` declares `condition: service_healthy` on `wikijs`, so it will not proxy traffic until Wiki.js reports ready.
+
+### Database Relationship
+
+- Wiki.js connects to PostgreSQL using `DB_TYPE: postgres`.
+- The connection hostname is the Docker service name `postgres`, reachable only on the `internal` network.
+- All wiki pages, users, permissions, metadata, and configuration are stored in PostgreSQL.
+- Wiki.js does **not** interact with the database at the network edge — only on the internal Docker network.
+
+### Reverse Proxy Relationship
+
+- Caddy receives all public HTTPS traffic and reverse-proxies it to Wiki.js at `WIKI_UPSTREAM` (default: `wikijs:3000`).
+- Wiki.js is **not** published directly to the host — it is only reachable through Caddy or on the internal network.
+- No ports are published from the `wikijs` container to the host.
+
+### Persistence Notes
+
+- Wiki uploads and application data live in the `wikijs_data` named volume.
+- Running `docker compose down` does **not** remove the volume; data is preserved.
+- To wipe the application data intentionally, use `docker compose down -v` (destructive).
+
+### Network and Security
+
+- Wiki.js is attached **only** to the `internal` Docker network.
+- No ports are published to the host or the public internet.
+- Public access is exclusively through Caddy on ports 80 and 443.
+- Future authentication providers (e.g., Google OAuth) can be added as environment variables without restructuring the stack.
