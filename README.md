@@ -27,6 +27,29 @@ See [`docs/architecture.md`](docs/architecture.md) for the architecture overview
 
 ---
 
+## Docker Stack (Scaffold)
+
+### Required Software
+
+- [Docker Engine](https://docs.docker.com/engine/install/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+### Planned Startup Flow
+
+The repository now includes an initial `docker-compose.yml` scaffold for `caddy`, `wikijs`, and `postgres`.
+
+When service configuration is completed in follow-up issues, the stack is expected to be started with Docker Compose after creating a local environment file from `.env.example`.
+
+### Service Overview
+
+- **caddy**: reverse-proxy entrypoint scaffold (configuration deferred)
+- **wikijs**: wiki application scaffold wired for PostgreSQL environment variables
+- **postgres**: persistent database scaffold with a basic health check
+
+Named volumes are defined for persistent data, and services are attached to an internal Docker network.
+
+---
+
 ## Development
 
 ### Prerequisites
