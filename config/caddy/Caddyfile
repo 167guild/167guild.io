@@ -1,3 +1,37 @@
-# Placeholder Caddy configuration.
-# Domain routing, TLS, and reverse-proxy directives will be added in future issues.
-{}
+# Global options
+{
+	email {$EMAIL}
+}
+
+# Reusable snippets
+(security_headers) {
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "geolocation=(), microphone=(), camera=()"
+		-Server
+	}
+}
+
+(wiki_proxy) {
+	reverse_proxy {$WIKI_UPSTREAM}
+}
+
+# Explicit redirect for HTTP traffic
+http://{$DOMAIN} {
+	redir https://{$DOMAIN}{uri} permanent
+}
+
+# Main HTTPS site
+{$DOMAIN} {
+	encode zstd gzip
+	import security_headers
+	import wiki_proxy
+
+	log {
+		output stdout
+		format json
+	}
+}
