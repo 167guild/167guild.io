@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "ms-azuretools.vscode-docker",
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+    "redhat.vscode-yaml",
+    "editorconfig.editorconfig",
+    "github.copilot",
+    "github.copilot-chat",
+    "streetsidesoftware.code-spell-checker"
+  ]
+}
