@@ -19,11 +19,6 @@
 	reverse_proxy {$WIKI_UPSTREAM}
 }
 
-# Explicit redirect for HTTP traffic
-http://{$DOMAIN} {
-	redir https://{$DOMAIN}{uri} permanent
-}
-
 # Main HTTPS site
 {$DOMAIN} {
 	encode zstd gzip
