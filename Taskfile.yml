@@ -1,0 +1,32 @@
+version: '3'
+
+tasks:
+  help:
+    desc: Show available development tasks
+    cmds:
+      - task --list
+
+  init:
+    desc: Initialize local development environment (placeholder)
+    cmds:
+      - echo "TODO: initialize local development environment"
+
+  lint:
+    desc: Run repository lint checks (placeholder)
+    cmds:
+      - echo "TODO: run lint checks"
+
+  format:
+    desc: Format repository files (placeholder)
+    cmds:
+      - echo "TODO: run formatting tools"
+
+  up:
+    desc: Start local development stack (placeholder)
+    cmds:
+      - echo "TODO: start local development stack"
+
+  down:
+    desc: Stop local development stack (placeholder)
+    cmds:
+      - echo "TODO: stop local development stack"

@@ -1,0 +1,22 @@
+{
+  "name": "167guild.io",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "redhat.vscode-yaml",
+        "editorconfig.editorconfig",
+        "github.copilot",
+        "github.copilot-chat",
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}

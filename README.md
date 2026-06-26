@@ -27,14 +27,14 @@ See [`docs/architecture.md`](docs/architecture.md) for the architecture overview
 
 ---
 
-## Quick Start
+## Development
 
 ### Prerequisites
 
 - [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/)
 - [Task](https://taskfile.dev/#/installation) (optional but recommended)
 
-### Local Development
+### Local Workflow (High Level)
 
 ```bash
 # 1. Clone the repository
@@ -44,31 +44,35 @@ cd 167guild.io
 # 2. Copy environment template
 cp .env.example .env
 
-# 3. Edit .env with your local configuration
-#    (no secrets required for local development)
+# 3. Open in VS Code
+#    - install recommended extensions from .vscode/extensions.json
+#    - optionally reopen in the provided Dev Container
 
-# 4. Start the stack
+# 4. Initialize local environment scaffolding
+task init
+
+# 5. Run placeholder quality checks
+task lint
+task format
+
+# 6. Start/stop local workflow placeholders
 task up
-# or without Task:
-docker compose up -d
+task down
 ```
 
-The wiki will be available at [http://localhost:3000](http://localhost:3000).
+The current Taskfile commands are intentionally scaffolded placeholders to establish a reproducible baseline developer environment.
 
 ---
 
 ## Available Commands
 
 ```bash
-task up        # Start all services
-task down      # Stop all services
-task restart   # Restart all services
-task logs      # Follow service logs
-task status    # Show service status
-task backup    # Run a backup
-task restore   # Restore from backup
-task deploy    # Deploy to production
-task setup     # Initial setup
+task help      # List available tasks
+task init      # Initialize local development scaffolding (placeholder)
+task lint      # Run lint workflow (placeholder)
+task format    # Run formatter workflow (placeholder)
+task up        # Start local workflow (placeholder)
+task down      # Stop local workflow (placeholder)
 ```
 
 ---
@@ -133,4 +137,3 @@ See [SECURITY.md](SECURITY.md) for the security policy and reporting vulnerabili
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
