@@ -89,16 +89,25 @@ Visual Identity
 - [x] Icons
 - [x] Design tokens
 
+Branding Assets
+
+- [x] Wiki logo
+- [x] Favicon
+- [x] Social preview image
+- [x] README banner
+- [x] Organization seal placeholders
+- [x] Loading artwork
+
 Artwork
 
-- [ ] Homepage hero
+- [x] Homepage hero
 - [ ] Section banners
 - [ ] Character art
 - [ ] NPC art
 - [ ] Maps
 - [ ] Organization crests
 - [ ] Faction heraldry
-- [ ] Background textures
+- [x] Background textures
 
 ---
 

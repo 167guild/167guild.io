@@ -1,5 +1,7 @@
 # 🐉 167guild.io
 
+![167 Guild Wiki](assets/banners/readme-banner.svg)
+
 A self-hosted D&D world wiki for the 167 Guild — powered by Wiki.js, PostgreSQL, and Caddy.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -110,6 +112,11 @@ task down      # Stop local workflow (placeholder)
 │   ├── workflows/          # GitHub Actions workflows
 │   └── specs/              # Project specifications (source of truth)
 ├── .vscode/                # VS Code workspace settings
+├── assets/
+│   ├── branding/           # Core brand identity (favicon, social preview, seals)
+│   ├── banners/            # Hero and README banners
+│   ├── logos/              # Logo variants (full, mark, wordmark)
+│   └── backgrounds/        # Background textures and loading artwork
 ├── config/
 │   ├── caddy/              # Caddy reverse proxy configuration
 │   └── wikijs/             # Wiki.js application configuration
@@ -119,6 +126,7 @@ task down      # Stop local workflow (placeholder)
 │   ├── bootstrap/          # Server bootstrap scripts
 │   ├── deploy/             # Deployment scripts
 │   └── restore/            # Restore scripts
+├── theme/                  # Wiki.js custom theme (design tokens, CSS)
 ├── .editorconfig           # Editor formatting standards
 ├── .env.example            # Environment variable template
 ├── CHANGELOG.md            # Version history
@@ -142,6 +150,22 @@ Project specifications are located in [`.github/specs/`](.github/specs/):
 | [vision.spec.md](.github/specs/vision.spec.md) | Project goals and guiding principles |
 | [architecture.spec.md](.github/specs/architecture.spec.md) | System design and component overview |
 | [repository.spec.md](.github/specs/repository.spec.md) | Repository standards and structure |
+| [design-system.spec.md](.github/specs/design-system.spec.md) | Visual identity and design language |
+
+---
+
+## Branding
+
+Visual assets are organized under [`assets/`](assets/):
+
+| Directory | Contents |
+|---|---|
+| [`assets/logos/`](assets/logos/) | Full logo, logomark, wordmark |
+| [`assets/branding/`](assets/branding/) | Favicon, social preview, organization/faction seals |
+| [`assets/banners/`](assets/banners/) | Homepage hero, README banner |
+| [`assets/backgrounds/`](assets/backgrounds/) | Loading artwork, hero background texture |
+
+See [`assets/README.md`](assets/README.md) for full asset inventory and usage guidance.
 
 ---
 

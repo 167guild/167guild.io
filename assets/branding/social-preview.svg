@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="167 Guild Wiki — social preview">
+  <title>167 Guild Wiki</title>
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f111a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1f2e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8c97a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8a6f2e;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glow-left" cx="20%" cy="30%" r="40%">
+      <stop offset="0%" style="stop-color:#1a2a4a;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#0f111a;stop-opacity:0" />
+    </radialGradient>
+    <radialGradient id="glow-right" cx="80%" cy="60%" r="35%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0.08" />
+      <stop offset="100%" style="stop-color:#0f111a;stop-opacity:0" />
+    </radialGradient>
+    <filter id="glow-filter">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Base background -->
+  <rect width="1200" height="630" fill="url(#bg-grad)"/>
+  <!-- Atmospheric glows -->
+  <rect width="1200" height="630" fill="url(#glow-left)"/>
+  <rect width="1200" height="630" fill="url(#glow-right)"/>
+  <!-- Border frame -->
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#2d3347" stroke-width="1" rx="8"/>
+  <rect x="32" y="32" width="1136" height="566" fill="none" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.3" rx="6"/>
+  <!-- Corner ornaments -->
+  <path d="M24,60 L24,24 L60,24" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.6"/>
+  <path d="M1140,24 L1176,24 L1176,60" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.6"/>
+  <path d="M24,570 L24,606 L60,606" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.6"/>
+  <path d="M1140,606 L1176,606 L1176,570" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.6"/>
+  <!-- Central hex emblem -->
+  <polygon points="600,180 660,213 660,279 600,312 540,279 540,213" fill="none" stroke="url(#gold-grad)" stroke-width="2" filter="url(#glow-filter)"/>
+  <polygon points="600,196 646,222 646,270 600,296 554,270 554,222" fill="#1a1f2e" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="600" y="256" font-family="Georgia, serif" font-size="40" font-weight="700" fill="#c9a84c" text-anchor="middle">167</text>
+  <!-- Main title -->
+  <text x="600" y="380" font-family="Georgia, serif" font-size="64" font-weight="700" fill="url(#gold-grad)" text-anchor="middle" letter-spacing="8">167 GUILD</text>
+  <!-- Divider line -->
+  <line x1="380" y1="410" x2="820" y2="410" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.4"/>
+  <!-- Subtitle -->
+  <text x="600" y="450" font-family="Georgia, serif" font-size="24" font-weight="400" fill="#8a8278" text-anchor="middle" letter-spacing="10">WIKI</text>
+  <!-- Tagline -->
+  <text x="600" y="510" font-family="Georgia, serif" font-size="16" font-weight="400" fill="#5a5650" text-anchor="middle" letter-spacing="3">A living world for the 167 Guild D&amp;D campaign</text>
+</svg>

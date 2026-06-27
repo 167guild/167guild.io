@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080" role="img" aria-label="167 Guild hero background texture">
+  <title>167 Guild — Hero Background</title>
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f111a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1f2e;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glow-left" cx="15%" cy="30%" r="40%">
+      <stop offset="0%" style="stop-color:#1a2a4a;stop-opacity:0.35" />
+      <stop offset="100%" style="stop-color:#0f111a;stop-opacity:0" />
+    </radialGradient>
+    <radialGradient id="glow-right" cx="85%" cy="70%" r="40%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0.05" />
+      <stop offset="100%" style="stop-color:#0f111a;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  <!-- Base background -->
+  <rect width="1920" height="1080" fill="url(#bg-grad)"/>
+  <rect width="1920" height="1080" fill="url(#glow-left)"/>
+  <rect width="1920" height="1080" fill="url(#glow-right)"/>
+  <!-- Subtle grid lines for depth -->
+  <line x1="0" y1="216" x2="1920" y2="216" stroke="#1e2335" stroke-width="1"/>
+  <line x1="0" y1="432" x2="1920" y2="432" stroke="#1e2335" stroke-width="1"/>
+  <line x1="0" y1="648" x2="1920" y2="648" stroke="#1e2335" stroke-width="1"/>
+  <line x1="0" y1="864" x2="1920" y2="864" stroke="#1e2335" stroke-width="1"/>
+  <line x1="384" y1="0" x2="384" y2="1080" stroke="#1e2335" stroke-width="1"/>
+  <line x1="768" y1="0" x2="768" y2="1080" stroke="#1e2335" stroke-width="1"/>
+  <line x1="1152" y1="0" x2="1152" y2="1080" stroke="#1e2335" stroke-width="1"/>
+  <line x1="1536" y1="0" x2="1536" y2="1080" stroke="#1e2335" stroke-width="1"/>
+  <!-- Large background hexagon pattern (watermark) -->
+  <polygon points="960,200 1120,293 1120,479 960,572 800,479 800,293" fill="none" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.04"/>
+  <polygon points="960,280 1080,348 1080,484 960,552 840,484 840,348" fill="none" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.03"/>
+  <!-- Bottom overlay for content legibility -->
+  <rect x="0" y="700" width="1920" height="380" fill="#0f111a" opacity="0.7"/>
+  <!-- Placeholder label -->
+  <text x="960" y="1060" font-family="system-ui, sans-serif" font-size="14" fill="#2d3347" text-anchor="middle" letter-spacing="3">PLACEHOLDER — HERO BACKGROUND TEXTURE</text>
+</svg>

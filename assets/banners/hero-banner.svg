@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 480" width="1440" height="480" role="img" aria-label="167 Guild Wiki — homepage hero artwork">
+  <title>167 Guild Wiki — Homepage Hero</title>
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f111a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1f2e;stop-opacity:0.95" />
+    </linearGradient>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8c97a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8a6f2e;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glow-top-left" cx="15%" cy="25%" r="40%">
+      <stop offset="0%" style="stop-color:#1a2a4a;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#0f111a;stop-opacity:0" />
+    </radialGradient>
+    <radialGradient id="glow-top-right" cx="85%" cy="20%" r="35%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0.06" />
+      <stop offset="100%" style="stop-color:#0f111a;stop-opacity:0" />
+    </radialGradient>
+    <radialGradient id="glow-center" cx="50%" cy="40%" r="30%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0.08" />
+      <stop offset="100%" style="stop-color:#0f111a;stop-opacity:0" />
+    </radialGradient>
+    <filter id="glow-filter">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Base -->
+  <rect width="1440" height="480" fill="url(#bg-grad)"/>
+  <rect width="1440" height="480" fill="url(#glow-top-left)"/>
+  <rect width="1440" height="480" fill="url(#glow-top-right)"/>
+  <rect width="1440" height="480" fill="url(#glow-center)"/>
+  <!-- Subtle grid / texture lines (atmosphere) -->
+  <line x1="0" y1="120" x2="1440" y2="120" stroke="#2d3347" stroke-width="0.5" stroke-opacity="0.3"/>
+  <line x1="0" y1="240" x2="1440" y2="240" stroke="#2d3347" stroke-width="0.5" stroke-opacity="0.2"/>
+  <line x1="0" y1="360" x2="1440" y2="360" stroke="#2d3347" stroke-width="0.5" stroke-opacity="0.3"/>
+  <!-- Vertical accents -->
+  <line x1="240" y1="0" x2="240" y2="480" stroke="#2d3347" stroke-width="0.5" stroke-opacity="0.2"/>
+  <line x1="720" y1="0" x2="720" y2="480" stroke="#2d3347" stroke-width="0.5" stroke-opacity="0.15"/>
+  <line x1="1200" y1="0" x2="1200" y2="480" stroke="#2d3347" stroke-width="0.5" stroke-opacity="0.2"/>
+  <!-- Large background hex emblem (watermark) -->
+  <polygon points="720,80 840,148 840,284 720,352 600,284 600,148" fill="none" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.08"/>
+  <polygon points="720,108 816,162 816,272 720,326 624,272 624,162" fill="none" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.05"/>
+  <!-- Center foreground emblem -->
+  <polygon points="720,152 760,175 760,221 720,244 680,221 680,175" fill="#1a1f2e" stroke="url(#gold-grad)" stroke-width="2" filter="url(#glow-filter)"/>
+  <text x="720" y="205" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#c9a84c" text-anchor="middle">167</text>
+  <!-- Hero title -->
+  <text x="720" y="305" font-family="Georgia, serif" font-size="56" font-weight="700" fill="url(#gold-grad)" text-anchor="middle" letter-spacing="10">167 GUILD</text>
+  <!-- Decorative divider lines -->
+  <line x1="320" y1="330" x2="560" y2="330" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.35"/>
+  <line x1="880" y1="330" x2="1120" y2="330" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.35"/>
+  <!-- Center dot -->
+  <circle cx="720" cy="330" r="3" fill="#c9a84c" fill-opacity="0.4"/>
+  <!-- Subtitle -->
+  <text x="720" y="375" font-family="Georgia, serif" font-size="18" font-weight="400" fill="#8a8278" text-anchor="middle" letter-spacing="8">A WORLD OF MYSTERY AND LEGEND</text>
+  <!-- Bottom fade -->
+  <rect x="0" y="420" width="1440" height="60" fill="url(#bg-grad)" opacity="0.7"/>
+  <!-- Bottom border -->
+  <rect x="0" y="477" width="1440" height="3" fill="url(#gold-grad)" opacity="0.3"/>
+  <!-- Placeholder label (to be replaced with generated art) -->
+  <text x="720" y="455" font-family="system-ui, sans-serif" font-size="10" fill="#5a5650" text-anchor="middle" letter-spacing="2">PLACEHOLDER — HOMEPAGE HERO</text>
+</svg>
