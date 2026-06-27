@@ -19,8 +19,11 @@ echo "🔎 Checking container status..."
 "${COMPOSE_CMD[@]}" ps
 
 echo "🔎 Checking Wiki.js health endpoint..."
-if ! "${COMPOSE_CMD[@]}" exec -T wikijs wget -q --spider http://localhost:3000/healthz \
-  && ! "${COMPOSE_CMD[@]}" exec -T wikijs wget -q --spider http://localhost:3000/; then
+if "${COMPOSE_CMD[@]}" exec -T wikijs wget -q --spider http://localhost:3000/healthz; then
+  :
+elif "${COMPOSE_CMD[@]}" exec -T wikijs wget -q --spider http://localhost:3000/; then
+  :
+else
   echo "❌ Wiki.js health check failed (/healthz and /)."
   echo "Verify the wikijs container is running and inspect logs with: docker compose --env-file $ENV_FILE -f docker-compose.yml -f deploy/production/docker-compose.production.yml logs wikijs"
   exit 1
@@ -36,7 +39,8 @@ fi
 echo "🔎 Checking Caddy endpoint..."
 if ! wget -q --spider --timeout=10 "https://${DOMAIN}"; then
   echo "❌ Caddy HTTPS check failed for https://${DOMAIN}."
-  echo "Check DNS, TLS provisioning, and Caddy logs: docker compose --env-file $ENV_FILE -f docker-compose.yml -f deploy/production/docker-compose.production.yml logs caddy"
+  echo "This can indicate DNS routing, TLS provisioning, or Caddy runtime issues."
+  echo "Check DNS, TLS state, and Caddy logs: docker compose --env-file $ENV_FILE -f docker-compose.yml -f deploy/production/docker-compose.production.yml logs caddy"
   exit 1
 fi
 

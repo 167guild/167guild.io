@@ -18,7 +18,7 @@ jobs:
       - name: Create production environment file
         run: |
           if [ -z "${{ secrets.PRODUCTION_ENV_FILE }}" ]; then
-            echo "Missing required placeholder secret: PRODUCTION_ENV_FILE"
+            echo "Missing required secret: PRODUCTION_ENV_FILE"
             echo "Store full .env.production content in repository/environment secrets."
             exit 1
           fi
