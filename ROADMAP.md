@@ -106,8 +106,8 @@ Phase 4 — AI & Knowledge Graph
 
 Context Engine
 
-- [ ] World knowledge graph
-- [ ] Entity relationship model
+- [x] World knowledge graph
+- [x] Entity relationship model
 - [ ] Context export pipeline
 - [ ] Prompt generation pipeline
 

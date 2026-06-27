@@ -1,5 +1,16 @@
 # Documentation
 
+## World Context Graph
+
+See [`context/`](context/) for the canonical world context metadata model, including:
+
+- Entity schema and metadata fields for all world entity types.
+- Typed relationship model connecting entities to one another.
+- Branding metadata for future artwork generation workflows.
+- Prompt generation strategy for AI-assisted content pipelines.
+
+---
+
 ## Templates
 
 See [`templates.md`](templates.md) for the complete content template reference, including:
