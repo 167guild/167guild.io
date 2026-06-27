@@ -13,6 +13,7 @@ if ! command -v task >/dev/null 2>&1; then
 fi
 
 if command -v apt-get >/dev/null 2>&1; then
+  echo "Installing shellcheck and shfmt..."
   sudo apt-get update
   sudo apt-get install -y shellcheck shfmt
 fi

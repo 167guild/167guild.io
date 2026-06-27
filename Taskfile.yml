@@ -23,7 +23,7 @@ tasks:
         else
           echo "ℹ️ .env already exists; leaving it unchanged"
         fi
-      - docker compose --env-file .env config >/dev/null
+      - docker compose --env-file .env config
       - echo "✅ Local environment scaffold is ready"
 
   lint:
