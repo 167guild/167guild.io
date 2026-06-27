@@ -12,11 +12,20 @@ if [[ ! -f "$ENV_FILE" ]]; then
 fi
 
 set -a
+# shellcheck source=/dev/null
 source "$ENV_FILE"
 set +a
 
 echo "🔎 Checking container status..."
 "${COMPOSE_CMD[@]}" ps
+
+echo "🔎 Validating Docker health states..."
+unhealthy_services="$("${COMPOSE_CMD[@]}" ps --format '{{.Service}}\t{{.Status}}' | awk -F '\t' '$2 ~ /unhealthy|Exited/ {print $1 ": " $2}')"
+if [[ -n "${unhealthy_services}" ]]; then
+  echo "❌ Unhealthy or exited services detected:"
+  echo "${unhealthy_services}"
+  exit 1
+fi
 
 echo "🔎 Checking Wiki.js health endpoint..."
 # Fail only when both the compose-configured endpoint and root endpoint are unreachable.
@@ -35,6 +44,12 @@ if ! "${COMPOSE_CMD[@]}" exec -T postgres pg_isready -U "${POSTGRES_USER}" -d "$
 fi
 
 echo "🔎 Checking Caddy endpoint..."
+if ! "${COMPOSE_CMD[@]}" exec -T caddy wget -q --spider --timeout=10 "http://localhost"; then
+  echo "❌ Caddy in-container endpoint check failed at http://localhost."
+  echo "Verify Caddy runtime and inspect logs with: docker compose --env-file $ENV_FILE -f docker-compose.yml -f deploy/production/docker-compose.production.yml logs caddy"
+  exit 1
+fi
+
 if ! wget -q --spider --timeout=10 "http://localhost"; then
   echo "❌ Caddy local endpoint check failed at http://localhost."
   echo "Verify the caddy container is running and inspect logs."

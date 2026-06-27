@@ -39,7 +39,7 @@ Docker
 - [x] Configure PostgreSQL
 - [x] Configure Wiki.js
 - [ ] Implement Wiki.js Google OAuth provider configuration (YAML or documented UI steps)
-- [ ] Pin container image versions in production overlay for reproducible deployments
+- [x] Pin container image versions in production overlay for reproducible deployments
 - [ ] Add resource limits and log driver limits to production Compose overlay
 
 Authentication
@@ -57,8 +57,8 @@ Operations
 - [x] Connect "167guild.io"
 - [x] Production hardening
 - [x] Release validation checklist
-- [ ] Implement backup scripts (PostgreSQL dump, volume backup, config archive)
-- [ ] Implement restore scripts and validate against a real backup archive
+- [x] Implement backup scripts (PostgreSQL dump, volume backup, config archive)
+- [x] Implement restore scripts and validate against a real backup archive
 - [ ] Wire SSH deployment step in GitHub Actions deploy workflow
 
 Release Management
@@ -191,9 +191,9 @@ Documentation
 Operations
 
 - [ ] Monitoring
-- [ ] Logging
-- [ ] Log rotation configuration
-- [ ] Disaster recovery
+- [x] Logging
+- [x] Log rotation configuration
+- [x] Disaster recovery
 - [ ] Security review
 - [ ] Secret rotation runbook
 - [ ] Scheduled backups (cron or GitHub Actions)
