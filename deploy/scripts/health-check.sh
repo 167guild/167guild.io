@@ -19,8 +19,9 @@ echo "🔎 Checking container status..."
 "${COMPOSE_CMD[@]}" ps
 
 echo "🔎 Checking Wiki.js health endpoint..."
-if ! "${COMPOSE_CMD[@]}" exec -T wikijs wget -q --spider http://localhost:3000/healthz; then
-  echo "❌ Wiki.js health check failed (/healthz)."
+if ! "${COMPOSE_CMD[@]}" exec -T wikijs wget -q --spider http://localhost:3000/healthz \
+  && ! "${COMPOSE_CMD[@]}" exec -T wikijs wget -q --spider http://localhost:3000/; then
+  echo "❌ Wiki.js health check failed (/healthz and /)."
   echo "Verify the wikijs container is running and inspect logs with: docker compose --env-file $ENV_FILE -f docker-compose.yml -f deploy/production/docker-compose.production.yml logs wikijs"
   exit 1
 fi

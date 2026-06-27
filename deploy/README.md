@@ -129,8 +129,8 @@ Persistent volumes are externalized in Docker volumes, so container rollback doe
 ## Health Verification Details
 
 - **Caddy**: `curl -I https://$DOMAIN` should return a valid HTTP response.
-- **Wiki.js**: `task health` checks `http://localhost:3000/healthz` inside the container.
-- The `/healthz` endpoint is the same endpoint configured in this repository's Docker Compose healthcheck.
+- **Wiki.js**: `task health` checks `http://localhost:3000/healthz` inside the container and falls back to `/` if needed.
+- The primary `/healthz` endpoint matches this repository's Docker Compose healthcheck.
 - **PostgreSQL**: `task health` runs `pg_isready`.
 - **Authentication**: perform a test Google OAuth login in the deployed wiki.
 - **Backups**: run `task backup` and confirm backup artifacts are created under `backups/`.
