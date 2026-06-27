@@ -1,0 +1,5 @@
+# Ignore all backup archives — they may contain sensitive data.
+# The directory itself is tracked so the backup location exists by default.
+*
+!.gitignore
+!README.md

@@ -1,5 +1,16 @@
 # Documentation
 
+## Backup & Restore
+
+See [`backup.md`](backup.md) for the complete backup and restore strategy, including:
+
+- Backup philosophy and design principles
+- Docker volumes that must be backed up
+- Backup and restore procedures
+- Current implementation status and future work
+
+---
+
 ## Authorization
 
 See [`authorization.md`](authorization.md) for the complete permission model, including:

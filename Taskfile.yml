@@ -30,3 +30,13 @@ tasks:
     desc: Stop local development stack (placeholder)
     cmds:
       - echo "TODO: stop local development stack"
+
+  backup:
+    desc: Back up all persistent application data (placeholder)
+    cmds:
+      - bash scripts/backup/backup.sh
+
+  restore:
+    desc: Restore application data from a backup archive (placeholder)
+    cmds:
+      - bash scripts/restore/restore.sh {{.BACKUP_DIR}}

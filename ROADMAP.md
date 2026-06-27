@@ -39,8 +39,8 @@ Authentication
 
 Operations
 
-- [ ] Configure backup strategy
-- [ ] Configure restore procedures
+- [x] Configure backup strategy
+- [x] Configure restore procedures
 - [ ] Configure deployment workflow
 - [ ] Configure production environment
 - [ ] Connect "167guild.io"
