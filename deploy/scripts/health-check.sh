@@ -35,11 +35,21 @@ if ! "${COMPOSE_CMD[@]}" exec -T postgres pg_isready -U "${POSTGRES_USER}" -d "$
 fi
 
 echo "🔎 Checking Caddy endpoint..."
-if ! wget -q --spider --timeout=10 "https://${DOMAIN}"; then
-  echo "❌ Caddy HTTPS check failed for https://${DOMAIN}."
-  echo "This can indicate DNS routing, TLS provisioning, or Caddy runtime issues."
-  echo "Check DNS, TLS state, and Caddy logs: docker compose --env-file $ENV_FILE -f docker-compose.yml -f deploy/production/docker-compose.production.yml logs caddy"
+if ! wget -q --spider --timeout=10 "http://localhost"; then
+  echo "❌ Caddy local endpoint check failed at http://localhost."
+  echo "Verify the caddy container is running and inspect logs."
   exit 1
+fi
+
+if getent hosts "${DOMAIN}" >/dev/null 2>&1; then
+  if ! wget -q --spider --timeout=10 "https://${DOMAIN}"; then
+    echo "❌ Caddy HTTPS check failed for https://${DOMAIN}."
+    echo "This can indicate DNS routing, TLS provisioning, or Caddy runtime issues."
+    echo "Check DNS, TLS state, and Caddy logs: docker compose --env-file $ENV_FILE -f docker-compose.yml -f deploy/production/docker-compose.production.yml logs caddy"
+    exit 1
+  fi
+else
+  echo "ℹ️  Skipping public HTTPS check for ${DOMAIN} because DNS does not currently resolve on this host."
 fi
 
 echo "✅ Health checks passed for Caddy, Wiki.js, and PostgreSQL."
