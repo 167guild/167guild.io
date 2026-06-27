@@ -213,7 +213,7 @@ Implementation status is noted for each component. Placeholder entries document 
 
 ## Planned Components
 
-### Hero Banner 📐
+### Hero Banner ✅
 
 **Intended treatment:**
 
@@ -222,7 +222,7 @@ Implementation status is noted for each component. Placeholder entries document 
 - Subtitle in `--font-body`, parchment tone
 - Optional decorative border or seal motif
 
-Implementation deferred pending artwork assets.
+Implemented as a placeholder-first landing hero in `wiki/home.md` using the `.landing-*` styles in `theme/css/components.css`. Final artwork can replace the gradient placeholder without changing layout structure.
 
 ---
 

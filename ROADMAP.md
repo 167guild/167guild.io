@@ -52,9 +52,9 @@ Phase 2 — World Foundation
 
 Campaign Structure
 
-- [ ] Create landing page
-- [ ] Create world overview
-- [ ] Create campaign overview
+- [x] Create landing page
+- [x] Create world overview
+- [x] Create campaign overview
 
 Templates
 
@@ -72,7 +72,7 @@ Templates
 Navigation
 
 - [ ] Sidebar organization
-- [ ] Home navigation
+- [x] Home navigation
 - [ ] Search optimization
 - [ ] Cross-linking strategy
 
@@ -214,4 +214,3 @@ The goal is to build a beautiful, living world that grows alongside the campaign
 # Long-Term Vision
 
 Transform the 167 Guild Wiki into a reusable open-source platform that enables anyone to create beautiful, self-hosted knowledge worlds for tabletop RPGs and collaborative storytelling.
-
