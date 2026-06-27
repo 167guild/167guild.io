@@ -119,7 +119,8 @@ Context Engine
 - [x] World knowledge graph
 - [x] Entity relationship model
 - [ ] Context export pipeline
-- [ ] Prompt generation pipeline
+- [x] Prompt generation pipeline architecture
+- [ ] Prompt generation pipeline implementation
 
 AI Workflows
 
