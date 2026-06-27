@@ -103,6 +103,20 @@ backup_wikijs_data() {
 
 backup_config() {
   local output_file="${BACKUP_DIR}/config.tar.gz"
+  local required_paths=(config deploy/production deploy/scripts)
+  local missing_paths=()
+  local path=""
+  for path in "${required_paths[@]}"; do
+    if [[ ! -e "${REPO_ROOT}/${path}" ]]; then
+      missing_paths+=("${path}")
+    fi
+  done
+  if [[ ${#missing_paths[@]} -gt 0 ]]; then
+    echo "ERROR: Cannot create configuration backup; missing paths:" >&2
+    printf ' - %s\n' "${missing_paths[@]}" >&2
+    exit 1
+  fi
+
   log "Backing up configuration files..."
   tar czf "${output_file}" -C "${REPO_ROOT}" config deploy/production deploy/scripts
   log "✅ Configuration backup written: ${output_file}"

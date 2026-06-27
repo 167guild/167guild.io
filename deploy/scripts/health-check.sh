@@ -20,7 +20,7 @@ echo "🔎 Checking container status..."
 "${COMPOSE_CMD[@]}" ps
 
 echo "🔎 Validating Docker health states..."
-unhealthy_services="$("${COMPOSE_CMD[@]}" ps --format '{{.Service}} {{.Status}}' | awk '$0 ~ /unhealthy|Exited/ {print $1}')"
+unhealthy_services="$("${COMPOSE_CMD[@]}" ps --format '{{.Service}}\t{{.Status}}' | awk -F '\t' '$2 ~ /unhealthy|Exited/ {print $1 ": " $2}')"
 if [[ -n "${unhealthy_services}" ]]; then
   echo "❌ Unhealthy or exited services detected:"
   echo "${unhealthy_services}"

@@ -127,7 +127,14 @@ restore_wikijs_data() {
   docker run --rm \
     -v "${WIKIJS_VOLUME}:/data" \
     -v "${BACKUP_DIR}:/backup:ro" \
-    alpine:3.20 sh -c "rm -rf /data/* /data/.[!.]* /data/..?*; tar xzf /backup/wikijs_data.tar.gz -C /data"
+    alpine:3.20 sh -eu -c '
+      test -d /data
+      test -f /backup/wikijs_data.tar.gz
+      echo "Cleaning target volume..."
+      find /data -mindepth 1 -delete
+      echo "Extracting Wiki.js data archive..."
+      tar xzf /backup/wikijs_data.tar.gz -C /data
+    '
   log "✅ Wiki.js data restore complete from ${source_file}."
 }
 
@@ -179,6 +186,14 @@ validate_backup_artifacts() {
   fi
 
   log "Verifying backup checksums from manifest..."
+  if ! grep -q '^sha256:$' "${BACKUP_DIR}/manifest.txt"; then
+    echo "ERROR: Backup manifest is missing required 'sha256:' section." >&2
+    exit 1
+  fi
+  if [[ -z "$(awk '/^sha256:/{flag=1; next} flag {print}' "${BACKUP_DIR}/manifest.txt")" ]]; then
+    echo "ERROR: Backup manifest does not contain checksum entries." >&2
+    exit 1
+  fi
   (
     cd "${BACKUP_DIR}"
     awk '/^sha256:/{flag=1; next} flag {print}' manifest.txt | sha256sum --check --status

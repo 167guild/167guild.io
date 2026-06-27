@@ -93,8 +93,13 @@ if [[ ! "${DOMAIN}" =~ ${domain_regex} ]]; then
   error "DOMAIN must look like a valid DNS hostname (example: wiki.example.com)."
 fi
 
-if [[ ! "${EMAIL}" =~ ^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$ ]]; then
-  error "EMAIL must be a valid email address for ACME notifications."
+if [[ "${EMAIL}" == *" "* || "${EMAIL}" != *"@"* ]]; then
+  error "EMAIL must be a non-whitespace address containing @ and a domain suffix."
+fi
+
+email_domain="${EMAIL##*@}"
+if [[ -z "${email_domain}" || "${email_domain}" != *.* ]]; then
+  error "EMAIL must include a domain suffix after @ (example: ops@example.com)."
 fi
 
 if [[ "${DB_HOST}" != "postgres" ]]; then
