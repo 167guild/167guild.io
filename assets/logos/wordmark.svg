@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" width="240" height="48" role="img" aria-label="167 Guild wordmark">
+  <title>167 Guild Wiki</title>
+  <defs>
+    <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8c97a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8a6f2e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="240" height="48" fill="#0f111a" rx="4"/>
+  <text x="12" y="28" font-family="Georgia, serif" font-size="20" font-weight="700" fill="url(#gold-gradient)" letter-spacing="3">167 GUILD</text>
+  <text x="13" y="42" font-family="Georgia, serif" font-size="10" font-weight="400" fill="#5a5650" letter-spacing="6">WIKI</text>
+</svg>

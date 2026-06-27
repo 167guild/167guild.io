@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="167 Guild loading artwork">
+  <title>167 Guild — Loading</title>
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f111a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1f2e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8c97a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8a6f2e;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glow-center" cx="50%" cy="50%" r="40%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#0f111a;stop-opacity:0" />
+    </radialGradient>
+    <filter id="glow-filter">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg-grad)"/>
+  <rect width="800" height="600" fill="url(#glow-center)"/>
+  <!-- Outer decorative ring -->
+  <circle cx="400" cy="280" r="180" fill="none" stroke="#2d3347" stroke-width="1"/>
+  <circle cx="400" cy="280" r="160" fill="none" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.3" stroke-dasharray="4 8"/>
+  <!-- Large hex -->
+  <polygon points="400,120 520,190 520,330 400,400 280,330 280,190" fill="none" stroke="url(#gold-grad)" stroke-width="2" filter="url(#glow-filter)"/>
+  <polygon points="400,148 492,200 492,304 400,356 308,304 308,200" fill="#1a1f2e" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.3"/>
+  <!-- Inner emblem -->
+  <polygon points="400,192 436,213 436,255 400,276 364,255 364,213" fill="none" stroke="url(#gold-grad)" stroke-width="1.5"/>
+  <text x="400" y="245" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#c9a84c" text-anchor="middle">167</text>
+  <!-- Guild text -->
+  <text x="400" y="310" font-family="Georgia, serif" font-size="20" font-weight="400" fill="#8a8278" text-anchor="middle" letter-spacing="8">GUILD</text>
+  <!-- Loading indicator dots -->
+  <circle cx="372" cy="440" r="5" fill="#c9a84c" fill-opacity="0.8"/>
+  <circle cx="392" cy="440" r="5" fill="#c9a84c" fill-opacity="0.5"/>
+  <circle cx="412" cy="440" r="5" fill="#c9a84c" fill-opacity="0.25"/>
+  <circle cx="432" cy="440" r="5" fill="#c9a84c" fill-opacity="0.1"/>
+  <!-- Loading text -->
+  <text x="400" y="490" font-family="system-ui, sans-serif" font-size="12" fill="#5a5650" text-anchor="middle" letter-spacing="5">ENTERING THE WORLD...</text>
+  <!-- Bottom placeholder label -->
+  <text x="400" y="560" font-family="system-ui, sans-serif" font-size="10" fill="#2d3347" text-anchor="middle" letter-spacing="2">PLACEHOLDER — LOADING ARTWORK</text>
+</svg>

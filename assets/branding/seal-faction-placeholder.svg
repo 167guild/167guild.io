@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Faction seal placeholder">
+  <title>Faction Seal — Placeholder</title>
+  <defs>
+    <linearGradient id="crimson-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#c94c4c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4a1010;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8c97a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8a6f2e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <circle cx="100" cy="100" r="100" fill="#0f111a"/>
+  <!-- Outer ring -->
+  <circle cx="100" cy="100" r="94" fill="none" stroke="#2d3347" stroke-width="2"/>
+  <!-- Inner ring -->
+  <circle cx="100" cy="100" r="78" fill="none" stroke="url(#crimson-grad)" stroke-width="1.5"/>
+  <!-- Decorative ring -->
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#8b1a1a" stroke-width="0.5" stroke-dasharray="3 6" stroke-opacity="0.5"/>
+  <!-- Central octagon -->
+  <polygon points="100,30 130,44 146,74 140,106 118,128 82,128 60,106 54,74 70,44" fill="#1a1f2e" stroke="url(#gold-grad)" stroke-width="1.5"/>
+  <polygon points="100,42 122,53 134,75 130,99 112,116 88,116 70,99 66,75 78,53" fill="none" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.4"/>
+  <!-- Placeholder text -->
+  <text x="100" y="88" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#c9a84c" text-anchor="middle">FAC</text>
+  <text x="100" y="108" font-family="Georgia, serif" font-size="10" font-weight="400" fill="#8a8278" text-anchor="middle">SEAL</text>
+  <!-- Bottom label -->
+  <text x="100" y="168" font-family="Georgia, serif" font-size="10" font-weight="400" fill="#8a8278" text-anchor="middle" letter-spacing="3">FACTION</text>
+</svg>
