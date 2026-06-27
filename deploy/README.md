@@ -4,6 +4,8 @@ This directory defines the production deployment workflow for the 167 Guild Wiki
 
 The process is environment-driven and uses Docker Compose as the source of truth.
 
+The initial public production target is the apex domain `167guild.io`.
+
 ## Directory Layout
 
 ```text
@@ -35,6 +37,27 @@ deploy/
   - Caddy state/config
 - Outbound internet access for container pulls and TLS provisioning
 
+## Domain Ownership and Deployment Assumptions
+
+- The production deployment assumes the 167 Guild team controls the registrar and DNS zone for `167guild.io`.
+- The initial hosting target is one Ubuntu LTS virtual machine with a public IPv4 address. IPv6 is optional but recommended if available.
+- Caddy is the only public-facing service and should be the only service bound to ports `80` and `443`.
+- PostgreSQL must remain private on the internal Docker network.
+- Use placeholders for values that are not yet known, such as the ACME notification email address, server IP addresses, and Google OAuth client credentials.
+
+## Expected DNS Records
+
+Create DNS records that direct the public domain to the production server before running the first HTTPS deployment.
+
+| Type | Name | Value | Required | Notes |
+| --- | --- | --- | --- | --- |
+| `A` | `@` | `YOUR_SERVER_IPV4` | Yes | Primary apex record for `167guild.io`. |
+| `AAAA` | `@` | `YOUR_SERVER_IPV6` | Optional | Add only if the server is reachable over IPv6. |
+| `CNAME` | `www` | `167guild.io` | Optional | Convenience redirect alias if `www` will be supported later. |
+| `CNAME` | `wiki` | `167guild.io` | Optional | Future-friendly alias if the wiki is moved to a subdomain later. |
+
+If your DNS provider does not allow `CNAME` records at the apex, keep the apex on `A`/`AAAA` records and use aliases only for subdomains.
+
 ## Environment Setup
 
 1. Copy the production template:
@@ -44,6 +67,13 @@ deploy/
    ```
 
 2. Replace placeholders with real production values.
+
+### Environment Management Philosophy
+
+- Keep local development in `.env` copied from `.env.example`.
+- Keep production configuration in `.env.production` copied from `deploy/examples/.env.production.example`.
+- Commit templates only; never commit populated environment files.
+- Treat the environment files as the source of truth for domain, database, and OAuth configuration so production stays fully environment-driven.
 
 ### Required Variables
 
@@ -57,7 +87,46 @@ deploy/
 - `GOOGLE_OAUTH_CLIENT_SECRET`
 - `GOOGLE_OAUTH_CALLBACK_URL`
 
+### Production Domain Values
+
+The production template is already wired for the primary public domain:
+
+- `DOMAIN=167guild.io`
+- `WIKI_BASE_URL=https://167guild.io`
+- `GOOGLE_OAUTH_CALLBACK_URL=https://167guild.io/login/callback`
+
+Replace only the remaining placeholders (email address, database password, and OAuth credentials) before deployment.
+
+### Caddy and Reverse Proxy Configuration
+
+- `config/caddy/Caddyfile` stays generic and reads `DOMAIN`, `EMAIL`, and `WIKI_UPSTREAM` from the environment.
+- In production, Caddy should terminate TLS for `167guild.io`, redirect HTTP to HTTPS automatically, and proxy traffic to `wikijs:3000`.
+- `WIKI_UPSTREAM` should remain on the internal Docker network so Wiki.js is not exposed directly to the internet.
+- If the public domain ever changes, update `.env.production`, DNS, and Google OAuth callback settings together.
+
+### Google OAuth Callback URLs
+
+Configure the Google OAuth client as a **Web application** and authorize the exact production callback URL:
+
+- `https://167guild.io/login/callback`
+
+If additional domains or subdomains are introduced later, add each exact callback URL explicitly in Google Cloud Console.
+
 `deploy/scripts/validate-env.sh` fails fast with actionable errors if required values are missing or still placeholders.
+
+## HTTPS and SSL Lifecycle
+
+- Caddy provisions and renews certificates automatically after `167guild.io` resolves to the production server and ports `80` and `443` are reachable.
+- The ACME account email is supplied through `EMAIL`; leave the example placeholder until the production mailbox is available.
+- Certificates and ACME state are stored in the `caddy_data` volume, while runtime config is cached in `caddy_config`.
+- On first deploy, expect certificate issuance to happen during Caddy startup; repeated restarts should reuse stored state unless volumes are removed.
+
+## DNS Propagation Considerations
+
+- DNS changes may take time to propagate based on provider TTLs and resolver caches.
+- Do not treat an immediate TLS failure as an application failure until you confirm `167guild.io` resolves to the correct server from the deployment host and from an external resolver.
+- If DNS has not propagated yet, `deploy/scripts/health-check.sh` may skip the public HTTPS check for the domain.
+- Lower DNS TTL values ahead of cutover when possible to reduce propagation delay during the first production switch.
 
 ## Deployment Lifecycle
 
@@ -117,6 +186,12 @@ Persistent volumes are externalized in Docker volumes, so container rollback doe
 
 ## Verification Checklist
 
+- [ ] Domain ownership and DNS zone access are confirmed for `167guild.io`
+- [ ] Apex `A` record for `167guild.io` points to the production server
+- [ ] Optional `AAAA`/alias records are configured if they will be used
+- [ ] `.env.production` is created from `deploy/examples/.env.production.example`
+- [ ] Placeholder values are replaced for `EMAIL`, `POSTGRES_PASSWORD`, `GOOGLE_OAUTH_CLIENT_ID`, and `GOOGLE_OAUTH_CLIENT_SECRET`
+- [ ] Google OAuth client is configured with `https://167guild.io/login/callback`
 - [ ] Caddy container is running (`task status`)
 - [ ] Wiki.js container is running (`task status`)
 - [ ] PostgreSQL container is healthy (`task status`)
