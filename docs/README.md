@@ -22,6 +22,12 @@ See [`templates.md`](templates.md) for the complete content template reference, 
 
 ---
 
+## Landing Page
+
+See [`landing-page.md`](landing-page.md) for the landing page architecture, component hierarchy, and future expansion strategy.
+
+---
+
 ## Backup & Restore
 
 See [`backup.md`](backup.md) for the complete backup and restore strategy, including:
