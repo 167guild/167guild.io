@@ -66,9 +66,9 @@ if [[ "${DOMAIN}" == *"://"* || "${DOMAIN}" == */* ]]; then
   exit 1
 fi
 
-invalid_domains=("example.com" "example.org" "example.net" "test.com" "localhost")
-for invalid_domain in "${invalid_domains[@]}"; do
-  if [[ "${DOMAIN}" == "${invalid_domain}" ]]; then
+invalid_domain_suffixes=("example.com" "example.org" "example.net" "test.com" "localhost")
+for invalid_suffix in "${invalid_domain_suffixes[@]}"; do
+  if [[ "${DOMAIN}" == "${invalid_suffix}" || "${DOMAIN}" == *".${invalid_suffix}" ]]; then
     echo "❌ DOMAIN must be a real production hostname, not a local/example placeholder."
     exit 1
   fi
@@ -95,8 +95,9 @@ if [[ ! "${GOOGLE_OAUTH_CALLBACK_URL}" =~ ^https:// ]]; then
   exit 1
 fi
 
+callback_path="/login/callback"
 # Google OAuth callback URLs must match exactly; remove trailing slash for consistent comparison.
-expected_callback="${WIKI_BASE_URL%/}/login/callback"
+expected_callback="${WIKI_BASE_URL%/}${callback_path}"
 if [[ "${GOOGLE_OAUTH_CALLBACK_URL}" != "${expected_callback}" ]]; then
   echo "❌ GOOGLE_OAUTH_CALLBACK_URL must match ${expected_callback}"
   exit 1
