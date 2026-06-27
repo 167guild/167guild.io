@@ -73,6 +73,7 @@ Navigation
 
 - [ ] Sidebar organization
 - [x] Home navigation
+- [x] Interactive world navigation scaffold
 - [ ] Search optimization
 - [ ] Cross-linking strategy
 

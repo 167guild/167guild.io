@@ -631,6 +631,10 @@ input[type="search"]:focus {
   margin-top: var(--space-8);
 }
 
+.world-breadcrumb-preview {
+  margin-top: var(--space-5);
+}
+
 .landing-nav-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -650,6 +654,30 @@ input[type="search"]:focus {
 .landing-section {
   display: grid;
   gap: var(--space-6);
+}
+
+.world-navigation-hubs {
+  gap: var(--space-5);
+}
+
+.world-nav-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--space-4);
+}
+
+.world-nav-hub {
+  display: flex;
+  flex-direction: column;
+}
+
+.world-nav-hub .card-body {
+  flex: 1;
+}
+
+.world-nav-hub-link {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
 }
 
 .landing-grid {
