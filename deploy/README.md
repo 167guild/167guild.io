@@ -161,12 +161,8 @@ docker compose exec -T postgres psql \
 Initial role assignment targets:
 
 - **Platform Administrator**: `szmyty@gmail.com`
-- **Dungeon Master**: `placeholder-dm@gmail.com` (replace with final DM email)
-- **Players**:
-  - Alan (Starwhisper): `szmyty@gmail.com`
-  - Kevin: `placeholder-kevin@gmail.com`
-  - Christian: `placeholder-christian@gmail.com`
-  - Tom: `placeholder-tom@gmail.com`
+- **Dungeon Master**: placeholder DM account listed in `docs/authorization.md#placeholder-accounts` (replace with final DM email)
+- **Players**: Alan (Starwhisper), Kevin, Christian, and Tom using accounts listed in `docs/authorization.md#placeholder-accounts`
 
 Dungeon Master responsibilities:
 
@@ -318,8 +314,8 @@ Version updates should be explicit and reviewed in pull requests to keep deploym
 - [ ] Google OAuth login flow succeeds in browser
 - [ ] Google OAuth failure path is tested (`redirect_uri_mismatch` and disabled strategy checks)
 - [ ] Platform Administrator bootstrap is verified for `szmyty@gmail.com`
-- [ ] Dungeon Master bootstrap is verified for placeholder DM account
-- [ ] Player bootstrap is verified for Alan (Starwhisper), Kevin, Christian, and Tom accounts/placeholders
+- [ ] Dungeon Master bootstrap is verified for the account listed in `docs/authorization.md#placeholder-accounts`
+- [ ] Player bootstrap is verified for Alan (Starwhisper), Kevin, Christian, and Tom accounts from `docs/authorization.md#placeholder-accounts`
 - [ ] Group membership is verified for Administrators, Dungeon Master, Player, and Viewer
 - [ ] Namespace permissions are verified (`/dm/`, `/characters/`, `/journals/`, `/lore/`)
 - [ ] First content pages are created and validated for expected role visibility

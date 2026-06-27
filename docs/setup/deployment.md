@@ -33,7 +33,7 @@ After containers are healthy for the first time:
 4. Configure Google OAuth in **Administration → Authentication** (see `docs/setup/oauth.md`).
 5. Sign out of the emergency admin account.
 6. Sign in with `szmyty@gmail.com` via Google.
-7. Re-enter **Administration → Users** using the emergency admin (or existing admin session) and assign `szmyty@gmail.com` to **Administrators**.
+7. Sign back in with the emergency admin account, open **Administration → Users**, and assign `szmyty@gmail.com` to **Administrators**.
 8. Confirm `szmyty@gmail.com` can access the full Admin area.
 
 ## Group Bootstrap
@@ -50,13 +50,8 @@ docker compose exec -T postgres psql \
 Then assign users in **Administration → Users**:
 
 - Platform Administrator: `szmyty@gmail.com` → `Administrators`
-- Dungeon Master: `placeholder-dm@gmail.com` → `Dungeon Master`
-- Players:
-  - `szmyty@gmail.com`
-  - `placeholder-kevin@gmail.com`
-  - `placeholder-christian@gmail.com`
-  - `placeholder-tom@gmail.com`
-  → `Player`
+- Dungeon Master: placeholder DM account from `docs/authorization.md#placeholder-accounts` → `Dungeon Master`
+- Players (Alan/Starwhisper, Kevin, Christian, Tom): accounts listed in `docs/authorization.md#placeholder-accounts` → `Player`
 
 Replace placeholder emails with real Google accounts when known.
 
