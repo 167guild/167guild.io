@@ -10,7 +10,7 @@ services:
       WIKI_UPSTREAM: ${WIKI_UPSTREAM:-wikijs:3000}
     depends_on:
       wikijs:
-        condition: service_started
+        condition: service_healthy
     ports:
       - "80:80"
       - "443:443"
@@ -37,8 +37,8 @@ services:
       APP_ENV: ${APP_ENV:-development}
       WIKI_BASE_URL: ${WIKI_BASE_URL:-http://localhost:3000}
       DB_TYPE: postgres
-      DB_HOST: postgres
-      DB_PORT: 5432
+      DB_HOST: ${DB_HOST:-postgres}
+      DB_PORT: ${DB_PORT:-5432}
       DB_NAME: ${POSTGRES_DB:-wikidb}
       DB_USER: ${POSTGRES_USER:-wikijs}
       DB_PASS: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
@@ -47,6 +47,12 @@ services:
       - ./config/wikijs:/wiki/config:ro
     networks:
       - internal
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:3000/healthz || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
 
   postgres:
     image: postgres:16-alpine
