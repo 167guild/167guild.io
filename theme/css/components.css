@@ -53,7 +53,7 @@ button:not([class]) {
 .btn-primary,
 .btn[data-variant="primary"] {
   background-color: var(--color-accent);
-  color: #0f111a;
+  color: var(--color-background);
   border-color: var(--color-accent);
 }
 
