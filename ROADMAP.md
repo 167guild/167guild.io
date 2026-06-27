@@ -38,7 +38,7 @@ Docker
 - [x] Configure Caddy reverse proxy
 - [x] Configure PostgreSQL
 - [x] Configure Wiki.js
-- [ ] Implement Wiki.js Google OAuth provider configuration (YAML or documented UI steps)
+- [x] Implement Wiki.js Google OAuth provider configuration (YAML or documented UI steps)
 - [x] Pin container image versions in production overlay for reproducible deployments
 - [ ] Add resource limits and log driver limits to production Compose overlay
 
