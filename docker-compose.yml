@@ -42,6 +42,9 @@ services:
       DB_NAME: ${POSTGRES_DB:-wikidb}
       DB_USER: ${POSTGRES_USER:-wikijs}
       DB_PASS: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      GOOGLE_OAUTH_CLIENT_ID: ${GOOGLE_OAUTH_CLIENT_ID:?GOOGLE_OAUTH_CLIENT_ID is required}
+      GOOGLE_OAUTH_CLIENT_SECRET: ${GOOGLE_OAUTH_CLIENT_SECRET:?GOOGLE_OAUTH_CLIENT_SECRET is required}
+      GOOGLE_OAUTH_CALLBACK_URL: ${GOOGLE_OAUTH_CALLBACK_URL:?GOOGLE_OAUTH_CALLBACK_URL is required}
     volumes:
       - wikijs_data:/wiki/data
       - ./config/wikijs:/wiki/config:ro

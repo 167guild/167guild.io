@@ -88,7 +88,7 @@ Wiki.js is the wiki engine and content management layer for the 167 Guild knowle
 ### Responsibilities
 
 - Content management and page rendering
-- User authentication (future: Google OAuth)
+- User authentication (Google OAuth)
 - Authorization and group-based permissions
 - Media and file uploads
 - Full-text search
@@ -118,8 +118,56 @@ Application configuration overrides live in `config/wikijs/config.yml`, mounted 
 | `POSTGRES_DB`   | Database name (shared with PostgreSQL service)         | `wikidb`                   |
 | `POSTGRES_USER` | Database username (shared with PostgreSQL service)     | `wikijs`                   |
 | `POSTGRES_PASSWORD` | Database password — **required**                   | *(secret)*                 |
+| `GOOGLE_OAUTH_CLIENT_ID` | Google OAuth client ID                         | `your-google-client-id`    |
+| `GOOGLE_OAUTH_CLIENT_SECRET` | Google OAuth client secret                 | *(secret)*                 |
+| `GOOGLE_OAUTH_CALLBACK_URL` | Google OAuth redirect URI used by Wiki.js    | `http://localhost:3000/login/callback` |
 
 Configure these values in `.env` (copied from `.env.example`). Never commit real credentials.
+
+### Google OAuth Setup
+
+Use Google OAuth as the Wiki.js authentication provider for identity only.
+
+1. In Google Cloud Console, create (or select) a project.
+2. Configure the OAuth consent screen.
+3. Create an OAuth 2.0 Client ID for type **Web application**.
+4. Add the redirect URI from `GOOGLE_OAUTH_CALLBACK_URL`.
+5. Copy the generated client ID and client secret into `.env`:
+   - `GOOGLE_OAUTH_CLIENT_ID`
+   - `GOOGLE_OAUTH_CLIENT_SECRET`
+   - `GOOGLE_OAUTH_CALLBACK_URL`
+6. In Wiki.js Admin → Authentication, configure the Google strategy using these values, enable:
+   - Auto-create users on first sign in
+   - Auto-update existing users
+7. Save and enable the Google provider.
+
+#### Redirect URI Requirements
+
+- The Google OAuth redirect URI must exactly match `GOOGLE_OAUTH_CALLBACK_URL`.
+- Local development should typically use `http://localhost:3000/login/callback`.
+- Production should use your public HTTPS wiki URL, for example:
+  `https://wiki.example.com/login/callback`.
+- Use HTTPS in production and avoid non-TLS callback URLs.
+
+#### Local Development Considerations
+
+- Keep local OAuth credentials in `.env` only.
+- Use separate OAuth credentials for local and production environments.
+- Never commit real OAuth client secrets.
+
+#### Production Considerations
+
+- Set `GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_SECRET`, and `GOOGLE_OAUTH_CALLBACK_URL` through a secure secret-management workflow.
+- Restrict authorized redirect URIs in Google Cloud Console to production domains you control.
+- Rotate OAuth secrets if they are exposed.
+
+#### Expected Login Flow
+
+1. User visits wiki.
+2. User selects "Sign in with Google".
+3. Google authenticates the user.
+4. User returns to Wiki.js.
+5. Wiki.js creates or updates the account.
 
 ### Startup Sequence
 
