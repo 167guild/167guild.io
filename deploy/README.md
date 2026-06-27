@@ -75,6 +75,15 @@ If your DNS provider does not allow `CNAME` records at the apex, keep the apex o
 - Commit templates only; never commit populated environment files.
 - Treat the environment files as the source of truth for domain, database, and OAuth configuration so production stays fully environment-driven.
 
+### Wiki.js Configuration Strategy (v0.1.0)
+
+Production uses a hybrid strategy:
+
+- **Environment variables** provide runtime settings and OAuth secrets (`.env.production`).
+- **Wiki.js Admin UI** is the source of truth for enabling Google auth strategy, first administrator bootstrap, and RBAC assignments.
+
+This is intentional because Wiki.js persists provider enablement, group memberships, and page rules in PostgreSQL after first boot.
+
 ### Required Variables
 
 - `DOMAIN`
@@ -111,11 +120,55 @@ Replace only the remaining placeholders (email address, database password, and O
 
 Configure the Google OAuth client as a **Web application** and authorize the exact production callback URL:
 
+- Authorized JavaScript origin: `https://167guild.io`
 - `https://167guild.io/login/callback`
 
 If additional domains or subdomains are introduced later, add each exact callback URL explicitly in Google Cloud Console.
 
 `deploy/scripts/validate-env.sh` fails fast with actionable errors if required values are missing or still placeholders.
+
+## First Boot and Administrator Bootstrap
+
+After the first successful `task deploy:production`:
+
+1. Open `https://167guild.io` and complete the Wiki.js setup wizard.
+2. Create an emergency admin account for break-glass access.
+3. In Wiki.js Admin, configure and enable Google auth using:
+   - `GOOGLE_OAUTH_CLIENT_ID`
+   - `GOOGLE_OAUTH_CLIENT_SECRET`
+   - `GOOGLE_OAUTH_CALLBACK_URL`
+4. Sign in with `szmyty@gmail.com` through Google.
+5. Assign `szmyty@gmail.com` to the built-in **Administrators** group.
+6. Verify `szmyty@gmail.com` can access **Administration**.
+
+Platform Administrator responsibilities:
+
+- Own authentication configuration.
+- Own user/group assignments and RBAC reviews.
+- Own operational maintenance and recovery tasks.
+
+## Group Bootstrap and Onboarding
+
+Seed custom groups after first boot initializes Wiki.js schema:
+
+```bash
+docker compose exec -T postgres psql \
+  -U "${POSTGRES_USER}" \
+  -d "${POSTGRES_DB}" \
+  < scripts/bootstrap/seed-groups.sql
+```
+
+Initial role assignment targets:
+
+- **Platform Administrator**: `szmyty@gmail.com`
+- **Dungeon Master**: placeholder DM account listed in `docs/authorization.md#placeholder-accounts` (replace with final DM email)
+- **Players**: Alan (Starwhisper), Kevin, Christian, and Tom using accounts listed in `docs/authorization.md#placeholder-accounts`
+
+Dungeon Master responsibilities:
+
+- Manage hidden `/dm/` planning content.
+- Maintain lore and campaign materials.
+- Review and curate player-submitted content.
 
 ## HTTPS and SSL Lifecycle
 
@@ -259,6 +312,13 @@ Version updates should be explicit and reviewed in pull requests to keep deploym
 - [ ] Wiki.js startup and health endpoint checks succeed (`task health`)
 - [ ] PostgreSQL readiness check succeeds (`task health`)
 - [ ] Google OAuth login flow succeeds in browser
+- [ ] Google OAuth failure path is tested (`redirect_uri_mismatch` and disabled strategy checks)
+- [ ] Platform Administrator bootstrap is verified for `szmyty@gmail.com`
+- [ ] Dungeon Master bootstrap is verified for the account listed in `docs/authorization.md#placeholder-accounts`
+- [ ] Player bootstrap is verified for Alan (Starwhisper), Kevin, Christian, and Tom accounts from `docs/authorization.md#placeholder-accounts`
+- [ ] Group membership is verified for Administrators, Dungeon Master, Player, and Viewer
+- [ ] Namespace permissions are verified (`/dm/`, `/characters/`, `/journals/`, `/lore/`)
+- [ ] First content pages are created and validated for expected role visibility
 - [ ] Backup/restore workflow is validated against the current runbook scope and documented
 - [ ] Wiki.js role permissions are validated for Administrators, Dungeon Master, Player, and Viewer
 
@@ -269,6 +329,17 @@ Version updates should be explicit and reviewed in pull requests to keep deploym
 - The primary `/healthz` endpoint matches this repository's Docker Compose healthcheck.
 - **PostgreSQL**: `task health` runs `pg_isready`.
 - **Authentication**: perform a test Google OAuth login in the deployed wiki.
+- **Groups/RBAC**: verify `Administrators`, `Dungeon Master`, `Player`, and `Viewer` exist and contain expected users.
+- **Namespaces**:
+  - `Administrators`: full access everywhere.
+  - `Dungeon Master`: read/write including `/dm/`.
+  - `Player`: no access to `/dm/`; write access under `/characters/` and `/journals/`.
+  - `Viewer`: read-only access to non-DM namespaces.
+- **First content creation**: publish at least one page in `/lore/`, `/characters/`, `/journals/`, and `/dm/` and verify visibility by role.
+- **Troubleshooting**:
+  - Google button missing: strategy not enabled in Wiki.js Admin.
+  - OAuth callback error: Google redirect URI does not exactly match `.env.production`.
+  - Access denied after login: user not assigned to the expected group.
 - **Backups**: verify backup artifact and restore validation by running a restore drill in non-production.
 
 ## Remaining Assumptions and Risks

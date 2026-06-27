@@ -282,6 +282,24 @@ After running the seed, assign placeholder users to their groups through the Wik
 
 ---
 
+## RBAC Verification Checklist
+
+Run this checklist after initial onboarding and after any permissions change:
+
+- [ ] `Administrators` group contains `szmyty@gmail.com`.
+- [ ] `Dungeon Master` group contains the current DM account (placeholder until final email is known).
+- [ ] `Player` group contains:
+  - `szmyty@gmail.com` (Alan / Starwhisper)
+  - Kevin account (placeholder or final)
+  - Christian account (placeholder or final)
+  - Tom account (placeholder or final)
+- [ ] `Viewer` group contains only explicitly approved read-only users.
+- [ ] `/dm/` is accessible only by Platform Administrator and Dungeon Master.
+- [ ] Players can write in `/characters/` and `/journals/` but cannot access `/dm/`.
+- [ ] Viewers can read public namespaces but cannot write anywhere.
+
+---
+
 ## Future Enhancements
 
 - Per-user character page ownership enforced at the application level.

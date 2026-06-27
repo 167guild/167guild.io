@@ -1,2 +1,8 @@
-# Placeholder Wiki.js configuration.
-# Application-specific configuration is intentionally deferred.
+# Wiki.js configuration strategy for production:
+# - Runtime/database settings come from environment variables.
+# - Authentication providers, groups, and permissions are configured in the
+#   Wiki.js Admin UI and persisted in PostgreSQL for repeatable bootstrap.
+#
+# This file is intentionally an empty YAML object so the mounted path is valid
+# without introducing stale placeholder-only content.
+{}
