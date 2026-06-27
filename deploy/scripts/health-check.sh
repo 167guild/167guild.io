@@ -25,7 +25,7 @@ echo "🔎 Checking PostgreSQL readiness..."
 "${COMPOSE_CMD[@]}" exec -T postgres pg_isready -U "${POSTGRES_USER}" -d "${POSTGRES_DB}" >/dev/null
 
 echo "🔎 Checking Caddy endpoint..."
-curl -fsS --max-time 10 "http://localhost" >/dev/null
+curl -fsS --max-time 10 "https://${DOMAIN}" >/dev/null
 
 echo "✅ Health checks passed for Caddy, Wiki.js, and PostgreSQL."
 echo "ℹ️  Manual follow-up: verify Google OAuth sign-in and latest backup artifacts."

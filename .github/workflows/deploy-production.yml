@@ -3,6 +3,9 @@ name: Deploy Production (Scaffold)
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   deploy-production:
     name: Deploy production stack
