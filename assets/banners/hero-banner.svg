@@ -46,7 +46,7 @@
   <polygon points="720,152 760,175 760,221 720,244 680,221 680,175" fill="#1a1f2e" stroke="url(#gold-grad)" stroke-width="2" filter="url(#glow-filter)"/>
   <text x="720" y="205" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#c9a84c" text-anchor="middle">167</text>
   <!-- Hero title -->
-  <text x="720" y="305" font-family="Georgia, serif" font-size="56" font-weight="700" fill="url(#gold-grad)" text-anchor="middle" letter-spacing="10">THE 167 GUILD</text>
+  <text x="720" y="305" font-family="Georgia, serif" font-size="56" font-weight="700" fill="url(#gold-grad)" text-anchor="middle" letter-spacing="10">167 GUILD</text>
   <!-- Decorative divider lines -->
   <line x1="320" y1="330" x2="560" y2="330" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.35"/>
   <line x1="880" y1="330" x2="1120" y2="330" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.35"/>

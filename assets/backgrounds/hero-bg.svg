@@ -32,10 +32,6 @@
   <polygon points="960,280 1080,348 1080,484 960,552 840,484 840,348" fill="none" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.03"/>
   <!-- Bottom overlay for content legibility -->
   <rect x="0" y="700" width="1920" height="380" fill="#0f111a" opacity="0.7"/>
-  <!-- Top vignette -->
-  <rect x="0" y="0" width="1920" height="200">
-    <animate attributeName="opacity" values="0;0" dur="1s"/>
-  </rect>
   <!-- Placeholder label -->
   <text x="960" y="1060" font-family="system-ui, sans-serif" font-size="14" fill="#2d3347" text-anchor="middle" letter-spacing="3">PLACEHOLDER — HERO BACKGROUND TEXTURE</text>
 </svg>
