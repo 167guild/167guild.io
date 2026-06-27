@@ -66,7 +66,7 @@ if [[ "${DOMAIN}" == *"://"* || "${DOMAIN}" == */* ]]; then
   exit 1
 fi
 
-invalid_domain_suffixes=("example.com" "example.org" "example.net" "test.com" "localhost")
+invalid_domain_suffixes=("example.com" "example.org" "example.net" "test.com" "test.local" "example.localhost" "localhost" "test" "invalid" "example")
 for invalid_suffix in "${invalid_domain_suffixes[@]}"; do
   if [[ "${DOMAIN}" == "${invalid_suffix}" || "${DOMAIN}" == *".${invalid_suffix}" ]]; then
     echo "❌ DOMAIN must be a real production hostname, not a local/example placeholder."
@@ -79,6 +79,7 @@ if [[ "${DOMAIN}" =~ \.local$ ]]; then
   exit 1
 fi
 
+# Reject literal IPv4 addresses by matching strictly valid 0-255 octets.
 ipv4_regex='^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
 if [[ "${DOMAIN}" =~ ${ipv4_regex} ]]; then
   echo "❌ DOMAIN must be a DNS hostname, not an IP address."
