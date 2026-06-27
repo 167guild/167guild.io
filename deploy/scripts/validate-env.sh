@@ -15,6 +15,7 @@ source "$ENV_FILE"
 set +a
 
 required_vars=(
+  APP_ENV
   DOMAIN
   EMAIL
   WIKI_BASE_URL
@@ -40,6 +41,11 @@ if [[ ${#missing[@]} -gt 0 ]]; then
   exit 1
 fi
 
+if [[ "${APP_ENV}" != "production" ]]; then
+  echo "❌ APP_ENV must be set to production in $ENV_FILE."
+  exit 1
+fi
+
 declare -A placeholder_by_var=(
   [EMAIL]="admin@example.com"
   [POSTGRES_PASSWORD]="REPLACE_WITH_STRONG_PASSWORD"
@@ -54,5 +60,31 @@ for var_name in "${!placeholder_by_var[@]}"; do
     exit 1
   fi
 done
+
+if [[ "${DOMAIN}" == *"://"* || "${DOMAIN}" == */* ]]; then
+  echo "❌ DOMAIN must be a hostname only (no scheme/path): ${DOMAIN}"
+  exit 1
+fi
+
+if [[ "${DOMAIN}" == "example.com" || "${DOMAIN}" == "localhost" || "${DOMAIN}" == "127.0.0.1" ]]; then
+  echo "❌ DOMAIN must be a real production hostname, not a local/example placeholder."
+  exit 1
+fi
+
+if [[ ! "${WIKI_BASE_URL}" =~ ^https:// ]]; then
+  echo "❌ WIKI_BASE_URL must use HTTPS in production."
+  exit 1
+fi
+
+if [[ ! "${GOOGLE_OAUTH_CALLBACK_URL}" =~ ^https:// ]]; then
+  echo "❌ GOOGLE_OAUTH_CALLBACK_URL must use HTTPS in production."
+  exit 1
+fi
+
+expected_callback="${WIKI_BASE_URL%/}/login/callback"
+if [[ "${GOOGLE_OAUTH_CALLBACK_URL}" != "${expected_callback}" ]]; then
+  echo "❌ GOOGLE_OAUTH_CALLBACK_URL must match ${expected_callback}"
+  exit 1
+fi
 
 echo "✅ Production environment validation passed for $ENV_FILE."
