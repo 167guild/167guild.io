@@ -58,14 +58,14 @@ Campaign Structure
 
 Templates
 
-- [ ] Character template
-- [ ] NPC template
-- [ ] Location template
-- [ ] Organization template
-- [ ] Faction template
-- [ ] Session template
-- [ ] Timeline template
-- [ ] Item template
+- [x] Character template
+- [x] NPC template
+- [x] Location template
+- [x] Organization template
+- [x] Faction template
+- [x] Session template
+- [x] Timeline template
+- [x] Item template
 - [ ] Spell template
 - [ ] Journal template
 

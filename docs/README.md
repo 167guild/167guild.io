@@ -1,5 +1,16 @@
 # Documentation
 
+## Templates
+
+See [`templates.md`](templates.md) for the complete content template reference, including:
+
+- Purpose and fields for each entity template (Character, NPC, Location, Organization, Faction, Session, Timeline Event, Item)
+- Cross-linking strategy and relationship guide
+- Wiki namespace reference
+- Contributing guidelines for template usage
+
+---
+
 ## Backup & Restore
 
 See [`backup.md`](backup.md) for the complete backup and restore strategy, including:
