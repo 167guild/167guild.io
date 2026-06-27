@@ -79,8 +79,8 @@ if [[ "${DOMAIN}" =~ \.local$ ]]; then
   exit 1
 fi
 
-if [[ "${DOMAIN}" =~ ^10\. || "${DOMAIN}" =~ ^192\.168\. || "${DOMAIN}" =~ ^172\.(1[6-9]|2[0-9]|3[0-1])\. ]]; then
-  echo "❌ DOMAIN cannot be a private network address in production."
+if [[ "${DOMAIN}" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
+  echo "❌ DOMAIN must be a DNS hostname, not an IP address."
   exit 1
 fi
 
