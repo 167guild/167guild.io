@@ -66,7 +66,7 @@ if [[ "${DOMAIN}" == *"://"* || "${DOMAIN}" == */* ]]; then
   exit 1
 fi
 
-invalid_domains=("example.com" "example.org" "example.net" "test.com" "localhost" "127.0.0.1" "0.0.0.0")
+invalid_domains=("example.com" "example.org" "example.net" "test.com" "localhost")
 for invalid_domain in "${invalid_domains[@]}"; do
   if [[ "${DOMAIN}" == "${invalid_domain}" ]]; then
     echo "❌ DOMAIN must be a real production hostname, not a local/example placeholder."
@@ -79,7 +79,7 @@ if [[ "${DOMAIN}" =~ \.local$ ]]; then
   exit 1
 fi
 
-if [[ "${DOMAIN}" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
+if [[ "${DOMAIN}" =~ ^((25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})\.){3}(25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})$ ]]; then
   echo "❌ DOMAIN must be a DNS hostname, not an IP address."
   exit 1
 fi
