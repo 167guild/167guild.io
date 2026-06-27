@@ -1,0 +1,4 @@
+services:
+  wikijs:
+    environment:
+      APP_ENV: production

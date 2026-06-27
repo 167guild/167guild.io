@@ -41,8 +41,8 @@ Operations
 
 - [x] Configure backup strategy
 - [x] Configure restore procedures
-- [ ] Configure deployment workflow
-- [ ] Configure production environment
+- [x] Configure deployment workflow
+- [x] Configure production environment
 - [ ] Connect "167guild.io"
 - [ ] Production hardening
 
