@@ -80,9 +80,12 @@ If your DNS provider does not allow `CNAME` records at the apex, keep the apex o
 - `DOMAIN`
 - `EMAIL`
 - `WIKI_BASE_URL`
+- `WIKI_UPSTREAM`
 - `POSTGRES_DB`
 - `POSTGRES_USER`
 - `POSTGRES_PASSWORD`
+- `DB_HOST`
+- `DB_PORT`
 - `GOOGLE_OAUTH_CLIENT_ID`
 - `GOOGLE_OAUTH_CLIENT_SECRET`
 - `GOOGLE_OAUTH_CALLBACK_URL`
@@ -143,6 +146,7 @@ This performs:
 1. Environment validation
 2. Compose validation
 3. Build/recreate containers with production overrides
+4. Post-deploy runtime health checks (`task health`)
 
 Useful operations:
 
@@ -179,10 +183,54 @@ If deployment fails:
 3. Restore data if needed with existing restore workflow:
 
    ```bash
-   task restore
+   bash scripts/restore/restore.sh ./backups/YYYY-MM-DDTHH-MM-SS .env.production
    ```
 
 Persistent volumes are externalized in Docker volumes, so container rollback does not discard data.
+
+## Backup and Disaster Recovery
+
+- Backup command: `bash scripts/backup/backup.sh .env.production`
+- Restore command: `bash scripts/restore/restore.sh ./backups/<timestamp> .env.production`
+- Restore order: configuration → Wiki.js data volume → PostgreSQL
+- Backup manifest checksums are verified automatically during restore
+
+Recommended production cadence:
+
+- Daily scheduled backup
+- Pre-deploy backup
+- Additional backup before risky maintenance
+
+For full disaster recovery flow, see `docs/backup.md`.
+
+## Production Logging and Rotation
+
+Production services use Docker `json-file` logging with rotation:
+
+- `max-size=10m`
+- `max-file=5`
+
+Configured in `deploy/production/docker-compose.production.yml` for:
+
+- `caddy`
+- `wikijs`
+- `postgres`
+
+View logs with:
+
+```bash
+task logs
+```
+
+## Container Version Pinning Strategy
+
+Production uses fixed image tags in `deploy/production/docker-compose.production.yml`:
+
+- `caddy:2.10.2-alpine`
+- `ghcr.io/requarks/wiki:2.5.306`
+- `postgres:16.9-alpine`
+
+Version updates should be explicit and reviewed in pull requests to keep deployments reproducible.
 
 ## Security Hardening Checklist
 
@@ -192,7 +240,7 @@ Persistent volumes are externalized in Docker volumes, so container rollback doe
 - [ ] Health checks reviewed for Caddy, Wiki.js, and PostgreSQL
 - [ ] Environment handling reviewed: `.env.production` is required and validated before deploy
 - [ ] Secrets handling reviewed: production credentials are never committed and placeholders are rejected
-- [ ] Backup and restore procedures reviewed and tested for the current release scope
+- [ ] Backup and restore procedures reviewed and tested end-to-end
 - [ ] Authentication flow reviewed: Google OAuth callback URL is exact and HTTPS
 - [ ] Role configuration reviewed in Wiki.js (Administrators, Dungeon Master, Player, Viewer)
 
@@ -221,11 +269,10 @@ Persistent volumes are externalized in Docker volumes, so container rollback doe
 - The primary `/healthz` endpoint matches this repository's Docker Compose healthcheck.
 - **PostgreSQL**: `task health` runs `pg_isready`.
 - **Authentication**: perform a test Google OAuth login in the deployed wiki.
-- **Backups**: validate the current backup/restore runbook scope and record where artifacts or manual outputs are stored.
+- **Backups**: verify backup artifact and restore validation by running a restore drill in non-production.
 
 ## Remaining Assumptions and Risks
 
-- Backup and restore scripts are currently scaffolds and must be treated as manual runbook workflows until automated, restore-safe implementations are completed.
 - Initial production release assumes a single Ubuntu LTS VM and Docker Compose runtime; high-availability failover is out of scope for this cut.
 - Role assignment still requires manual verification in Wiki.js Admin after first OAuth sign-in for each user.
 

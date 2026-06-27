@@ -73,12 +73,12 @@ tasks:
       - '{{.COMPOSE_CMD}} down --remove-orphans'
 
   backup:
-    desc: Back up all persistent application data (placeholder)
+    desc: Back up PostgreSQL, Wiki.js data, and deployment config
     cmds:
       - bash scripts/backup/backup.sh
 
   restore:
-    desc: Restore application data from a backup archive (placeholder)
+    desc: Restore application data from a backup archive
     cmds:
       - bash scripts/restore/restore.sh {{.BACKUP_DIR}}
 

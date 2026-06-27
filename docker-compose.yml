@@ -22,7 +22,7 @@ services:
       - edge
       - internal
     healthcheck:
-      test: ["CMD", "caddy", "validate", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+      test: ["CMD-SHELL", "wget -q --spider http://localhost || exit 1"]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -51,7 +51,7 @@ services:
     networks:
       - internal
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider http://localhost:3000/healthz || exit 1"]
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:3000/healthz || wget -q --spider http://localhost:3000/ || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5

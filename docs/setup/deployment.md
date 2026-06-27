@@ -23,4 +23,4 @@ task health
 task logs
 ```
 
-Backup/restore automation remains out of scope for this issue and is still scaffolded.
+Backup/restore automation is available via `scripts/backup/backup.sh` and `scripts/restore/restore.sh`.

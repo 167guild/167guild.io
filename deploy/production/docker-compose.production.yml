@@ -1,4 +1,26 @@
 services:
+  caddy:
+    image: caddy:2.10.2-alpine
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
   wikijs:
+    image: ghcr.io/requarks/wiki:2.5.306
     environment:
       APP_ENV: production
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  postgres:
+    image: postgres:16.9-alpine
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
