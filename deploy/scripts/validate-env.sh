@@ -40,17 +40,17 @@ if [[ ${#missing[@]} -gt 0 ]]; then
   exit 1
 fi
 
-placeholder_values=(
-  "example.com"
-  "admin@example.com"
-  "REPLACE_WITH_STRONG_PASSWORD"
-  "replace-with-google-client-id"
-  "replace-with-google-client-secret"
+declare -A placeholder_by_var=(
+  [DOMAIN]="wiki.example.com"
+  [EMAIL]="admin@example.com"
+  [POSTGRES_PASSWORD]="REPLACE_WITH_STRONG_PASSWORD"
+  [GOOGLE_OAUTH_CLIENT_ID]="replace-with-google-client-id"
+  [GOOGLE_OAUTH_CLIENT_SECRET]="replace-with-google-client-secret"
 )
 
-for value in "${placeholder_values[@]}"; do
-  if grep -q "$value" "$ENV_FILE"; then
-    echo "❌ Placeholder value detected in $ENV_FILE: $value"
+for var_name in "${!placeholder_by_var[@]}"; do
+  if [[ "${!var_name}" == "${placeholder_by_var[$var_name]}" ]]; then
+    echo "❌ Placeholder value detected for $var_name in $ENV_FILE."
     echo "Replace all placeholder values before deploying. See deploy/README.md."
     exit 1
   fi

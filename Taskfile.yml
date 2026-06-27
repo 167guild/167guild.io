@@ -47,6 +47,7 @@ tasks:
     cmds:
       - bash scripts/restore/restore.sh {{.BACKUP_DIR}}
 
+  # Keep deploy as a stable entrypoint for future multi-environment targets.
   deploy:
     desc: Deploy the stack using production configuration
     cmds:
@@ -56,7 +57,7 @@ tasks:
     desc: Validate production config and deploy containers
     preconditions:
       - sh: test -f {{.PRODUCTION_ENV_FILE}}
-        msg: "{{.PRODUCTION_ENV_FILE}} is required. See deploy/README.md and deploy/examples/.env.production.example"
+        msg: ".env.production is required. See deploy/README.md and deploy/examples/.env.production.example"
       - sh: test -f {{.PRODUCTION_COMPOSE_FILE}}
         msg: "{{.PRODUCTION_COMPOSE_FILE}} is required."
     cmds:

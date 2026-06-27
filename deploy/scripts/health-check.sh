@@ -33,7 +33,7 @@ if ! "${COMPOSE_CMD[@]}" exec -T postgres pg_isready -U "${POSTGRES_USER}" -d "$
 fi
 
 echo "🔎 Checking Caddy endpoint..."
-if ! curl -fsS --max-time 10 "https://${DOMAIN}" >/dev/null; then
+if ! wget -q --spider --timeout=10 "https://${DOMAIN}"; then
   echo "❌ Caddy HTTPS check failed for https://${DOMAIN}."
   echo "Check DNS, TLS provisioning, and Caddy logs: docker compose --env-file $ENV_FILE -f docker-compose.yml -f deploy/production/docker-compose.production.yml logs caddy"
   exit 1
