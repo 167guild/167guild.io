@@ -53,8 +53,8 @@ Create DNS records that direct the public domain to the production server before
 | --- | --- | --- | --- | --- |
 | `A` | `@` | `YOUR_SERVER_IPV4` | Yes | Primary apex record for `167guild.io`. |
 | `AAAA` | `@` | `YOUR_SERVER_IPV6` | Optional | Add only if the server is reachable over IPv6. |
-| `CNAME` | `www` | `167guild.io` | Optional | Convenience redirect alias if `www` will be supported later. |
-| `CNAME` | `wiki` | `167guild.io` | Optional | Future-friendly alias if the wiki is moved to a subdomain later. |
+| `CNAME` | `www` | `167guild.io` | Optional | Convenience DNS alias if `www` will be supported later. |
+| `CNAME` | `wiki` | `167guild.io` | Optional | Future-friendly DNS alias if the wiki is moved to a subdomain later. |
 
 If your DNS provider does not allow `CNAME` records at the apex, keep the apex on `A`/`AAAA` records and use aliases only for subdomains.
 
@@ -117,7 +117,7 @@ If additional domains or subdomains are introduced later, add each exact callbac
 ## HTTPS and SSL Lifecycle
 
 - Caddy provisions and renews certificates automatically after `167guild.io` resolves to the production server and ports `80` and `443` are reachable.
-- The ACME account email is supplied through `EMAIL`; leave the example placeholder until the production mailbox is available.
+- The ACME account email is supplied through `EMAIL`; replace the example placeholder with a real monitored mailbox before the first production deployment.
 - Certificates and ACME state are stored in the `caddy_data` volume, while runtime config is cached in `caddy_config`.
 - On first deploy, expect certificate issuance to happen during Caddy startup; repeated restarts should reuse stored state unless volumes are removed.
 
