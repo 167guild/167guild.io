@@ -12,43 +12,20 @@ A self-hosted D&D world wiki for the 167 Guild — powered by Wiki.js, PostgreSQ
 
 167guild.io is a self-hosted knowledge portal for the 167 Guild D&D campaign. It preserves lore, session history, characters, maps, and world context.
 
-This repository is also intended as a **reusable template** for future self-hosted knowledge platforms.
+This repository is also intended as a reusable template for future self-hosted knowledge platforms.
 
 ---
 
 ## Architecture
 
-| Component     | Role                                      |
-|---------------|-------------------------------------------|
-| **Wiki.js**   | Wiki engine and content management        |
-| **PostgreSQL** | Primary database                         |
-| **Caddy**     | Reverse proxy, automatic HTTPS           |
-| **Docker Compose** | Local orchestration                 |
+| Component | Role |
+| --- | --- |
+| **Wiki.js** | Wiki engine and content management |
+| **PostgreSQL** | Primary database |
+| **Caddy** | Reverse proxy and HTTPS |
+| **Docker Compose** | Local and production orchestration |
 
-See [`docs/architecture.md`](docs/architecture.md) for the architecture overview.
-
----
-
-## Docker Stack (Scaffold)
-
-### Required Software
-
-- [Docker Engine](https://docs.docker.com/engine/install/)
-- [Docker Compose](https://docs.docker.com/compose/)
-
-### Planned Startup Flow
-
-The repository now includes an initial `docker-compose.yml` scaffold for `caddy`, `wikijs`, and `postgres`.
-
-When service configuration is completed in follow-up issues, the stack is expected to be started with Docker Compose after creating a local environment file from `.env.example`.
-
-### Service Overview
-
-- **caddy**: reverse-proxy entrypoint scaffold (configuration deferred)
-- **wikijs**: wiki application scaffold wired for PostgreSQL environment variables
-- **postgres**: persistent database scaffold with a basic health check
-
-Named volumes are defined for persistent data, and services are attached to an internal Docker network.
+See [`docs/architecture.md`](docs/architecture.md) for the full architecture and diagrams.
 
 ---
 
@@ -57,35 +34,40 @@ Named volumes are defined for persistent data, and services are attached to an i
 ### Prerequisites
 
 - [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/)
-- [Task](https://taskfile.dev/#/installation) (optional but recommended)
+- [Task](https://taskfile.dev/#/installation) (auto-installed in Dev Container)
 
-### Local Workflow (High Level)
+### Quick Start
 
 ```bash
-# 1. Clone the repository
+# 1) Clone
 git clone https://github.com/167guild/167guild.io.git
 cd 167guild.io
 
-# 2. Copy environment template
-cp .env.example .env
-
-# 3. Open in VS Code
-#    - install recommended extensions from .vscode/extensions.json
-#    - optionally reopen in the provided Dev Container
-
-# 4. Initialize local environment scaffolding
+# 2) Initialize env file and validate local compose config
 task init
 
-# 5. Run placeholder quality checks
+# 3) Run lint and formatting checks
 task lint
 task format
 
-# 6. Start/stop local workflow placeholders
+# 4) Start / stop the local stack
 task up
 task down
 ```
 
-The current Taskfile commands are intentionally scaffolded placeholders to establish a reproducible baseline developer environment.
+If you use VS Code Dev Containers, open the repository in the provided container. It installs Task CLI and creates `.env` from `.env.example` automatically when missing.
+
+---
+
+## Setup Portal
+
+Deployment setup documentation lives under [`docs/setup/`](docs/setup/README.md) and is the single source of truth for:
+
+- required environment variables
+- DNS prerequisites
+- Google Cloud OAuth setup
+- GitHub secrets mapping
+- deployment and secret rotation runbooks
 
 ---
 
@@ -93,49 +75,34 @@ The current Taskfile commands are intentionally scaffolded placeholders to estab
 
 ```bash
 task help      # List available tasks
-task init      # Initialize local development scaffolding (placeholder)
-task lint      # Run lint workflow (placeholder)
-task format    # Run formatter workflow (placeholder)
-task up        # Start local workflow (placeholder)
-task down      # Stop local workflow (placeholder)
+task init      # Create .env if missing and validate local Compose config
+task lint      # Run shell syntax checks and Compose validation
+task format    # Format shell scripts with shfmt
+task up        # Start local stack
+task down      # Stop local stack
+task deploy    # Deploy using production overlay
 ```
 
 ---
 
 ## Repository Structure
 
-```
+```text
 .
 ├── .devcontainer/          # VS Code Dev Container configuration
 ├── .github/
 │   ├── ISSUE_TEMPLATE/     # GitHub issue templates
 │   ├── workflows/          # GitHub Actions workflows
-│   └── specs/              # Project specifications (source of truth)
+│   └── specs/              # Project specifications
 ├── .vscode/                # VS Code workspace settings
-├── assets/
-│   ├── branding/           # Core brand identity (favicon, social preview, seals)
-│   ├── banners/            # Hero and README banners
-│   ├── logos/              # Logo variants (full, mark, wordmark)
-│   └── backgrounds/        # Background textures and loading artwork
-├── config/
-│   ├── caddy/              # Caddy reverse proxy configuration
-│   └── wikijs/             # Wiki.js application configuration
-├── docs/                   # Project documentation
-├── scripts/
-│   ├── backup/             # Backup automation scripts
-│   ├── bootstrap/          # Server bootstrap scripts
-│   ├── deploy/             # Deployment scripts
-│   └── restore/            # Restore scripts
-├── theme/                  # Wiki.js custom theme (design tokens, CSS)
-├── .editorconfig           # Editor formatting standards
-├── .env.example            # Environment variable template
-├── CHANGELOG.md            # Version history
-├── CODE_OF_CONDUCT.md      # Community standards
-├── CONTRIBUTING.md         # Contribution guidelines
-├── docker-compose.yml      # Docker Compose stack definition
-├── LICENSE                 # MIT License
-├── README.md               # This file
-├── SECURITY.md             # Security policy
+├── assets/                 # Branding assets
+├── config/                 # Caddy and Wiki.js configuration
+├── deploy/                 # Production deployment overlay and scripts
+├── docs/                   # Architecture and setup documentation
+├── scripts/                # Backup/restore/bootstrap scaffolding
+├── theme/                  # Wiki.js custom theme
+├── wiki/                   # Wiki content scaffolding
+├── docker-compose.yml      # Local stack definition
 └── Taskfile.yml            # Task automation
 ```
 
@@ -143,43 +110,21 @@ task down      # Stop local workflow (placeholder)
 
 ## Specifications
 
-Project specifications are located in [`.github/specs/`](.github/specs/):
-
-| Specification | Description |
-|---|---|
-| [vision.spec.md](.github/specs/vision.spec.md) | Project goals and guiding principles |
-| [architecture.spec.md](.github/specs/architecture.spec.md) | System design and component overview |
-| [repository.spec.md](.github/specs/repository.spec.md) | Repository standards and structure |
-| [design-system.spec.md](.github/specs/design-system.spec.md) | Visual identity and design language |
-
----
-
-## Branding
-
-Visual assets are organized under [`assets/`](assets/):
-
-| Directory | Contents |
-|---|---|
-| [`assets/logos/`](assets/logos/) | Full logo, logomark, wordmark |
-| [`assets/branding/`](assets/branding/) | Favicon, social preview, organization/faction seals |
-| [`assets/banners/`](assets/banners/) | Homepage hero, README banner |
-| [`assets/backgrounds/`](assets/backgrounds/) | Loading artwork, hero background texture |
-
-See [`assets/README.md`](assets/README.md) for full asset inventory and usage guidance.
+Project specifications are located in [`.github/specs/`](.github/specs/).
 
 ---
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
-
----
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Security
 
-See [SECURITY.md](SECURITY.md) for the security policy and reporting vulnerabilities.
+See [SECURITY.md](SECURITY.md).
 
----
+## Support
+
+See [SUPPORT.md](SUPPORT.md).
 
 ## License
 

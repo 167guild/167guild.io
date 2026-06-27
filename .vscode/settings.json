@@ -4,5 +4,6 @@
   "files.insertFinalNewline": true,
   "markdown.validate.enabled": true,
   "yaml.validate": true,
-  "cSpell.enabled": true
+  "cSpell.enabled": true,
+  "task.autoDetect": "on"
 }

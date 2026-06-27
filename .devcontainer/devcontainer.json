@@ -4,6 +4,7 @@
   "features": {
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
   },
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -14,7 +15,9 @@
         "editorconfig.editorconfig",
         "github.copilot",
         "github.copilot-chat",
-        "streetsidesoftware.code-spell-checker"
+        "streetsidesoftware.code-spell-checker",
+        "timonwong.shellcheck",
+        "task.vscode-task"
       ]
     }
   },

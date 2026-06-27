@@ -4,6 +4,7 @@ vars:
   COMPOSE_FILE: docker-compose.yml
   PRODUCTION_COMPOSE_FILE: deploy/production/docker-compose.production.yml
   PRODUCTION_ENV_FILE: .env.production
+  COMPOSE_CMD: docker compose --env-file .env
   COMPOSE_PRODUCTION_CMD: docker compose --env-file {{.PRODUCTION_ENV_FILE}} -f {{.COMPOSE_FILE}} -f {{.PRODUCTION_COMPOSE_FILE}}
 
 tasks:
@@ -13,29 +14,63 @@ tasks:
       - task --list
 
   init:
-    desc: Initialize local development environment (placeholder)
+    desc: Initialize local development environment
     cmds:
-      - echo "TODO: initialize local development environment"
+      - |
+        if [ ! -f .env ]; then
+          cp .env.example .env
+          echo "✅ Created .env from .env.example"
+        else
+          echo "ℹ️ .env already exists; leaving it unchanged"
+        fi
+      - docker compose --env-file .env config >/dev/null
+      - echo "✅ Local environment scaffold is ready"
 
   lint:
-    desc: Run repository lint checks (placeholder)
+    desc: Run repository lint checks
     cmds:
-      - echo "TODO: run lint checks"
+      - |
+        set -e
+        while IFS= read -r -d '' file; do
+          bash -n "$file"
+        done < <(find scripts deploy/scripts .devcontainer -type f -name '*.sh' -print0)
+      - docker compose --env-file .env.example config >/dev/null
+      - docker compose --env-file deploy/examples/.env.production.example -f {{.COMPOSE_FILE}} -f {{.PRODUCTION_COMPOSE_FILE}} config >/dev/null
+      - |
+        if command -v shellcheck >/dev/null 2>&1; then
+          find scripts deploy/scripts .devcontainer -type f -name '*.sh' -print0 | xargs -0 -r shellcheck
+        else
+          echo "ℹ️ shellcheck not installed; skipping shellcheck pass"
+        fi
+      - echo "✅ Lint checks complete"
 
   format:
-    desc: Format repository files (placeholder)
+    desc: Format repository files
     cmds:
-      - echo "TODO: run formatting tools"
+      - |
+        if command -v shfmt >/dev/null 2>&1; then
+          find scripts deploy/scripts .devcontainer -type f -name '*.sh' -print0 | xargs -0 -r shfmt -w
+          echo "✅ Formatted shell scripts with shfmt"
+        else
+          echo "❌ shfmt is required for task format. Install shfmt or use the Dev Container."
+          exit 1
+        fi
 
   up:
-    desc: Start local development stack (placeholder)
+    desc: Start local development stack
+    preconditions:
+      - sh: test -f .env
+        msg: ".env is required. Run 'task init' first."
     cmds:
-      - echo "TODO: start local development stack"
+      - '{{.COMPOSE_CMD}} up -d --remove-orphans'
 
   down:
-    desc: Stop local development stack (placeholder)
+    desc: Stop local development stack
+    preconditions:
+      - sh: test -f .env
+        msg: ".env is required. Run 'task init' first."
     cmds:
-      - echo "TODO: stop local development stack"
+      - '{{.COMPOSE_CMD}} down --remove-orphans'
 
   backup:
     desc: Back up all persistent application data (placeholder)

@@ -1,5 +1,12 @@
 # Documentation
 
+## Core Docs
+
+- [Architecture](architecture.md)
+- [Setup Portal](setup/README.md)
+
+---
+
 ## World Context Graph
 
 See [`context/`](context/) for the canonical world context metadata model, including:
