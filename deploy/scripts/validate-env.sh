@@ -15,6 +15,7 @@ source "$ENV_FILE"
 set +a
 
 required_vars=(
+  APP_ENV
   DOMAIN
   EMAIL
   WIKI_BASE_URL
@@ -40,6 +41,11 @@ if [[ ${#missing[@]} -gt 0 ]]; then
   exit 1
 fi
 
+if [[ "${APP_ENV}" != "production" ]]; then
+  echo "❌ APP_ENV must be set to production in $ENV_FILE."
+  exit 1
+fi
+
 declare -A placeholder_by_var=(
   [EMAIL]="admin@example.com"
   [POSTGRES_PASSWORD]="REPLACE_WITH_STRONG_PASSWORD"
@@ -54,5 +60,48 @@ for var_name in "${!placeholder_by_var[@]}"; do
     exit 1
   fi
 done
+
+if [[ "${DOMAIN}" == *"://"* || "${DOMAIN}" == */* ]]; then
+  echo "❌ DOMAIN must be a hostname only (no scheme/path): ${DOMAIN}"
+  exit 1
+fi
+
+invalid_domain_suffixes=("example.com" "example.org" "example.net" "test.com" "test.local" "example.localhost" "localhost" "test" "invalid" "example")
+for invalid_suffix in "${invalid_domain_suffixes[@]}"; do
+  if [[ "${DOMAIN}" == "${invalid_suffix}" || "${DOMAIN}" == *".${invalid_suffix}" ]]; then
+    echo "❌ DOMAIN must be a real production hostname, not a local/example placeholder."
+    exit 1
+  fi
+done
+
+if [[ "${DOMAIN}" =~ \.local$ ]]; then
+  echo "❌ DOMAIN cannot end with .local in production."
+  exit 1
+fi
+
+# Reject literal IPv4 addresses by matching strictly valid 0-255 octets.
+ipv4_regex='^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
+if [[ "${DOMAIN}" =~ ${ipv4_regex} ]]; then
+  echo "❌ DOMAIN must be a DNS hostname, not an IP address."
+  exit 1
+fi
+
+if [[ ! "${WIKI_BASE_URL}" =~ ^https:// ]]; then
+  echo "❌ WIKI_BASE_URL must use HTTPS in production."
+  exit 1
+fi
+
+if [[ ! "${GOOGLE_OAUTH_CALLBACK_URL}" =~ ^https:// ]]; then
+  echo "❌ GOOGLE_OAUTH_CALLBACK_URL must use HTTPS in production."
+  exit 1
+fi
+
+callback_path="/login/callback"
+# Google OAuth callback URLs must match exactly; remove trailing slash for consistent comparison.
+expected_callback="${WIKI_BASE_URL%/}${callback_path}"
+if [[ "${GOOGLE_OAUTH_CALLBACK_URL}" != "${expected_callback}" ]]; then
+  echo "❌ GOOGLE_OAUTH_CALLBACK_URL must match ${expected_callback}"
+  exit 1
+fi
 
 echo "✅ Production environment validation passed for $ENV_FILE."

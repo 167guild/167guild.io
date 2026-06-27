@@ -44,7 +44,8 @@ Operations
 - [x] Configure deployment workflow
 - [x] Configure production environment
 - [x] Connect "167guild.io"
-- [ ] Production hardening
+- [x] Production hardening
+- [x] Release validation checklist
 
 ---
 

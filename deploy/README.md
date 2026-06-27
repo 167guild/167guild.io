@@ -184,7 +184,19 @@ If deployment fails:
 
 Persistent volumes are externalized in Docker volumes, so container rollback does not discard data.
 
-## Verification Checklist
+## Security Hardening Checklist
+
+- [ ] Exposed ports reviewed: only Caddy publishes host ports (`80`, `443`)
+- [ ] Docker networking reviewed: Wiki.js and PostgreSQL are private on the internal network
+- [ ] Restart policies reviewed: all production services use `unless-stopped`
+- [ ] Health checks reviewed for Caddy, Wiki.js, and PostgreSQL
+- [ ] Environment handling reviewed: `.env.production` is required and validated before deploy
+- [ ] Secrets handling reviewed: production credentials are never committed and placeholders are rejected
+- [ ] Backup and restore procedures reviewed and tested for the current release scope
+- [ ] Authentication flow reviewed: Google OAuth callback URL is exact and HTTPS
+- [ ] Role configuration reviewed in Wiki.js (Administrators, Dungeon Master, Player, Viewer)
+
+## Release Checklist
 
 - [ ] Domain ownership and DNS zone access are confirmed for `167guild.io`
 - [ ] Apex `A` record for `167guild.io` points to the production server
@@ -195,11 +207,12 @@ Persistent volumes are externalized in Docker volumes, so container rollback doe
 - [ ] Caddy container is running (`task status`)
 - [ ] Wiki.js container is running (`task status`)
 - [ ] PostgreSQL container is healthy (`task status`)
-- [ ] Public endpoint responds through Caddy
-- [ ] Wiki.js health endpoint responds
-- [ ] Database readiness check succeeds
-- [ ] Google OAuth login flow succeeds
-- [ ] Latest backup exists and restore path is documented
+- [ ] Caddy endpoint responds over HTTP and HTTPS (`task health`)
+- [ ] Wiki.js startup and health endpoint checks succeed (`task health`)
+- [ ] PostgreSQL readiness check succeeds (`task health`)
+- [ ] Google OAuth login flow succeeds in browser
+- [ ] Backup/restore workflow is validated against the current runbook scope and documented
+- [ ] Wiki.js role permissions are validated for Administrators, Dungeon Master, Player, and Viewer
 
 ## Health Verification Details
 
@@ -208,7 +221,13 @@ Persistent volumes are externalized in Docker volumes, so container rollback doe
 - The primary `/healthz` endpoint matches this repository's Docker Compose healthcheck.
 - **PostgreSQL**: `task health` runs `pg_isready`.
 - **Authentication**: perform a test Google OAuth login in the deployed wiki.
-- **Backups**: run `task backup` and confirm backup artifacts are created under `backups/`.
+- **Backups**: validate the current backup/restore runbook scope and record where artifacts or manual outputs are stored.
+
+## Remaining Assumptions and Risks
+
+- Backup and restore scripts are currently scaffolds and must be treated as manual runbook workflows until automated, restore-safe implementations are completed.
+- Initial production release assumes a single Ubuntu LTS VM and Docker Compose runtime; high-availability failover is out of scope for this cut.
+- Role assignment still requires manual verification in Wiki.js Admin after first OAuth sign-in for each user.
 
 ## GitHub Actions Scaffold
 
