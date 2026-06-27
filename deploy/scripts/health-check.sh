@@ -19,13 +19,25 @@ echo "🔎 Checking container status..."
 "${COMPOSE_CMD[@]}" ps
 
 echo "🔎 Checking Wiki.js health endpoint..."
-"${COMPOSE_CMD[@]}" exec -T wikijs wget -q --spider http://localhost:3000/healthz
+if ! "${COMPOSE_CMD[@]}" exec -T wikijs wget -q --spider http://localhost:3000/healthz; then
+  echo "❌ Wiki.js health check failed (/healthz)."
+  echo "Verify the wikijs container is running and inspect logs with: docker compose --env-file $ENV_FILE -f docker-compose.yml -f deploy/production/docker-compose.production.yml logs wikijs"
+  exit 1
+fi
 
 echo "🔎 Checking PostgreSQL readiness..."
-"${COMPOSE_CMD[@]}" exec -T postgres pg_isready -U "${POSTGRES_USER}" -d "${POSTGRES_DB}" >/dev/null
+if ! "${COMPOSE_CMD[@]}" exec -T postgres pg_isready -U "${POSTGRES_USER}" -d "${POSTGRES_DB}"; then
+  echo "❌ PostgreSQL readiness check failed."
+  echo "Verify the postgres container is running and credentials in $ENV_FILE are correct."
+  exit 1
+fi
 
 echo "🔎 Checking Caddy endpoint..."
-curl -fsS --max-time 10 "https://${DOMAIN}" >/dev/null
+if ! curl -fsS --max-time 10 "https://${DOMAIN}" >/dev/null; then
+  echo "❌ Caddy HTTPS check failed for https://${DOMAIN}."
+  echo "Check DNS, TLS provisioning, and Caddy logs: docker compose --env-file $ENV_FILE -f docker-compose.yml -f deploy/production/docker-compose.production.yml logs caddy"
+  exit 1
+fi
 
 echo "✅ Health checks passed for Caddy, Wiki.js, and PostgreSQL."
 echo "ℹ️  Manual follow-up: verify Google OAuth sign-in and latest backup artifacts."
