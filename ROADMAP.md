@@ -12,6 +12,9 @@ Repository
 - [x] Create specification library
 - [x] Bootstrap repository structure
 - [x] Configure community health files
+- [ ] Create `docs/architecture.md` (referenced in README but missing)
+- [ ] Expand `SECURITY.md` with vulnerability reporting policy and threat model
+- [ ] Add `SUPPORT.md` with community support channels
 
 Developer Experience
 
@@ -19,6 +22,11 @@ Developer Experience
 - [x] Configure Taskfile
 - [x] Configure Dev Container
 - [x] Configure VS Code recommendations
+- [ ] Implement `task up` / `task down` (currently stubs)
+- [ ] Implement `task init` (currently a stub)
+- [ ] Implement `task lint` / `task format` (currently stubs)
+- [ ] Add `task` installation to Dev Container
+- [ ] Add auto-copy of `.env.example` → `.env` in Dev Container `postCreateCommand`
 
 ---
 
@@ -30,6 +38,9 @@ Docker
 - [x] Configure Caddy reverse proxy
 - [x] Configure PostgreSQL
 - [x] Configure Wiki.js
+- [ ] Implement Wiki.js Google OAuth provider configuration (YAML or documented UI steps)
+- [ ] Pin container image versions in production overlay for reproducible deployments
+- [ ] Add resource limits and log driver limits to production Compose overlay
 
 Authentication
 
@@ -46,6 +57,9 @@ Operations
 - [x] Connect "167guild.io"
 - [x] Production hardening
 - [x] Release validation checklist
+- [ ] Implement backup scripts (PostgreSQL dump, volume backup, config archive)
+- [ ] Implement restore scripts and validate against a real backup archive
+- [ ] Wire SSH deployment step in GitHub Actions deploy workflow
 
 Release Management
 
@@ -178,8 +192,14 @@ Operations
 
 - [ ] Monitoring
 - [ ] Logging
+- [ ] Log rotation configuration
 - [ ] Disaster recovery
 - [ ] Security review
+- [ ] Secret rotation runbook
+- [ ] Scheduled backups (cron or GitHub Actions)
+- [ ] Offsite backup storage
+- [ ] Backup encryption
+- [ ] Backup retention policy
 
 ---
 
@@ -208,7 +228,7 @@ The goal is to build a beautiful, living world that grows alongside the campaign
 
 ## Productization
 
-- [ ] Audit repository for reusable components
+- [x] Audit repository for reusable components
 - [ ] Remove campaign-specific assets
 - [ ] Extract reusable configuration
 - [ ] Generalize templates
@@ -220,6 +240,8 @@ The goal is to build a beautiful, living world that grows alongside the campaign
 - [ ] Create installation guide
 - [ ] Create demo world
 - [ ] Publish OSS template repository
+- [ ] Review Wiki.js AGPL license implications for OSS bundling
+- [ ] Add `ATTRIBUTION.md` for third-party fonts and icons
 
 ## Community
 
