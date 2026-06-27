@@ -66,7 +66,7 @@ if [[ "${DOMAIN}" == *"://"* || "${DOMAIN}" == */* ]]; then
   exit 1
 fi
 
-if [[ "${DOMAIN}" == "example.com" || "${DOMAIN}" == "localhost" || "${DOMAIN}" == "127.0.0.1" || "${DOMAIN}" == "0.0.0.0" || "${DOMAIN}" == *.local ]]; then
+if [[ "${DOMAIN}" == "example.com" || "${DOMAIN}" == "localhost" || "${DOMAIN}" == "127.0.0.1" || "${DOMAIN}" == "0.0.0.0" || "${DOMAIN}" =~ \.local$ ]]; then
   echo "❌ DOMAIN must be a real production hostname, not a local/example placeholder."
   exit 1
 fi
