@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "description": "167 Guild Wiki — Icon Design Tokens.",
+  "icon": {
+    "size-xs": {
+      "$value": "12px",
+      "$type": "dimension",
+      "$description": "Extra small. Inline status indicators."
+    },
+    "size-sm": {
+      "$value": "16px",
+      "$type": "dimension",
+      "$description": "Small. Button icons, navigation items, list markers."
+    },
+    "size-base": {
+      "$value": "20px",
+      "$type": "dimension",
+      "$description": "Base. Default icon size for most UI contexts."
+    },
+    "size-md": {
+      "$value": "24px",
+      "$type": "dimension",
+      "$description": "Medium. Feature icons, toolbar actions."
+    },
+    "size-lg": {
+      "$value": "32px",
+      "$type": "dimension",
+      "$description": "Large. Section hero icons, empty states."
+    },
+    "size-xl": {
+      "$value": "48px",
+      "$type": "dimension",
+      "$description": "Extra large. Illustration-scale icons."
+    },
+    "source-primary": {
+      "$value": "Phosphor Icons",
+      "$type": "string",
+      "$description": "Primary icon set. MIT licensed. https://phosphoricons.com"
+    },
+    "source-custom": {
+      "$value": "Custom SVG",
+      "$type": "string",
+      "$description": "World-specific icons: ravens, crests, twin moons, serpents. Stored in theme/assets/."
+    },
+    "color-default": {
+      "$value": "#d4cbb8",
+      "$type": "color",
+      "$description": "Default icon color (Stone White)."
+    },
+    "color-muted": {
+      "$value": "#8a8278",
+      "$type": "color",
+      "$description": "Muted icon color (Ash) for secondary icons."
+    },
+    "color-accent": {
+      "$value": "#c9a84c",
+      "$type": "color",
+      "$description": "Accent icon color (Guild Gold) for active and highlighted icons."
+    }
+  }
+}

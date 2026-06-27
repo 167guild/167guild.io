@@ -1,0 +1,219 @@
+/**
+ * 167 Guild Wiki — CSS Custom Properties (Design Tokens)
+ *
+ * This file defines all CSS variables for the 167 Guild Wiki theme.
+ * All values derive from the design tokens in theme/tokens/.
+ *
+ * Usage: inject this file via Wiki.js Administration > Theming > Custom CSS.
+ * All other theme CSS files depend on these variables being loaded first.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Table of Contents
+ *   1. Font Imports
+ *   2. Color Variables
+ *   3. Typography Variables
+ *   4. Spacing Variables
+ *   5. Border Radius Variables
+ *   6. Shadow Variables
+ *   7. Border Variables
+ *   8. Animation Variables
+ *   9. Icon Variables
+ *  10. Semantic Aliases
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
+/* ─── 1. Font Imports ──────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── 2. Color Variables ───────────────────────────────────────────────────── */
+
+:root {
+  /* Base palette */
+  --color-background:     #0f111a;
+  --color-surface:        #1a1f2e;
+  --color-surface-raised: #1e2335;
+  --color-iron:           #2d3347;
+  --color-primary:        #1a2a4a;
+  --color-accent:         #c9a84c;
+  --color-accent-muted:   #8a6f2e;
+  --color-crimson:        #8b1a1a;
+  --color-parchment:      #e8dfc8;
+
+  /* Text */
+  --color-text:           #d4cbb8;
+  --color-text-muted:     #8a8278;
+  --color-text-faint:     #5a5650;
+
+  /* Semantic */
+  --color-success:        #2d5a27;
+  --color-success-text:   #6dbe65;
+  --color-warning:        #b8860b;
+  --color-warning-text:   #e8b84b;
+  --color-error:          #8b1a1a;
+  --color-error-text:     #d45656;
+  --color-info:           #4a6fa5;
+  --color-info-text:      #6b9bc8;
+
+  /* Links */
+  --color-link:           #6b9bc8;
+  --color-link-visited:   #9b88c8;
+  --color-link-hover:     #9fc5e8;
+
+  /* Code syntax */
+  --color-code-bg:        #131620;
+  --color-code-text:      #cdd6f4;
+  --color-code-keyword:   #cba6f7;
+  --color-code-string:    #a6e3a1;
+  --color-code-comment:   #6c7086;
+  --color-code-number:    #fab387;
+  --color-code-operator:  #89dceb;
+
+/* ─── 3. Typography Variables ──────────────────────────────────────────────── */
+
+  /* Font families */
+  --font-heading: 'Cinzel', Georgia, serif;
+  --font-body:    'Crimson Text', Georgia, serif;
+  --font-ui:      'Lato', system-ui, -apple-system, sans-serif;
+  --font-code:    'JetBrains Mono', 'Courier New', Courier, monospace;
+
+  /* Font sizes */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  3rem;
+  --text-6xl:  3.75rem;
+
+  /* Font weights */
+  --font-light:    300;
+  --font-normal:   400;
+  --font-medium:   500;
+  --font-semibold: 600;
+  --font-bold:     700;
+
+  /* Line heights */
+  --leading-tight:   1.25;
+  --leading-snug:    1.375;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose:   2;
+
+  /* Letter spacing */
+  --tracking-tight:  -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.05em;
+  --tracking-wider:  0.1em;
+
+/* ─── 4. Spacing Variables ─────────────────────────────────────────────────── */
+
+  --space-0:  0;
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+/* ─── 5. Border Radius Variables ───────────────────────────────────────────── */
+
+  --radius-none: 0;
+  --radius-sm:   0.125rem;
+  --radius-base: 0.25rem;
+  --radius-md:   0.375rem;
+  --radius-lg:   0.5rem;
+  --radius-xl:   0.75rem;
+  --radius-full: 9999px;
+
+/* ─── 6. Shadow Variables ──────────────────────────────────────────────────── */
+
+  --shadow-sm:           0 1px 2px rgba(0, 0, 0, 0.6);
+  --shadow-base:         0 2px 4px rgba(0, 0, 0, 0.7);
+  --shadow-md:           0 4px 8px rgba(0, 0, 0, 0.75);
+  --shadow-lg:           0 8px 16px rgba(0, 0, 0, 0.8);
+  --shadow-xl:           0 16px 32px rgba(0, 0, 0, 0.85);
+  --shadow-glow-gold:    0 0 12px rgba(201, 168, 76, 0.3);
+  --shadow-glow-gold-strong: 0 0 24px rgba(201, 168, 76, 0.5);
+  --shadow-glow-crimson: 0 0 12px rgba(139, 26, 26, 0.4);
+  --shadow-inset:        inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  --shadow-inset-deep:   inset 0 4px 8px rgba(0, 0, 0, 0.7);
+
+/* ─── 7. Border Variables ──────────────────────────────────────────────────── */
+
+  --border-width-thin:  1px;
+  --border-width-base:  2px;
+  --border-width-thick: 4px;
+
+  --border-color-default: var(--color-iron);
+  --border-color-accent:  var(--color-accent);
+  --border-color-muted:   rgba(45, 51, 71, 0.6);
+  --border-color-success: var(--color-success);
+  --border-color-warning: var(--color-warning);
+  --border-color-error:   var(--color-error);
+  --border-color-info:    var(--color-info);
+
+/* ─── 8. Animation Variables ───────────────────────────────────────────────── */
+
+  --duration-instant: 0ms;
+  --duration-fast:    100ms;
+  --duration-base:    200ms;
+  --duration-slow:    350ms;
+  --duration-slower:  500ms;
+
+  --easing-linear:      linear;
+  --easing-ease:        ease;
+  --easing-ease-in:     ease-in;
+  --easing-ease-out:    ease-out;
+  --easing-ease-in-out: ease-in-out;
+  --easing-dramatic:    cubic-bezier(0.4, 0, 0.2, 1);
+
+/* ─── 9. Icon Variables ────────────────────────────────────────────────────── */
+
+  --icon-xs:   12px;
+  --icon-sm:   16px;
+  --icon-base: 20px;
+  --icon-md:   24px;
+  --icon-lg:   32px;
+  --icon-xl:   48px;
+
+  --icon-color-default: var(--color-text);
+  --icon-color-muted:   var(--color-text-muted);
+  --icon-color-accent:  var(--color-accent);
+
+/* ─── 10. Semantic Aliases ─────────────────────────────────────────────────── */
+
+  /* Page structure */
+  --page-bg:         var(--color-background);
+  --panel-bg:        var(--color-surface);
+  --panel-bg-raised: var(--color-surface-raised);
+  --panel-border:    var(--border-color-default);
+
+  /* Interactive */
+  --focus-ring: 0 0 0 3px rgba(201, 168, 76, 0.4);
+
+  /* Transition shorthand */
+  --transition-base:  var(--duration-base) var(--easing-ease-in-out);
+  --transition-fast:  var(--duration-fast) var(--easing-ease-out);
+  --transition-slow:  var(--duration-slow) var(--easing-ease-in-out);
+}
+
+/* ─── Reduced Motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast:   0ms;
+    --duration-base:   0ms;
+    --duration-slow:   0ms;
+    --duration-slower: 0ms;
+  }
+}
