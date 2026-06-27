@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "description": "167 Guild Wiki — Border Design Tokens.",
+  "border": {
+    "width-thin": {
+      "$value": "1px",
+      "$type": "dimension",
+      "$description": "Thin border. Standard borders and subtle dividers."
+    },
+    "width-base": {
+      "$value": "2px",
+      "$type": "dimension",
+      "$description": "Base border. Emphasized borders and focus rings."
+    },
+    "width-thick": {
+      "$value": "4px",
+      "$type": "dimension",
+      "$description": "Thick border. Section dividers and alert left borders."
+    },
+    "color-default": {
+      "$value": "#2d3347",
+      "$type": "color",
+      "$description": "Standard border color (iron). Used for most element borders."
+    },
+    "color-accent": {
+      "$value": "#c9a84c",
+      "$type": "color",
+      "$description": "Accent border color (Guild Gold). Active states, hover borders."
+    },
+    "color-muted": {
+      "$value": "rgba(45, 51, 71, 0.6)",
+      "$type": "color",
+      "$description": "Muted border color. Subtle structural separation."
+    },
+    "color-success": {
+      "$value": "#2d5a27",
+      "$type": "color",
+      "$description": "Success border color."
+    },
+    "color-warning": {
+      "$value": "#b8860b",
+      "$type": "color",
+      "$description": "Warning border color."
+    },
+    "color-error": {
+      "$value": "#8b1a1a",
+      "$type": "color",
+      "$description": "Error border color."
+    },
+    "color-info": {
+      "$value": "#4a6fa5",
+      "$type": "color",
+      "$description": "Info border color."
+    },
+    "style-solid": {
+      "$value": "solid",
+      "$type": "string",
+      "$description": "Standard solid border style."
+    },
+    "style-ornate": {
+      "$value": "double",
+      "$type": "string",
+      "$description": "Ornate double-line border style for decorative elements."
+    },
+    "style-dashed": {
+      "$value": "dashed",
+      "$type": "string",
+      "$description": "Dashed border style for draft or placeholder elements."
+    }
+  }
+}

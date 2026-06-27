@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "description": "167 Guild Wiki — Shadow Design Tokens. Deep shadows reinforce the dark fantasy atmosphere.",
+  "shadow": {
+    "sm": {
+      "$value": "0 1px 2px rgba(0, 0, 0, 0.6)",
+      "$type": "shadow",
+      "$description": "Subtle depth for minor raised elements."
+    },
+    "base": {
+      "$value": "0 2px 4px rgba(0, 0, 0, 0.7)",
+      "$type": "shadow",
+      "$description": "Default card and panel shadow."
+    },
+    "md": {
+      "$value": "0 4px 8px rgba(0, 0, 0, 0.75)",
+      "$type": "shadow",
+      "$description": "Raised panels and active cards."
+    },
+    "lg": {
+      "$value": "0 8px 16px rgba(0, 0, 0, 0.8)",
+      "$type": "shadow",
+      "$description": "Modals, popovers, and elevated overlays."
+    },
+    "xl": {
+      "$value": "0 16px 32px rgba(0, 0, 0, 0.85)",
+      "$type": "shadow",
+      "$description": "Top-level overlay layers and full-screen elements."
+    },
+    "glow-gold": {
+      "$value": "0 0 12px rgba(201, 168, 76, 0.3)",
+      "$type": "shadow",
+      "$description": "Gold glow effect for accent elements and active states."
+    },
+    "glow-gold-strong": {
+      "$value": "0 0 24px rgba(201, 168, 76, 0.5)",
+      "$type": "shadow",
+      "$description": "Strong gold glow for focus states and hero elements."
+    },
+    "glow-crimson": {
+      "$value": "0 0 12px rgba(139, 26, 26, 0.4)",
+      "$type": "shadow",
+      "$description": "Crimson glow for error states and dangerous actions."
+    },
+    "inset": {
+      "$value": "inset 0 2px 4px rgba(0, 0, 0, 0.5)",
+      "$type": "shadow",
+      "$description": "Inset shadow for pressed states and input wells."
+    },
+    "inset-deep": {
+      "$value": "inset 0 4px 8px rgba(0, 0, 0, 0.7)",
+      "$type": "shadow",
+      "$description": "Deep inset shadow for recessed elements."
+    }
+  }
+}

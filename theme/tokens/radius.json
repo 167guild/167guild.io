@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "description": "167 Guild Wiki — Border Radius Design Tokens. Sharp corners evoke stone and iron; gentle rounding softens UI elements.",
+  "radius": {
+    "none": {
+      "$value": "0",
+      "$type": "dimension",
+      "$description": "No rounding. Sharp stone and iron corners for structural elements."
+    },
+    "sm": {
+      "$value": "0.125rem",
+      "$type": "dimension",
+      "$description": "2px. Subtle rounding for minor elements."
+    },
+    "base": {
+      "$value": "0.25rem",
+      "$type": "dimension",
+      "$description": "4px. Default element rounding."
+    },
+    "md": {
+      "$value": "0.375rem",
+      "$type": "dimension",
+      "$description": "6px. Cards, panels, and containers."
+    },
+    "lg": {
+      "$value": "0.5rem",
+      "$type": "dimension",
+      "$description": "8px. Modals, dialogs, and large containers."
+    },
+    "xl": {
+      "$value": "0.75rem",
+      "$type": "dimension",
+      "$description": "12px. Large feature containers."
+    },
+    "full": {
+      "$value": "9999px",
+      "$type": "dimension",
+      "$description": "Fully rounded. Pills, badges, and circular elements."
+    }
+  }
+}

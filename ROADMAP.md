@@ -82,12 +82,12 @@ Phase 3 — Design & Branding
 
 Visual Identity
 
-- [ ] Global design system
-- [ ] Wiki.js custom theme
-- [ ] Typography
-- [ ] Color palette
-- [ ] Icons
-- [ ] Design tokens
+- [x] Global design system
+- [x] Wiki.js custom theme
+- [x] Typography
+- [x] Color palette
+- [x] Icons
+- [x] Design tokens
 
 Artwork
 

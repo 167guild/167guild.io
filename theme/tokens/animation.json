@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "description": "167 Guild Wiki — Animation and Transition Design Tokens. Transitions should feel deliberate — not sluggish, not instant.",
+  "animation": {
+    "duration-instant": {
+      "$value": "0ms",
+      "$type": "duration",
+      "$description": "No animation. For elements that must update immediately."
+    },
+    "duration-fast": {
+      "$value": "100ms",
+      "$type": "duration",
+      "$description": "Fast micro-interactions. Button clicks, focus rings."
+    },
+    "duration-base": {
+      "$value": "200ms",
+      "$type": "duration",
+      "$description": "Default transition duration. Color changes, opacity."
+    },
+    "duration-slow": {
+      "$value": "350ms",
+      "$type": "duration",
+      "$description": "Slow transitions. Panel reveals, dropdown menus."
+    },
+    "duration-slower": {
+      "$value": "500ms",
+      "$type": "duration",
+      "$description": "Deliberate reveals. Page-level transitions, dramatic effects."
+    },
+    "easing-linear": {
+      "$value": "linear",
+      "$type": "cubicBezier",
+      "$description": "Linear easing. Continuous motion like progress bars."
+    },
+    "easing-ease": {
+      "$value": "ease",
+      "$type": "cubicBezier",
+      "$description": "Default easing. Natural feel for most transitions."
+    },
+    "easing-ease-in": {
+      "$value": "ease-in",
+      "$type": "cubicBezier",
+      "$description": "Ease in. Accelerating enter animations."
+    },
+    "easing-ease-out": {
+      "$value": "ease-out",
+      "$type": "cubicBezier",
+      "$description": "Ease out. Decelerating exit animations."
+    },
+    "easing-ease-in-out": {
+      "$value": "ease-in-out",
+      "$type": "cubicBezier",
+      "$description": "Ease in-out. Balanced transitions with smooth start and end."
+    },
+    "easing-dramatic": {
+      "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "$type": "cubicBezier",
+      "$description": "Material-style dramatic curve. For impactful state changes."
+    }
+  }
+}

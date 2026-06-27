@@ -1,0 +1,321 @@
+/**
+ * 167 Guild Wiki — Typography Styles
+ *
+ * Heading hierarchy, body text, code, tables, and inline elements.
+ * Depends on: variables.css, base.css
+ *
+ * Applied via Wiki.js Administration > Theming > Custom CSS.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Table of Contents
+ *   1. Headings
+ *   2. Body Text
+ *   3. Lists
+ *   4. Blockquotes
+ *   5. Code — Inline
+ *   6. Code — Blocks
+ *   7. Tables
+ *   8. Emphasis and Inline Elements
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
+/* ─── 1. Headings ──────────────────────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-bold);
+  color: var(--color-parchment);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-4);
+}
+
+h1 {
+  font-size: var(--text-5xl);
+  color: var(--color-accent);
+  letter-spacing: var(--tracking-tight);
+  border-bottom: var(--border-width-base) solid var(--border-color-accent);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+h2 {
+  font-size: var(--text-4xl);
+  color: var(--color-parchment);
+  border-bottom: var(--border-width-thin) solid var(--border-color-default);
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+h3 {
+  font-size: var(--text-3xl);
+  color: var(--color-accent);
+}
+
+h4 {
+  font-size: var(--text-2xl);
+  color: var(--color-parchment);
+}
+
+h5 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+h6 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ─── 2. Body Text ─────────────────────────────────────────────────────────── */
+
+p {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text);
+  margin-top: 0;
+  margin-bottom: var(--space-4);
+}
+
+.lead,
+.intro {
+  font-size: var(--text-lg);
+  color: var(--color-parchment);
+  line-height: var(--leading-relaxed);
+}
+
+/* ─── 3. Lists ─────────────────────────────────────────────────────────────── */
+
+ul,
+ol {
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+li {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text);
+  margin-bottom: var(--space-1);
+}
+
+ul li::marker {
+  color: var(--color-accent-muted);
+}
+
+ol li::marker {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-weight: var(--font-semibold);
+}
+
+/* Nested lists */
+ul ul,
+ol ol,
+ul ol,
+ol ul {
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-1);
+}
+
+/* Definition lists */
+dl {
+  margin-bottom: var(--space-4);
+}
+
+dt {
+  font-family: var(--font-heading);
+  font-weight: var(--font-semibold);
+  color: var(--color-accent);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  margin-top: var(--space-3);
+}
+
+dd {
+  margin-left: var(--space-4);
+  color: var(--color-text);
+}
+
+/* ─── 4. Blockquotes ───────────────────────────────────────────────────────── */
+
+blockquote {
+  border-left: var(--border-width-thick) solid var(--border-color-accent);
+  margin: var(--space-6) 0;
+  padding: var(--space-4) var(--space-6);
+  background-color: rgba(201, 168, 76, 0.06);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+blockquote p {
+  font-style: italic;
+  color: var(--color-parchment);
+  font-size: var(--text-lg);
+  margin-bottom: 0;
+}
+
+blockquote cite,
+blockquote footer {
+  display: block;
+  margin-top: var(--space-2);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-style: normal;
+}
+
+blockquote cite::before,
+blockquote footer::before {
+  content: '— ';
+}
+
+/* ─── 5. Code — Inline ─────────────────────────────────────────────────────── */
+
+code {
+  font-family: var(--font-code);
+  font-size: 0.875em;
+  background-color: rgba(19, 22, 32, 0.8);
+  color: var(--color-code-text);
+  padding: 0.1em 0.4em;
+  border-radius: var(--radius-base);
+  border: var(--border-width-thin) solid var(--border-color-muted);
+}
+
+/* ─── 6. Code — Blocks ─────────────────────────────────────────────────────── */
+
+pre {
+  font-family: var(--font-code);
+  font-size: var(--text-sm);
+  background-color: var(--color-code-bg);
+  color: var(--color-code-text);
+  padding: var(--space-5) var(--space-6);
+  border-radius: var(--radius-md);
+  border: var(--border-width-thin) solid var(--border-color-default);
+  overflow-x: auto;
+  line-height: var(--leading-loose);
+  margin-bottom: var(--space-6);
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  border-radius: 0;
+}
+
+/* ─── 7. Tables ────────────────────────────────────────────────────────────── */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-base);
+}
+
+thead {
+  background-color: var(--color-surface-raised);
+}
+
+thead th {
+  font-family: var(--font-heading);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: var(--border-width-base) solid var(--border-color-accent);
+}
+
+tbody tr {
+  border-bottom: var(--border-width-thin) solid var(--border-color-muted);
+  transition: background-color var(--transition-fast);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--color-surface-raised);
+}
+
+tbody tr:hover {
+  background-color: rgba(201, 168, 76, 0.06);
+}
+
+tbody td {
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text);
+  vertical-align: top;
+}
+
+tfoot td {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  padding: var(--space-3) var(--space-4);
+  border-top: var(--border-width-base) solid var(--border-color-default);
+}
+
+/* ─── 8. Emphasis and Inline Elements ─────────────────────────────────────── */
+
+strong,
+b {
+  font-weight: var(--font-bold);
+  color: var(--color-parchment);
+}
+
+em,
+i {
+  font-style: italic;
+  color: inherit;
+}
+
+mark {
+  background-color: rgba(201, 168, 76, 0.25);
+  color: var(--color-parchment);
+  padding: 0.1em 0.2em;
+  border-radius: var(--radius-sm);
+}
+
+abbr[title] {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+small {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+sup,
+sub {
+  font-size: 0.75em;
+}
+
+kbd {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  background-color: var(--color-surface-raised);
+  color: var(--color-text);
+  border: var(--border-width-thin) solid var(--border-color-default);
+  border-bottom-width: 2px;
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-base);
+}

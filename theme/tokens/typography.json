@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "description": "167 Guild Wiki — Typography Design Tokens",
+  "font": {
+    "family-heading": {
+      "$value": "'Cinzel', Georgia, serif",
+      "$type": "fontFamily",
+      "$description": "Heading font. Cinzel evokes classical inscriptions and ancient authority."
+    },
+    "family-body": {
+      "$value": "'Crimson Text', Georgia, serif",
+      "$type": "fontFamily",
+      "$description": "Body text font. Crimson Text provides elegant readability for long-form content."
+    },
+    "family-ui": {
+      "$value": "'Lato', system-ui, -apple-system, sans-serif",
+      "$type": "fontFamily",
+      "$description": "UI font. Lato provides clean legibility for navigation, labels, and interactive elements."
+    },
+    "family-code": {
+      "$value": "'JetBrains Mono', 'Courier New', Courier, monospace",
+      "$type": "fontFamily",
+      "$description": "Code font. JetBrains Mono for code blocks and inline code."
+    },
+    "size-xs": {
+      "$value": "0.75rem",
+      "$type": "dimension",
+      "$description": "12px. Captions, small labels, metadata."
+    },
+    "size-sm": {
+      "$value": "0.875rem",
+      "$type": "dimension",
+      "$description": "14px. Secondary body text, metadata, footnotes."
+    },
+    "size-base": {
+      "$value": "1rem",
+      "$type": "dimension",
+      "$description": "16px. Primary body text."
+    },
+    "size-lg": {
+      "$value": "1.125rem",
+      "$type": "dimension",
+      "$description": "18px. Lead paragraphs, introductory text."
+    },
+    "size-xl": {
+      "$value": "1.25rem",
+      "$type": "dimension",
+      "$description": "20px. Section labels, emphasized body."
+    },
+    "size-2xl": {
+      "$value": "1.5rem",
+      "$type": "dimension",
+      "$description": "24px. h6, h5 headings."
+    },
+    "size-3xl": {
+      "$value": "1.875rem",
+      "$type": "dimension",
+      "$description": "30px. h4 headings."
+    },
+    "size-4xl": {
+      "$value": "2.25rem",
+      "$type": "dimension",
+      "$description": "36px. h3 headings."
+    },
+    "size-5xl": {
+      "$value": "3rem",
+      "$type": "dimension",
+      "$description": "48px. h2 headings."
+    },
+    "size-6xl": {
+      "$value": "3.75rem",
+      "$type": "dimension",
+      "$description": "60px. h1 and hero headings."
+    },
+    "weight-light": {
+      "$value": "300",
+      "$type": "fontWeight",
+      "$description": "Light weight. Captions, muted text."
+    },
+    "weight-normal": {
+      "$value": "400",
+      "$type": "fontWeight",
+      "$description": "Normal weight. Body text."
+    },
+    "weight-medium": {
+      "$value": "500",
+      "$type": "fontWeight",
+      "$description": "Medium weight. UI labels, emphasized body."
+    },
+    "weight-semibold": {
+      "$value": "600",
+      "$type": "fontWeight",
+      "$description": "Semibold weight. Subheadings, table headers."
+    },
+    "weight-bold": {
+      "$value": "700",
+      "$type": "fontWeight",
+      "$description": "Bold weight. Headings, strong emphasis."
+    },
+    "leading-tight": {
+      "$value": "1.25",
+      "$type": "number",
+      "$description": "Tight line height for large headings."
+    },
+    "leading-snug": {
+      "$value": "1.375",
+      "$type": "number",
+      "$description": "Snug line height for subheadings."
+    },
+    "leading-normal": {
+      "$value": "1.5",
+      "$type": "number",
+      "$description": "Normal line height for standard body text."
+    },
+    "leading-relaxed": {
+      "$value": "1.625",
+      "$type": "number",
+      "$description": "Relaxed line height for long-form reading."
+    },
+    "leading-loose": {
+      "$value": "2",
+      "$type": "number",
+      "$description": "Loose line height for code and preformatted text."
+    },
+    "tracking-tight": {
+      "$value": "-0.025em",
+      "$type": "dimension",
+      "$description": "Tight letter-spacing for large headings."
+    },
+    "tracking-normal": {
+      "$value": "0",
+      "$type": "dimension",
+      "$description": "Normal letter-spacing."
+    },
+    "tracking-wide": {
+      "$value": "0.05em",
+      "$type": "dimension",
+      "$description": "Wide letter-spacing for uppercase labels and navigation."
+    },
+    "tracking-wider": {
+      "$value": "0.1em",
+      "$type": "dimension",
+      "$description": "Wider letter-spacing for small caps and decorative labels."
+    }
+  }
+}

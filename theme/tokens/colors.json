@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "description": "167 Guild Wiki — Color Design Tokens",
+  "color": {
+    "background": {
+      "$value": "#0f111a",
+      "$type": "color",
+      "$description": "Page background. The void — deep and dark."
+    },
+    "surface": {
+      "$value": "#1a1f2e",
+      "$type": "color",
+      "$description": "Cards, panels, sidebar background."
+    },
+    "surface-raised": {
+      "$value": "#1e2335",
+      "$type": "color",
+      "$description": "Raised panels, modals, hover backgrounds."
+    },
+    "iron": {
+      "$value": "#2d3347",
+      "$type": "color",
+      "$description": "Surface borders and dividers."
+    },
+    "primary": {
+      "$value": "#1a2a4a",
+      "$type": "color",
+      "$description": "Primary interactive element backgrounds."
+    },
+    "accent": {
+      "$value": "#c9a84c",
+      "$type": "color",
+      "$description": "Guild Gold. Used for highlights, active states, and key headings."
+    },
+    "accent-muted": {
+      "$value": "#8a6f2e",
+      "$type": "color",
+      "$description": "Aged Gold. Secondary accents, borders, and decorative elements."
+    },
+    "crimson": {
+      "$value": "#8b1a1a",
+      "$type": "color",
+      "$description": "Blood Red. Warnings, errors, and important callouts."
+    },
+    "parchment": {
+      "$value": "#e8dfc8",
+      "$type": "color",
+      "$description": "Pale Gold parchment. High-contrast text on dark backgrounds."
+    },
+    "text": {
+      "$value": "#d4cbb8",
+      "$type": "color",
+      "$description": "Stone White. Primary body text color."
+    },
+    "text-muted": {
+      "$value": "#8a8278",
+      "$type": "color",
+      "$description": "Ash. Secondary text, captions, metadata."
+    },
+    "text-faint": {
+      "$value": "#5a5650",
+      "$type": "color",
+      "$description": "Deep Ash. Placeholder text and disabled states."
+    },
+    "success": {
+      "$value": "#2d5a27",
+      "$type": "color",
+      "$description": "Forest. Positive semantic states."
+    },
+    "success-text": {
+      "$value": "#6dbe65",
+      "$type": "color",
+      "$description": "Light Forest. Success text on dark backgrounds."
+    },
+    "warning": {
+      "$value": "#b8860b",
+      "$type": "color",
+      "$description": "Amber. Cautionary semantic states."
+    },
+    "warning-text": {
+      "$value": "#e8b84b",
+      "$type": "color",
+      "$description": "Light Amber. Warning text on dark backgrounds."
+    },
+    "error": {
+      "$value": "#8b1a1a",
+      "$type": "color",
+      "$description": "Crimson. Error semantic states."
+    },
+    "error-text": {
+      "$value": "#d45656",
+      "$type": "color",
+      "$description": "Light Crimson. Error text on dark backgrounds."
+    },
+    "info": {
+      "$value": "#4a6fa5",
+      "$type": "color",
+      "$description": "Steel Blue. Informational semantic states."
+    },
+    "info-text": {
+      "$value": "#6b9bc8",
+      "$type": "color",
+      "$description": "Ice Blue. Info text on dark backgrounds."
+    },
+    "link": {
+      "$value": "#6b9bc8",
+      "$type": "color",
+      "$description": "Ice Blue. Hyperlink default color."
+    },
+    "link-visited": {
+      "$value": "#9b88c8",
+      "$type": "color",
+      "$description": "Lavender. Visited link color."
+    },
+    "link-hover": {
+      "$value": "#9fc5e8",
+      "$type": "color",
+      "$description": "Pale Ice. Link hover color."
+    },
+    "code-bg": {
+      "$value": "#131620",
+      "$type": "color",
+      "$description": "Code block background."
+    },
+    "code-text": {
+      "$value": "#cdd6f4",
+      "$type": "color",
+      "$description": "Default code text."
+    },
+    "code-keyword": {
+      "$value": "#cba6f7",
+      "$type": "color",
+      "$description": "Code syntax: keywords."
+    },
+    "code-string": {
+      "$value": "#a6e3a1",
+      "$type": "color",
+      "$description": "Code syntax: string literals."
+    },
+    "code-comment": {
+      "$value": "#6c7086",
+      "$type": "color",
+      "$description": "Code syntax: comments."
+    },
+    "code-number": {
+      "$value": "#fab387",
+      "$type": "color",
+      "$description": "Code syntax: numeric literals."
+    },
+    "code-operator": {
+      "$value": "#89dceb",
+      "$type": "color",
+      "$description": "Code syntax: operators and punctuation."
+    }
+  }
+}
