@@ -66,7 +66,7 @@ if [[ "${DOMAIN}" == *"://"* || "${DOMAIN}" == */* ]]; then
   exit 1
 fi
 
-invalid_domains=("example.com" "localhost" "127.0.0.1" "0.0.0.0")
+invalid_domains=("example.com" "example.org" "example.net" "test.com" "localhost" "127.0.0.1" "0.0.0.0")
 for invalid_domain in "${invalid_domains[@]}"; do
   if [[ "${DOMAIN}" == "${invalid_domain}" ]]; then
     echo "❌ DOMAIN must be a real production hostname, not a local/example placeholder."
@@ -75,7 +75,12 @@ for invalid_domain in "${invalid_domains[@]}"; do
 done
 
 if [[ "${DOMAIN}" =~ \.local$ ]]; then
-  echo "❌ DOMAIN must be a real production hostname, not a local/example placeholder."
+  echo "❌ DOMAIN cannot end with .local in production."
+  exit 1
+fi
+
+if [[ "${DOMAIN}" =~ ^10\. || "${DOMAIN}" =~ ^192\.168\. || "${DOMAIN}" =~ ^172\.(1[6-9]|2[0-9]|3[0-1])\. ]]; then
+  echo "❌ DOMAIN cannot be a private network address in production."
   exit 1
 fi
 
