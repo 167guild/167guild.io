@@ -1,5 +1,18 @@
 # Documentation
 
+## Authorization
+
+See [`authorization.md`](authorization.md) for the complete permission model, including:
+
+- Role hierarchy (Platform Administrator, Dungeon Master, Player, Viewer)
+- Group responsibilities and permission matrix
+- Content namespace definitions
+- Placeholder account documentation
+- Onboarding process for each role
+- Bootstrap instructions for the initial group seed
+
+---
+
 ## Caddy Reverse Proxy
 
 ### Purpose
