@@ -79,8 +79,8 @@ if [[ "${DOMAIN}" =~ \.local$ ]]; then
   exit 1
 fi
 
-IPV4_REGEX='^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
-if [[ "${DOMAIN}" =~ ${IPV4_REGEX} ]]; then
+ipv4_regex='^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
+if [[ "${DOMAIN}" =~ ${ipv4_regex} ]]; then
   echo "❌ DOMAIN must be a DNS hostname, not an IP address."
   exit 1
 fi
@@ -95,8 +95,7 @@ if [[ ! "${GOOGLE_OAUTH_CALLBACK_URL}" =~ ^https:// ]]; then
   exit 1
 fi
 
-# Remove trailing slash so Google callback comparison is stable and exact.
-# Google OAuth callback URLs must match exactly in provider configuration.
+# Google OAuth callback URLs must match exactly; remove trailing slash for consistent comparison.
 expected_callback="${WIKI_BASE_URL%/}/login/callback"
 if [[ "${GOOGLE_OAUTH_CALLBACK_URL}" != "${expected_callback}" ]]; then
   echo "❌ GOOGLE_OAUTH_CALLBACK_URL must match ${expected_callback}"
