@@ -24,9 +24,13 @@ wiki/home.md
     │       ├── .landing-title
     │       ├── .landing-subtitle
     │       ├── .landing-introduction
+    │       ├── .world-breadcrumb-preview (breadcrumb placeholder)
     │       └── .landing-navigation
     │           └── .landing-nav-grid
     │               └── .nav-item links to world entities
+    ├── .landing-section (Explore by Domain)
+    │   └── .world-nav-hub-grid
+    │       └── .world-nav-hub × 9 (World, Characters, NPCs, Locations, Factions, Organizations, Timeline, Sessions, Maps)
     ├── .landing-section (World Overview)
     │   └── .landing-grid
     │       └── .card × 3 (World, Campaign, Adventuring Party)
@@ -57,6 +61,29 @@ wiki/home.md
 3. Add dynamic "recent sessions" and "latest discoveries" queries once content volume grows.
 4. Introduce optional thematic flourishes (crests, seals, ornaments) without reducing readability.
 5. Extend navigation with context-aware discovery links as cross-link density increases.
+
+---
+
+## World Navigation Concept
+
+The navigation model is discovery-first, not documentation-tree-first.
+
+- Entry points are parallel hubs (`World`, `Characters`, `NPCs`, `Locations`, `Factions`, `Organizations`, `Timeline`, `Sessions`, `Maps`) so users can begin anywhere.
+- Each hub acts as a launchpad to adjacent entity types instead of forcing a top-down hierarchy.
+- Session and timeline links function as temporal connectors, while map and location links function as spatial connectors.
+- The homepage now includes a placeholder `.world-nav-hub-grid` to scaffold these domain hubs before data-driven navigation is implemented.
+
+---
+
+## Future Breadcrumb Strategy
+
+Breadcrumbs should communicate relationship context, not just folder depth.
+
+- Keep the first crumb domain-focused (for example `World` or `Characters`).
+- Use the second crumb to identify the immediate relational collection (for example `Locations`, `Factions`, or `Sessions`).
+- Use the final crumb as the current entity page.
+- Maintain consistent separator and active-page semantics from the existing breadcrumb component.
+- Current scaffold: `.world-breadcrumb-preview` in `wiki/home.md` demonstrates the intended interaction pattern.
 
 ---
 

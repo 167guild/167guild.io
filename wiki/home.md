@@ -16,6 +16,15 @@
         world of the 167 Guild. Begin where your curiosity pulls you, and follow
         each thread deeper into the campaign.
       </p>
+      <nav class="breadcrumb world-breadcrumb-preview" aria-label="World breadcrumb preview">
+        <ol class="breadcrumb-list">
+          <li><a href="/world/">World</a></li>
+          <li><span class="breadcrumb-separator">/</span></li>
+          <li><a href="/lore/locations/">Locations</a></li>
+          <li><span class="breadcrumb-separator">/</span></li>
+          <li><span aria-current="page">Moonfall Keep</span></li>
+        </ol>
+      </nav>
       <nav class="navigation landing-navigation" aria-label="Primary world navigation">
         <ul class="nav-list landing-nav-grid">
           <li class="nav-item"><a href="/world/">World</a></li>
@@ -29,6 +38,93 @@
           <li class="nav-item"><a href="/maps/">Maps</a></li>
         </ul>
       </nav>
+    </div>
+  </section>
+
+  <section class="landing-section world-navigation-hubs">
+    <h2>Explore by Domain</h2>
+    <div class="world-nav-hub-grid">
+      <article class="card world-nav-hub">
+        <h3 class="card-header">World</h3>
+        <div class="card-body">
+          History, geography, cosmology, and enduring mysteries.
+        </div>
+        <div class="card-footer">
+          <a class="world-nav-hub-link" href="/world/">Open world hub</a>
+        </div>
+      </article>
+      <article class="card world-nav-hub">
+        <h3 class="card-header">Characters</h3>
+        <div class="card-body">
+          Player character biographies, journals, and key relationships.
+        </div>
+        <div class="card-footer">
+          <a class="world-nav-hub-link" href="/characters/">Open character hub</a>
+        </div>
+      </article>
+      <article class="card world-nav-hub">
+        <h3 class="card-header">NPCs</h3>
+        <div class="card-body">
+          Allies, rivals, and recurring figures shaping campaign events.
+        </div>
+        <div class="card-footer">
+          <a class="world-nav-hub-link" href="/lore/npcs/">Open NPC hub</a>
+        </div>
+      </article>
+      <article class="card world-nav-hub">
+        <h3 class="card-header">Locations</h3>
+        <div class="card-body">
+          Cities, dungeons, regions, and landmarks connected to the story.
+        </div>
+        <div class="card-footer">
+          <a class="world-nav-hub-link" href="/lore/locations/">Open location hub</a>
+        </div>
+      </article>
+      <article class="card world-nav-hub">
+        <h3 class="card-header">Factions</h3>
+        <div class="card-body">
+          Political and ideological powers with goals, allies, and rivals.
+        </div>
+        <div class="card-footer">
+          <a class="world-nav-hub-link" href="/lore/factions/">Open faction hub</a>
+        </div>
+      </article>
+      <article class="card world-nav-hub">
+        <h3 class="card-header">Organizations</h3>
+        <div class="card-body">
+          Guilds, houses, and institutions that anchor social networks.
+        </div>
+        <div class="card-footer">
+          <a class="world-nav-hub-link" href="/lore/organizations/">Open organization hub</a>
+        </div>
+      </article>
+      <article class="card world-nav-hub">
+        <h3 class="card-header">Timeline</h3>
+        <div class="card-body">
+          Major world events and campaign milestones in chronological context.
+        </div>
+        <div class="card-footer">
+          <a class="world-nav-hub-link" href="/campaign/timeline/">Open timeline hub</a>
+        </div>
+      </article>
+      <article class="card world-nav-hub">
+        <h3 class="card-header">Sessions</h3>
+        <div class="card-body">
+          Session-by-session records linking participants, locations, and outcomes.
+        </div>
+        <div class="card-footer">
+          <a class="world-nav-hub-link" href="/campaign/sessions/">Open session hub</a>
+        </div>
+      </article>
+      <article class="card world-nav-hub">
+        <h3 class="card-header">Maps</h3>
+        <div class="card-body">
+          Regional and local maps that connect place-based discovery.
+        </div>
+        <div class="card-footer">
+          <a class="world-nav-hub-link" href="/maps/">Open map hub</a>
+        </div>
+      </article>
     </div>
   </section>
 

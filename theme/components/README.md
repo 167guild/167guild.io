@@ -108,6 +108,20 @@ Implementation status is noted for each component. Placeholder entries document 
 
 ---
 
+### World Navigation Hubs ✅
+
+**Appearance:**
+
+- Grid of `.world-nav-hub` cards for domain-first exploration.
+- Reuses `.card` structure with one call-to-action link per hub.
+- Intended to keep `World`, `Characters`, `NPCs`, `Locations`, `Factions`, `Organizations`, `Timeline`, `Sessions`, and `Maps` equally discoverable.
+
+**Related placeholders:**
+- `.world-nav-hub-grid` in `wiki/home.md`
+- `.world-breadcrumb-preview` to demonstrate breadcrumb intent
+
+---
+
 ### Breadcrumbs ✅
 
 **Appearance:**
