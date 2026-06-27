@@ -225,7 +225,7 @@ Persistent volumes are externalized in Docker volumes, so container rollback doe
 
 ## Remaining Assumptions and Risks
 
-- Backup and restore scripts are currently scaffolds and must be treated as manual-runbook workflows until automated restore-safe implementations are completed.
+- Backup and restore scripts are currently scaffolds and must be treated as manual-runbook workflows until automated, restore-safe implementations are completed.
 - Initial production release assumes a single Ubuntu LTS VM and Docker Compose runtime; high-availability failover is out of scope for this cut.
 - Role assignment still requires manual verification in Wiki.js Admin after first OAuth sign-in for each user.
 
