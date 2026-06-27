@@ -1,5 +1,11 @@
 version: '3'
 
+vars:
+  COMPOSE_FILE: docker-compose.yml
+  PRODUCTION_COMPOSE_FILE: deploy/production/docker-compose.production.yml
+  PRODUCTION_ENV_FILE: .env.production
+  COMPOSE_PRODUCTION_CMD: docker compose --env-file {{.PRODUCTION_ENV_FILE}} -f {{.COMPOSE_FILE}} -f {{.PRODUCTION_COMPOSE_FILE}}
+
 tasks:
   help:
     desc: Show available development tasks
@@ -40,3 +46,46 @@ tasks:
     desc: Restore application data from a backup archive (placeholder)
     cmds:
       - bash scripts/restore/restore.sh {{.BACKUP_DIR}}
+
+  # Keep deploy as a stable entrypoint for future multi-environment targets.
+  deploy:
+    desc: Deploy the stack using production configuration
+    cmds:
+      - task deploy:production
+
+  'deploy:production':
+    desc: Validate production config and deploy containers
+    preconditions:
+      - sh: test -f {{.PRODUCTION_ENV_FILE}}
+        msg: ".env.production is required. See deploy/README.md and deploy/examples/.env.production.example"
+      - sh: test -f {{.PRODUCTION_COMPOSE_FILE}}
+        msg: "{{.PRODUCTION_COMPOSE_FILE}} is required."
+    cmds:
+      - bash deploy/scripts/validate-env.sh {{.PRODUCTION_ENV_FILE}}
+      - '{{.COMPOSE_PRODUCTION_CMD}} config >/dev/null'
+      - '{{.COMPOSE_PRODUCTION_CMD}} up -d --build --remove-orphans'
+
+  stop:
+    desc: Stop production services without removing containers
+    cmds:
+      - '{{.COMPOSE_PRODUCTION_CMD}} stop'
+
+  restart:
+    desc: Restart production services
+    cmds:
+      - '{{.COMPOSE_PRODUCTION_CMD}} restart'
+
+  logs:
+    desc: Tail production service logs
+    cmds:
+      - '{{.COMPOSE_PRODUCTION_CMD}} logs -f caddy wikijs postgres'
+
+  status:
+    desc: Show production service status
+    cmds:
+      - '{{.COMPOSE_PRODUCTION_CMD}} ps'
+
+  health:
+    desc: Run production health checks
+    cmds:
+      - bash deploy/scripts/health-check.sh {{.PRODUCTION_ENV_FILE}}

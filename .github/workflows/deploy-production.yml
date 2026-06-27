@@ -1,0 +1,40 @@
+name: Deploy Production (Scaffold)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-production:
+    name: Deploy production stack
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create production environment file
+        run: |
+          if [ -z "${{ secrets.PRODUCTION_ENV_FILE }}" ]; then
+            echo "Missing required secret: PRODUCTION_ENV_FILE"
+            echo "Store full .env.production content in repository/environment secrets."
+            exit 1
+          fi
+          printf '%s\n' "${{ secrets.PRODUCTION_ENV_FILE }}" > .env.production
+
+      - name: Validate deployment environment
+        run: bash deploy/scripts/validate-env.sh .env.production
+
+      - name: Validate compose configuration
+        run: |
+          docker compose --env-file .env.production \
+            -f docker-compose.yml \
+            -f deploy/production/docker-compose.production.yml \
+            config >/dev/null
+
+      - name: Deployment placeholder
+        run: |
+          echo "Scaffold only: wire SSH/runner deployment in a follow-up issue."
+          echo "No production secrets or domain configuration are performed here."
