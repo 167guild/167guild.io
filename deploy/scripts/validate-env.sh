@@ -66,7 +66,15 @@ if [[ "${DOMAIN}" == *"://"* || "${DOMAIN}" == */* ]]; then
   exit 1
 fi
 
-if [[ "${DOMAIN}" == "example.com" || "${DOMAIN}" == "localhost" || "${DOMAIN}" == "127.0.0.1" || "${DOMAIN}" == "0.0.0.0" || "${DOMAIN}" =~ \.local$ ]]; then
+invalid_domains=("example.com" "localhost" "127.0.0.1" "0.0.0.0")
+for invalid_domain in "${invalid_domains[@]}"; do
+  if [[ "${DOMAIN}" == "${invalid_domain}" ]]; then
+    echo "❌ DOMAIN must be a real production hostname, not a local/example placeholder."
+    exit 1
+  fi
+done
+
+if [[ "${DOMAIN}" =~ \.local$ ]]; then
   echo "❌ DOMAIN must be a real production hostname, not a local/example placeholder."
   exit 1
 fi
@@ -81,6 +89,7 @@ if [[ ! "${GOOGLE_OAUTH_CALLBACK_URL}" =~ ^https:// ]]; then
   exit 1
 fi
 
+# Remove any trailing slash before appending the fixed OAuth callback path.
 expected_callback="${WIKI_BASE_URL%/}/login/callback"
 if [[ "${GOOGLE_OAUTH_CALLBACK_URL}" != "${expected_callback}" ]]; then
   echo "❌ GOOGLE_OAUTH_CALLBACK_URL must match ${expected_callback}"
