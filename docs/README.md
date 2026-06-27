@@ -66,13 +66,20 @@ config/
     └── Caddyfile
 ```
 
-`/config/caddy/Caddyfile` contains production-oriented reverse proxy behavior using environment-driven placeholders.
+`/config/caddy/Caddyfile` contains production-oriented reverse proxy behavior using environment-driven placeholders. The production deployment template currently targets `167guild.io` through the `DOMAIN` environment variable.
 
 ### Configuration Philosophy
 
 - Keep configuration environment-driven (`DOMAIN`, `EMAIL`, `WIKI_UPSTREAM`).
 - Prefer reusable Caddy snippets for easy extension.
 - Keep security defaults in the proxy layer while keeping app and database concerns separate.
+
+### Production Domain Notes
+
+- Set `DOMAIN=167guild.io` for the primary production deployment.
+- Keep `WIKI_BASE_URL=https://167guild.io` aligned with the same public domain.
+- `WIKI_UPSTREAM` should remain the internal Docker address (`wikijs:3000`) so only Caddy is exposed publicly.
+- If a future deployment moves to `wiki.167guild.io`, update `DOMAIN`, `WIKI_BASE_URL`, DNS records, and the Google OAuth callback URL together.
 
 ---
 
@@ -198,7 +205,7 @@ Use Google OAuth as the Wiki.js authentication provider for identity only.
 - The Google OAuth redirect URI must exactly match `GOOGLE_OAUTH_CALLBACK_URL`.
 - Local development should typically use `http://localhost:3000/login/callback`.
 - Production should use your public HTTPS wiki URL, for example:
-  `https://wiki.example.com/login/callback`.
+  `https://167guild.io/login/callback`.
 - Use HTTPS in production and avoid non-TLS callback URLs.
 
 #### Local Development Considerations

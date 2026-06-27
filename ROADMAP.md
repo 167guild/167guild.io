@@ -43,7 +43,7 @@ Operations
 - [x] Configure restore procedures
 - [x] Configure deployment workflow
 - [x] Configure production environment
-- [ ] Connect "167guild.io"
+- [x] Connect "167guild.io"
 - [ ] Production hardening
 
 ---

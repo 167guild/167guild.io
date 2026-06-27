@@ -41,7 +41,6 @@ if [[ ${#missing[@]} -gt 0 ]]; then
 fi
 
 declare -A placeholder_by_var=(
-  [DOMAIN]="wiki.example.com"
   [EMAIL]="admin@example.com"
   [POSTGRES_PASSWORD]="REPLACE_WITH_STRONG_PASSWORD"
   [GOOGLE_OAUTH_CLIENT_ID]="replace-with-google-client-id"
