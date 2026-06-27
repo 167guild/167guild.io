@@ -7,7 +7,7 @@
 
 ## Production
 
-- Use HTTPS callback: `https://167guild.io/login/callback`.
+- Use an HTTPS callback matching your production domain, for example `https://167guild.io/login/callback`.
 - Ensure callback URL exactly matches Google Cloud and Wiki.js configuration.
 - Use separate local and production OAuth credentials.
 
