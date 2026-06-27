@@ -12,9 +12,9 @@ Repository
 - [x] Create specification library
 - [x] Bootstrap repository structure
 - [x] Configure community health files
-- [ ] Create `docs/architecture.md` (referenced in README but missing)
-- [ ] Expand `SECURITY.md` with vulnerability reporting policy and threat model
-- [ ] Add `SUPPORT.md` with community support channels
+- [x] Create `docs/architecture.md` (referenced in README but missing)
+- [x] Expand `SECURITY.md` with vulnerability reporting policy and threat model
+- [x] Add `SUPPORT.md` with community support channels
 
 Developer Experience
 
@@ -22,11 +22,11 @@ Developer Experience
 - [x] Configure Taskfile
 - [x] Configure Dev Container
 - [x] Configure VS Code recommendations
-- [ ] Implement `task up` / `task down` (currently stubs)
-- [ ] Implement `task init` (currently a stub)
-- [ ] Implement `task lint` / `task format` (currently stubs)
-- [ ] Add `task` installation to Dev Container
-- [ ] Add auto-copy of `.env.example` → `.env` in Dev Container `postCreateCommand`
+- [x] Implement `task up` / `task down` (currently stubs)
+- [x] Implement `task init` (currently a stub)
+- [x] Implement `task lint` / `task format` (currently stubs)
+- [x] Add `task` installation to Dev Container
+- [x] Add auto-copy of `.env.example` → `.env` in Dev Container `postCreateCommand`
 
 ---
 

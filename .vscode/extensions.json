@@ -7,6 +7,8 @@
     "editorconfig.editorconfig",
     "github.copilot",
     "github.copilot-chat",
-    "streetsidesoftware.code-spell-checker"
+    "streetsidesoftware.code-spell-checker",
+    "timonwong.shellcheck",
+    "task.vscode-task"
   ]
 }
