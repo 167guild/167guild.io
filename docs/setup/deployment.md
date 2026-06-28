@@ -71,6 +71,30 @@ Replace placeholder emails with real Google accounts when known.
   - `/dm/private-seed-note` (DM-only)
 - [ ] Verify DM-only page is hidden from Player and Viewer accounts.
 
+## v0.1.0 Deployment Execution Record
+
+Date: 2026-06-28
+
+- [x] Google OAuth button visible on login page.
+- [x] Google login succeeds for `szmyty@gmail.com`.
+- [x] `szmyty@gmail.com` can access Wiki.js Administration.
+- [x] `Dungeon Master`, `Player`, and `Viewer` groups exist after seed.
+- [x] DM account can read/write `/dm/`.
+- [x] Player account cannot read `/dm/` and can write `/characters/` and `/journals/`.
+- [x] Viewer account can read public pages and cannot write.
+- [x] Created first content pages:
+  - `/lore/welcome`
+  - `/characters/starwhisper`
+  - `/journals/session-001`
+  - `/dm/private-seed-note` (DM-only)
+- [x] Verified DM-only page is hidden from Player and Viewer accounts.
+
+## Manual Steps to Automate in Future Releases
+
+- Automate first-login group assignment checks after OAuth sign-in.
+- Automate namespace permission smoke tests for DM/Player/Viewer roles.
+- Automate release checklist execution evidence capture in CI/CD.
+
 ## Authentication Troubleshooting
 
 - `redirect_uri_mismatch`: update Google Cloud redirect URI and `.env.production` to the exact same callback.

@@ -57,6 +57,9 @@ Operations
 - [x] Connect "167guild.io"
 - [x] Production hardening
 - [x] Release validation checklist
+- [x] Execute first production deployment to `167guild.io`
+- [x] Validate production authentication/authorization flows end-to-end
+- [x] Validate backup/restore and post-deploy health checks in production
 - [x] Implement backup scripts (PostgreSQL dump, volume backup, config archive)
 - [x] Implement restore scripts and validate against a real backup archive
 - [ ] Wire SSH deployment step in GitHub Actions deploy workflow
@@ -69,6 +72,7 @@ Release Management
 - [x] Configure automated changelog generation
 - [x] Configure GitHub Releases automation
 - [x] Document versioning strategy and release lifecycle
+- [x] Publish first production release tag `v0.1.0`
 
 ---
 
