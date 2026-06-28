@@ -342,6 +342,29 @@ Version updates should be explicit and reviewed in pull requests to keep deploym
   - Access denied after login: user not assigned to the expected group.
 - **Backups**: verify backup artifact and restore validation by running a restore drill in non-production.
 
+## v0.1.0 Production Deployment Record
+
+Date: 2026-06-28
+
+- [x] Production VM baseline verified (Docker Engine, Docker Compose, Task, Git, required OS packages)
+- [x] Production `.env.production` validated with `bash deploy/scripts/validate-env.sh .env.production`
+- [x] Google OAuth configured (client, secret, origins, redirect URI, consent screen)
+- [x] DNS cutover completed for `167guild.io` with successful HTTPS certificate issuance
+- [x] Production stack deployed with `task deploy:production` (Caddy, Wiki.js, PostgreSQL healthy)
+- [x] Authentication verified for Platform Administrator, Dungeon Master, and Player accounts
+- [x] Authorization verified for Administrators, Dungeon Master, Player, and Viewer permissions
+- [x] Backup workflow executed and restore drill completed
+- [x] Health checks passed with `task health`
+- [x] First production release tagged as `v0.1.0`
+
+### Manual Steps Captured for Future Automation
+
+- Wiki.js initial setup wizard completion and emergency admin bootstrap
+- First-login group assignment/verification in Wiki.js Admin
+- Google OAuth provider enablement/validation in Wiki.js Admin
+- Post-deploy role-based namespace verification (`/dm/`, `/characters/`, `/journals/`, `/lore/`)
+- Final release sign-off checklist and GitHub Release confirmation
+
 ## Remaining Assumptions and Risks
 
 - Initial production release assumes a single Ubuntu LTS VM and Docker Compose runtime; high-availability failover is out of scope for this cut.
