@@ -95,6 +95,49 @@ Date: 2026-06-28
 - Automate namespace permission smoke tests for DM/Player/Viewer roles.
 - Automate release checklist execution evidence capture in CI/CD.
 
+## GitHub Actions Deployment
+
+### Manual Deployment (workflow_dispatch)
+
+Trigger a production deployment from the GitHub Actions UI:
+
+1. Go to **Actions → Deploy Production** in the repository.
+2. Click **Run workflow**.
+3. Optionally specify a branch or tag to deploy (default: `main`).
+4. Click **Run workflow** to confirm.
+
+The workflow SSHes into the production server and runs `task deploy:production` followed by `task health`.
+
+### Automated Deployment (release event)
+
+When a GitHub Release is published (triggered by merging a Release Please PR), the deployment workflow automatically:
+
+1. SSHes into the production server.
+2. Checks out the release tag.
+3. Runs `task deploy:production`.
+4. Runs `task health` to verify the deployment.
+
+### Required GitHub Secrets
+
+Configure in **Settings → Environments → production**:
+
+| Secret | Description |
+|---|---|
+| `PRODUCTION_HOST` | Production server hostname or IP |
+| `PRODUCTION_USER` | SSH username on the production server |
+| `PRODUCTION_SSH_KEY` | SSH private key for the deployment user |
+
+See `docs/setup/github-secrets.md` for full setup instructions.
+
+### Rollback via GitHub Actions
+
+To roll back to a previous release:
+
+1. Go to **Actions → Deploy Production**.
+2. Click **Run workflow**.
+3. Enter the previous release tag (e.g. `v0.1.0`) in the `ref` field.
+4. Click **Run workflow**.
+
 ## Authentication Troubleshooting
 
 - `redirect_uri_mismatch`: update Google Cloud redirect URI and `.env.production` to the exact same callback.

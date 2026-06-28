@@ -62,7 +62,7 @@ Operations
 - [x] Validate backup/restore and post-deploy health checks in production
 - [x] Implement backup scripts (PostgreSQL dump, volume backup, config archive)
 - [x] Implement restore scripts and validate against a real backup archive
-- [ ] Wire SSH deployment step in GitHub Actions deploy workflow
+- [x] Wire SSH deployment step in GitHub Actions deploy workflow
 
 Release Management
 
