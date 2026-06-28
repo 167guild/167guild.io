@@ -30,11 +30,13 @@ Application secrets (database credentials, OAuth keys) remain on the server in `
 
 ### SSH Key Setup
 
-Generate a dedicated deployment keypair:
+Generate a dedicated deployment keypair (no passphrase — required for unattended automation):
 
 ```bash
 ssh-keygen -t ed25519 -C "github-deploy@167guild.io" -f ~/.ssh/deploy_key -N ""
 ```
+
+> **Note:** The empty passphrase (`-N ""`) is intentional. GitHub Actions runs unattended and cannot prompt for a passphrase. The private key is stored as an encrypted GitHub Actions secret and never leaves the runner's memory during a workflow run. Restrict its permissions on the server with a `command=` constraint in `authorized_keys` if additional hardening is desired.
 
 Add the public key to the server:
 

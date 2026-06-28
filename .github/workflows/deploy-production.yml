@@ -28,9 +28,17 @@ jobs:
           script: |
             set -e
             DEPLOY_REF="${{ github.event.inputs.ref || github.ref_name }}"
+            # Validate ref: allow only alphanumeric characters, dots, slashes, hyphens, and underscores
+            if ! echo "$DEPLOY_REF" | grep -qE '^[a-zA-Z0-9_./-]+$'; then
+              echo "Invalid ref format: $DEPLOY_REF" >&2
+              exit 1
+            fi
             cd /opt/167guild.io
             git fetch --tags origin
             git checkout "$DEPLOY_REF"
-            git pull origin "$DEPLOY_REF" --ff-only 2>/dev/null || true
+            # Pull only if deploying a branch (remote tracking ref exists); skip for tags
+            if git rev-parse --verify "refs/remotes/origin/$DEPLOY_REF" >/dev/null 2>&1; then
+              git pull origin "$DEPLOY_REF" --ff-only
+            fi
             task deploy:production
             task health
