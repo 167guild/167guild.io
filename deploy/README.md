@@ -370,7 +370,46 @@ Date: 2026-06-28
 - Initial production release assumes a single Ubuntu LTS VM and Docker Compose runtime; high-availability failover is out of scope for this cut.
 - Role assignment still requires manual verification in Wiki.js Admin after first OAuth sign-in for each user.
 
-## GitHub Actions Scaffold
+## GitHub Actions Deployment
 
-See `.github/workflows/deploy-production.yml` for an optional manual deployment scaffold.
-It intentionally uses placeholders and does **not** configure production secrets.
+The deployment workflow is defined in `.github/workflows/deploy-production.yml`.
+
+### Triggers
+
+- **Manual** (`workflow_dispatch`): Trigger a deployment from the GitHub Actions UI. An optional `ref` input allows deploying a specific branch or tag (default: `main`).
+- **Automated** (`release` event): Automatically deploys the tagged release commit when a GitHub Release is published.
+
+### Required Secrets
+
+Configure these in the `production` environment under **Settings → Environments → production**:
+
+| Secret | Description |
+|---|---|
+| `PRODUCTION_HOST` | Production server hostname or IP |
+| `PRODUCTION_USER` | SSH username (e.g. `ubuntu`) |
+| `PRODUCTION_SSH_KEY` | SSH private key for the deployment user |
+
+Application secrets remain on the server in `.env.production` and are not managed by GitHub.
+
+### How It Works
+
+The workflow SSHes into the production server and runs:
+
+```bash
+git fetch --tags origin
+git checkout <ref>
+git pull origin <ref> --ff-only   # for branches
+task deploy:production             # validate → build → deploy
+task health                        # post-deploy health checks
+```
+
+### Manual Deployment via GitHub Actions
+
+1. Go to **Actions → Deploy Production** in the repository.
+2. Click **Run workflow**.
+3. Optionally specify a branch or tag (default: `main`).
+4. Click **Run workflow** to confirm.
+
+### Setup
+
+See `docs/setup/github-secrets.md` for SSH key setup instructions and full GitHub repository configuration requirements.
