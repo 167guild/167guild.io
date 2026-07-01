@@ -44,6 +44,8 @@ Override defaults with environment variables:
 - `GUILD_FIREWALL_RULE`
 - `GUILD_SSH_USER`
 - `GUILD_DEPLOY_REF`
+- `GUILD_DEPLOY_DIR`
+- `GUILD_DOMAIN`
 - `GUILD_PRODUCTION_ENV_FILE`
 - `GUILD_PRODUCTION_COMPOSE_FILE`
 
@@ -86,16 +88,32 @@ guild health
 
 ## Deployment Workflow
 
+After initial VM provisioning and bootstrap, deploy with a single command:
+
+```bash
+git pull
+guild deploy
+```
+
+`guild deploy` handles the complete remote deployment lifecycle:
+
+1. Connects to the production VM via `gcloud compute ssh`.
+2. Bootstraps `/opt/167guild.io` (clones the repository) on first run.
+3. Syncs the repository (`git fetch`, `git checkout main`, `git pull --ff-only`) on subsequent runs.
+4. Uploads `.env.production` from local if not already present on the remote.
+5. Executes `task deploy:production` on the remote VM.
+6. Runs health checks remotely and prints a deployment summary.
+
+For initial provisioning only:
+
 ```bash
 guild doctor
 guild gcp enable-apis
 guild gcp reserve-ip
 guild gcp create-vm
 guild gcp firewall
-guild gcp ssh
 guild vm bootstrap
 guild deploy
-guild verify
 ```
 
 ## VM Lifecycle

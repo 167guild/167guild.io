@@ -189,27 +189,23 @@ Dungeon Master responsibilities:
 From the repository root:
 
 ```bash
-task deploy:production
+git pull
+./guild deploy
 ```
 
-`task deploy` is kept as a stable top-level entrypoint and currently delegates to `deploy:production`.
+`guild deploy` handles the complete remote deployment lifecycle automatically:
 
-This performs:
+1. Connects to the production VM via `gcloud compute ssh`.
+2. Creates `/opt/167guild.io` and clones the repository if not present (first-run bootstrap).
+3. Synchronizes the repository (`git fetch`, `git checkout main`, `git pull --ff-only`) on all subsequent runs.
+4. Uploads `.env.production` from local if not already present on the remote.
+5. Executes `task deploy:production` on the remote VM (validates env, builds/recreates containers).
+6. Runs `task health` on the remote VM for post-deploy health checks.
+7. Prints a deployment summary.
 
-1. Environment validation
-2. Compose validation
-3. Build/recreate containers with production overrides
-4. Post-deploy runtime health checks (`task health`)
+No manual SSH session is required for standard production deployments.
 
-Useful operations:
-
-```bash
-task status
-task logs
-task restart
-task stop
-task health
-```
+`task deploy` and `task deploy:production` remain as stable entrypoints for running the deployment directly on the server (e.g., from a GitHub Actions workflow or an active SSH session).
 
 ## Upgrade Procedure
 

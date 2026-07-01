@@ -64,6 +64,7 @@ Operations
 - [x] Implement backup scripts (PostgreSQL dump, volume backup, config archive)
 - [x] Implement restore scripts and validate against a real backup archive
 - [x] Wire SSH deployment step in GitHub Actions deploy workflow
+- [x] Automate remote deployment bootstrap via `guild deploy` (directory creation, clone, git sync, env upload, health checks)
 
 Release Management
 
