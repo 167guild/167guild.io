@@ -39,7 +39,7 @@ if [[ -z "${GUILD_PROJECT_ID:-}" ]] && command -v gcloud >/dev/null 2>&1; then
 fi
 
 export GUILD_PROJECT_ID="${GUILD_PROJECT_ID:-}"
-export GUILD_REGION="${GUILD_REGION:-us-central1}"
+export GUILD_REGION="${GUILD_REGION:-us-east1}"
 export GUILD_ZONE="${GUILD_ZONE:-${GUILD_REGION}-a}"
 export GUILD_VM_NAME="${GUILD_VM_NAME:-guild-platform-vm}"
 export GUILD_MACHINE_TYPE="${GUILD_MACHINE_TYPE:-e2-medium}"
