@@ -10,7 +10,8 @@ source "${REPO_ROOT}/scripts/common/config.sh"
 show_help() {
   cat <<'HELP'
 Usage:
-  guild [--verbose] [--debug] [--no-color] <command> [subcommand] [args]
+  guild [--verbose|-v] [--debug] [--no-color] <command> [subcommand] [args]
+  guild [--help|-h]
 
 Core:
   guild help

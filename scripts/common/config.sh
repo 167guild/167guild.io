@@ -29,6 +29,9 @@ export GUILD_REPO
 
 if [[ -z "${GUILD_PROJECT_ID:-}" ]] && command -v gcloud >/dev/null 2>&1; then
   GUILD_PROJECT_ID="$(gcloud config get-value project 2>/dev/null || true)"
+  if [[ -n "${GUILD_PROJECT_ID}" && "${GUILD_VERBOSE:-0}" == "1" ]]; then
+    echo "[guild] Using gcloud default project from local config: ${GUILD_PROJECT_ID}" >&2
+  fi
 fi
 
 export GUILD_PROJECT_ID="${GUILD_PROJECT_ID:-}"
