@@ -55,10 +55,13 @@ if ! command -v task >/dev/null 2>&1; then
   trap 'rm -rf "${TMP_DIR}"' EXIT
   curl -fsSL "${TASK_BASE_URL}/${TASK_ARCHIVE}" -o "${TMP_DIR}/${TASK_ARCHIVE}"
   curl -fsSL "${TASK_BASE_URL}/task_checksums.txt" -o "${TMP_DIR}/task_checksums.txt"
-  (
+  if ! (
     cd "${TMP_DIR}"
     grep " ${TASK_ARCHIVE}\$" task_checksums.txt | sha256sum --check
-  )
+  ); then
+    echo "Task checksum verification failed for ${TASK_ARCHIVE}" >&2
+    exit 1
+  fi
   sudo tar -xzf "${TMP_DIR}/${TASK_ARCHIVE}" -C /usr/local/bin task
   sudo chmod +x /usr/local/bin/task
 fi

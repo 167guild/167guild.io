@@ -57,7 +57,7 @@ run_script() {
   local script_path="$1"
   shift || true
   if [[ ! -f "${script_path}" ]]; then
-    die "Command implementation not found: ${script_path}"
+    die "Command not implemented. Run: guild help"
   fi
   bash "${script_path}" "$@"
 }

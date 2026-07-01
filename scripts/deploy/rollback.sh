@@ -23,7 +23,7 @@ main() {
     log_warn "Rollback deploy failed. Attempting to restore previous ref: ${current_ref}"
     if ! git -C "${GUILD_REPO_ROOT}" checkout "${current_ref}"; then
       log_error "Failed to restore previous ref (${current_ref}). Manual recovery required."
-      log_error "Try: git -C ${GUILD_REPO_ROOT} fetch --tags origin && git -C ${GUILD_REPO_ROOT} checkout ${current_ref}"
+      log_error "Try: git -C \"${GUILD_REPO_ROOT}\" fetch --tags origin && git -C \"${GUILD_REPO_ROOT}\" checkout \"${current_ref}\""
     fi
     exit 1
   fi
