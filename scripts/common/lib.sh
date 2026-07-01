@@ -51,8 +51,14 @@ run_cmd() {
 join_by() {
   local delimiter="$1"
   shift
-  local output="${1:-}"
-  shift || true
+  local output=""
+  if [[ $# -eq 0 ]]; then
+    echo ""
+    return 0
+  fi
+
+  output="$1"
+  shift
   for item in "$@"; do
     output+="${delimiter}${item}"
   done

@@ -90,11 +90,11 @@ parse_global_flags() {
         ;;
     esac
   done
-  REMAINING_ARGS=("$@")
+  COMMAND_ARGS=("$@")
 }
 
 parse_global_flags "$@"
-set -- "${REMAINING_ARGS[@]}"
+set -- "${COMMAND_ARGS[@]}"
 
 command="${1:-help}"
 if [[ $# -gt 0 ]]; then

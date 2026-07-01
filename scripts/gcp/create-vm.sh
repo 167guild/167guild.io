@@ -25,15 +25,26 @@ main() {
   fi
 
   log_info "Creating VM ${GUILD_VM_NAME} in ${GUILD_ZONE}"
-  run_cmd gcloud compute instances create "${GUILD_VM_NAME}" \
-    --project "${GUILD_PROJECT_ID}" \
-    --zone "${GUILD_ZONE}" \
-    --machine-type "${GUILD_MACHINE_TYPE}" \
-    --image-family ubuntu-2204-lts \
-    --image-project ubuntu-os-cloud \
-    --boot-disk-size 30GB \
-    --tags "${GUILD_NETWORK_TAG}" \
-    "${ip_args[@]}"
+  if [[ ${#ip_args[@]} -gt 0 ]]; then
+    run_cmd gcloud compute instances create "${GUILD_VM_NAME}" \
+      --project "${GUILD_PROJECT_ID}" \
+      --zone "${GUILD_ZONE}" \
+      --machine-type "${GUILD_MACHINE_TYPE}" \
+      --image-family ubuntu-2204-lts \
+      --image-project ubuntu-os-cloud \
+      --boot-disk-size 30GB \
+      --tags "${GUILD_NETWORK_TAG}" \
+      "${ip_args[@]}"
+  else
+    run_cmd gcloud compute instances create "${GUILD_VM_NAME}" \
+      --project "${GUILD_PROJECT_ID}" \
+      --zone "${GUILD_ZONE}" \
+      --machine-type "${GUILD_MACHINE_TYPE}" \
+      --image-family ubuntu-2204-lts \
+      --image-project ubuntu-os-cloud \
+      --boot-disk-size 30GB \
+      --tags "${GUILD_NETWORK_TAG}"
+  fi
 
   log_success "VM created: ${GUILD_VM_NAME}"
 }

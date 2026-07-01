@@ -21,7 +21,9 @@ main() {
   run_cmd git -C "${GUILD_REPO_ROOT}" checkout "${rollback_ref}"
   if ! bash "${SCRIPT_DIR}/deploy.sh"; then
     log_warn "Rollback deploy failed. Attempting to restore previous ref: ${current_ref}"
-    git -C "${GUILD_REPO_ROOT}" checkout "${current_ref}" || true
+    if ! git -C "${GUILD_REPO_ROOT}" checkout "${current_ref}"; then
+      log_error "Failed to restore previous ref (${current_ref}). Manual recovery required."
+    fi
     exit 1
   fi
 
