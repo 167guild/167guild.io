@@ -53,6 +53,7 @@ Operations
 - [x] Configure backup strategy
 - [x] Configure restore procedures
 - [x] Configure deployment workflow
+- [x] Build `guild` operational platform CLI
 - [x] Configure production environment
 - [x] Connect "167guild.io"
 - [x] Production hardening

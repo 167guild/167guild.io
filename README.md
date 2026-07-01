@@ -74,6 +74,8 @@ Deployment setup documentation lives under [`docs/setup/`](docs/setup/README.md)
 ## Available Commands
 
 ```bash
+./guild help   # List guild platform CLI commands
+./guild doctor # Validate local CLI/runtime prerequisites
 task help      # List available tasks
 task init      # Create .env if missing and validate local Compose config
 task lint      # Run shell syntax checks and Compose validation
@@ -82,6 +84,8 @@ task up        # Start local stack
 task down      # Stop local stack
 task deploy    # Deploy using production overlay
 ```
+
+See [`docs/guild-cli.md`](docs/guild-cli.md) for installation, command reference, deployment workflow, troubleshooting, and extension patterns.
 
 ---
 
@@ -99,7 +103,7 @@ task deploy    # Deploy using production overlay
 ├── config/                 # Caddy and Wiki.js configuration
 ├── deploy/                 # Production deployment overlay and scripts
 ├── docs/                   # Architecture and setup documentation
-├── scripts/                # Backup/restore/bootstrap scaffolding
+├── scripts/                # Platform CLI and operational scripts
 ├── theme/                  # Wiki.js custom theme
 ├── wiki/                   # Wiki content scaffolding
 ├── docker-compose.yml      # Local stack definition

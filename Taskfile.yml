@@ -13,6 +13,11 @@ tasks:
     cmds:
       - task --list
 
+  guild:
+    desc: Run guild platform CLI
+    cmds:
+      - bash ./guild {{.CLI_ARGS}}
+
   init:
     desc: Initialize local development environment
     cmds:
