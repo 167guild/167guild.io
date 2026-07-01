@@ -50,6 +50,9 @@ main() {
   log_info "Connecting to production VM..."
 
   # Step 1: Remote bootstrap or repository sync
+  # Note: local variables (deploy_dir, deploy_ref, clone_url) are expanded before
+  # the command string is sent to the remote shell; single-quoted values protect
+  # the expanded result from further remote-shell interpretation.
   if remote_test "test -d '${deploy_dir}/.git'"; then
     log_info "Repository found."
     log_info "Updating repository..."
@@ -57,9 +60,9 @@ main() {
 set -Eeuo pipefail
 cd '${deploy_dir}'
 git fetch origin
-git checkout '${deploy_ref}'
-if git rev-parse --verify 'refs/remotes/origin/${deploy_ref}' >/dev/null 2>&1; then
-  git pull --ff-only origin '${deploy_ref}'
+git checkout ${deploy_ref}
+if git rev-parse --verify refs/remotes/origin/${deploy_ref} >/dev/null 2>&1; then
+  git pull --ff-only origin ${deploy_ref}
 fi
 "
     log_success "Repository updated."
@@ -71,7 +74,7 @@ sudo mkdir -p '${deploy_dir}'
 sudo chown \"\$(id -un):\$(id -gn)\" '${deploy_dir}'
 git clone '${clone_url}' '${deploy_dir}'
 cd '${deploy_dir}'
-git checkout '${deploy_ref}'
+git checkout ${deploy_ref}
 "
     log_success "Repository bootstrapped."
   fi
@@ -109,7 +112,10 @@ cd '${deploy_dir}'
 task health
 "
 
-  # Step 5: Deployment summary
+  # Step 5: Deployment summary.
+  # This block is only reached when all previous steps — including health checks —
+  # completed successfully. set -Eeuo pipefail ensures the script exits immediately
+  # on any failure, so these status lines accurately reflect the completed deployment.
   echo ""
   log_success "Deployment Complete"
   echo ""
