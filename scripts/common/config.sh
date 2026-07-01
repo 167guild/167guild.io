@@ -40,7 +40,7 @@ fi
 
 export GUILD_PROJECT_ID="${GUILD_PROJECT_ID:-}"
 export GUILD_REGION="${GUILD_REGION:-us-east1}"
-export GUILD_ZONE="${GUILD_ZONE:-${GUILD_REGION}-a}"
+export GUILD_ZONE="${GUILD_ZONE:-$(gcloud config get compute/zone 2>/dev/null || echo us-east1-b)}"
 export GUILD_VM_NAME="${GUILD_VM_NAME:-guild-platform-vm}"
 export GUILD_MACHINE_TYPE="${GUILD_MACHINE_TYPE:-e2-medium}"
 export GUILD_IP_NAME="${GUILD_IP_NAME:-${GUILD_VM_NAME}-ip}"
