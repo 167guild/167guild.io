@@ -9,11 +9,7 @@ source "${SCRIPT_DIR}/../common/config.sh"
 
 main() {
   local compose_cmd=(docker compose --env-file "${GUILD_REPO_ROOT}/${GUILD_PRODUCTION_ENV_FILE}" -f "${GUILD_REPO_ROOT}/docker-compose.yml" -f "${GUILD_REPO_ROOT}/${GUILD_PRODUCTION_COMPOSE_FILE}")
-  if [[ $# -gt 0 ]]; then
-    run_cmd "${compose_cmd[@]}" logs -f "$@"
-  else
-    run_cmd "${compose_cmd[@]}" logs -f caddy wikijs postgres
-  fi
+  run_cmd "${compose_cmd[@]}" ps "$@"
 }
 
 main "$@"

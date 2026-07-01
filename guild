@@ -48,7 +48,12 @@ Operations:
   guild backup [env-file]
   guild restore <backup-dir> [env-file]
   guild status
-  guild logs
+  guild ps
+  guild logs [service]
+  guild logs caddy
+  guild logs wikijs
+  guild logs postgres
+  guild restart [service]
   guild health
 HELP
 }
@@ -157,8 +162,14 @@ case "${command}" in
   status)
     run_script "${REPO_ROOT}/scripts/ops/status.sh" "$@"
     ;;
+  ps)
+    run_script "${REPO_ROOT}/scripts/ops/ps.sh" "$@"
+    ;;
   logs)
     run_script "${REPO_ROOT}/scripts/ops/logs.sh" "$@"
+    ;;
+  restart)
+    run_script "${REPO_ROOT}/scripts/ops/restart.sh" "$@"
     ;;
   health)
     run_script "${REPO_ROOT}/scripts/ops/health.sh" "$@"
