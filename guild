@@ -1,0 +1,168 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=scripts/common/lib.sh
+source "${REPO_ROOT}/scripts/common/lib.sh"
+# shellcheck source=scripts/common/config.sh
+source "${REPO_ROOT}/scripts/common/config.sh"
+
+show_help() {
+  cat <<'HELP'
+Usage:
+  guild [--verbose] [--debug] [--no-color] <command> [subcommand] [args]
+
+Core:
+  guild help
+  guild version
+  guild doctor
+
+Google Cloud:
+  guild gcp doctor
+  guild gcp enable-apis
+  guild gcp reserve-ip
+  guild gcp create-vm
+  guild gcp delete-vm [--yes]
+  guild gcp firewall
+  guild gcp ip
+  guild gcp ssh [-- <ssh args>]
+
+VM:
+  guild vm bootstrap
+  guild vm update
+  guild vm verify
+  guild vm info
+
+Deployment:
+  guild deploy
+  guild redeploy
+  guild rollback <git-ref>
+  guild verify
+
+Release:
+  guild release doctor
+  guild release verify
+
+Operations:
+  guild backup [env-file]
+  guild restore <backup-dir> [env-file]
+  guild status
+  guild logs
+  guild health
+HELP
+}
+
+run_script() {
+  local script_path="$1"
+  shift || true
+  if [[ ! -f "${script_path}" ]]; then
+    die "Command implementation not found: ${script_path}"
+  fi
+  bash "${script_path}" "$@"
+}
+
+parse_global_flags() {
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --verbose|-v)
+        export GUILD_VERBOSE=1
+        shift
+        ;;
+      --debug)
+        export GUILD_DEBUG=1
+        set -x
+        shift
+        ;;
+      --no-color)
+        export GUILD_NO_COLOR=1
+        shift
+        ;;
+      --help|-h)
+        show_help
+        exit 0
+        ;;
+      --)
+        shift
+        break
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+  REMAINING_ARGS=("$@")
+}
+
+parse_global_flags "$@"
+set -- "${REMAINING_ARGS[@]}"
+
+command="${1:-help}"
+if [[ $# -gt 0 ]]; then
+  shift
+fi
+
+case "${command}" in
+  help)
+    show_help
+    ;;
+  version)
+    echo "guild ${GUILD_VERSION}"
+    ;;
+  doctor)
+    run_script "${REPO_ROOT}/scripts/doctor/doctor.sh" "$@"
+    ;;
+  gcp)
+    subcommand="${1:-}"
+    if [[ -z "${subcommand}" ]]; then
+      die "Missing gcp subcommand. Run: guild help"
+    fi
+    shift
+    run_script "${REPO_ROOT}/scripts/gcp/${subcommand}.sh" "$@"
+    ;;
+  vm)
+    subcommand="${1:-}"
+    if [[ -z "${subcommand}" ]]; then
+      die "Missing vm subcommand. Run: guild help"
+    fi
+    shift
+    run_script "${REPO_ROOT}/scripts/vm/${subcommand}.sh" "$@"
+    ;;
+  deploy)
+    run_script "${REPO_ROOT}/scripts/deploy/deploy.sh" "$@"
+    ;;
+  redeploy)
+    run_script "${REPO_ROOT}/scripts/deploy/redeploy.sh" "$@"
+    ;;
+  rollback)
+    run_script "${REPO_ROOT}/scripts/deploy/rollback.sh" "$@"
+    ;;
+  verify)
+    run_script "${REPO_ROOT}/scripts/deploy/verify.sh" "$@"
+    ;;
+  release)
+    subcommand="${1:-}"
+    if [[ -z "${subcommand}" ]]; then
+      die "Missing release subcommand. Run: guild help"
+    fi
+    shift
+    run_script "${REPO_ROOT}/scripts/release/${subcommand}.sh" "$@"
+    ;;
+  backup)
+    run_script "${REPO_ROOT}/scripts/backup/backup.sh" "$@"
+    ;;
+  restore)
+    run_script "${REPO_ROOT}/scripts/restore/restore.sh" "$@"
+    ;;
+  status)
+    run_script "${REPO_ROOT}/scripts/ops/status.sh" "$@"
+    ;;
+  logs)
+    run_script "${REPO_ROOT}/scripts/ops/logs.sh" "$@"
+    ;;
+  health)
+    run_script "${REPO_ROOT}/scripts/ops/health.sh" "$@"
+    ;;
+  *)
+    die "Unknown command: ${command}. Run: guild help"
+    ;;
+esac
