@@ -48,6 +48,8 @@ export GUILD_NETWORK_TAG="${GUILD_NETWORK_TAG:-guild-web}"
 export GUILD_FIREWALL_RULE="${GUILD_FIREWALL_RULE:-${GUILD_VM_NAME}-allow-web}"
 export GUILD_SSH_USER="${GUILD_SSH_USER:-$USER}"
 export GUILD_DEPLOY_REF="${GUILD_DEPLOY_REF:-main}"
+export GUILD_DEPLOY_DIR="${GUILD_DEPLOY_DIR:-/opt/167guild.io}"
+export GUILD_DOMAIN="${GUILD_DOMAIN:-167guild.io}"
 export GUILD_PRODUCTION_ENV_FILE="${GUILD_PRODUCTION_ENV_FILE:-.env.production}"
 export GUILD_PRODUCTION_COMPOSE_FILE="${GUILD_PRODUCTION_COMPOSE_FILE:-deploy/production/docker-compose.production.yml}"
 
