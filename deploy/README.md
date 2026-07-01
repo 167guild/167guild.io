@@ -268,7 +268,10 @@ Configured in `deploy/production/docker-compose.production.yml` for:
 View logs with:
 
 ```bash
-task logs
+guild logs             # tail all services
+guild logs caddy       # tail caddy only
+guild logs wikijs      # tail wikijs only
+guild logs postgres    # tail postgres only
 ```
 
 ## Container Version Pinning Strategy
@@ -301,12 +304,12 @@ Version updates should be explicit and reviewed in pull requests to keep deploym
 - [ ] `.env.production` is created from `deploy/examples/.env.production.example`
 - [ ] Placeholder values are replaced for `EMAIL`, `POSTGRES_PASSWORD`, `GOOGLE_OAUTH_CLIENT_ID`, and `GOOGLE_OAUTH_CLIENT_SECRET`
 - [ ] Google OAuth client is configured with `https://167guild.io/login/callback`
-- [ ] Caddy container is running (`task status`)
-- [ ] Wiki.js container is running (`task status`)
-- [ ] PostgreSQL container is healthy (`task status`)
-- [ ] Caddy endpoint responds over HTTP and HTTPS (`task health`)
-- [ ] Wiki.js startup and health endpoint checks succeed (`task health`)
-- [ ] PostgreSQL readiness check succeeds (`task health`)
+- [ ] Caddy container is running (`guild status`)
+- [ ] Wiki.js container is running (`guild status`)
+- [ ] PostgreSQL container is healthy (`guild status`)
+- [ ] Caddy endpoint responds over HTTP and HTTPS (`guild health`)
+- [ ] Wiki.js startup and health endpoint checks succeed (`guild health`)
+- [ ] PostgreSQL readiness check succeeds (`guild health`)
 - [ ] Google OAuth login flow succeeds in browser
 - [ ] Google OAuth failure path is tested (`redirect_uri_mismatch` and disabled strategy checks)
 - [ ] Platform Administrator bootstrap is verified for `szmyty@gmail.com`
@@ -321,9 +324,9 @@ Version updates should be explicit and reviewed in pull requests to keep deploym
 ## Health Verification Details
 
 - **Caddy**: `curl -I https://$DOMAIN` should return a valid HTTP response.
-- **Wiki.js**: `task health` checks `http://localhost:3000/healthz` inside the container and falls back to `/` if needed.
+- **Wiki.js**: `guild health` checks `http://localhost:3000/healthz` inside the container and falls back to `/` if needed.
 - The primary `/healthz` endpoint matches this repository's Docker Compose healthcheck.
-- **PostgreSQL**: `task health` runs `pg_isready`.
+- **PostgreSQL**: `guild health` runs `pg_isready`.
 - **Authentication**: perform a test Google OAuth login in the deployed wiki.
 - **Groups/RBAC**: verify `Administrators`, `Dungeon Master`, `Player`, and `Viewer` exist and contain expected users.
 - **Namespaces**:

@@ -163,15 +163,11 @@ Wiki.js is the wiki engine and content management layer for the 167 Guild knowle
 ### Directory Layout
 
 ```text
-config/
-└── wikijs/
-    └── config.yml       # Application-level configuration overrides
-
 volumes:
 └── wikijs_data          # named Docker volume — persists uploads and application data
 ```
 
-Application configuration overrides live in `config/wikijs/config.yml`, mounted read-only into the container at `/wiki/config`. The named volume `wikijs_data` is mounted at `/wiki/data` and persists across container recreation.
+All runtime configuration is supplied via environment variables. The named volume `wikijs_data` is mounted at `/wiki/data` and persists across container recreation.
 
 ### Environment Variables
 
@@ -249,18 +245,18 @@ The service declares `condition: service_healthy` on `postgres` so it will not a
 
 ### Health Check
 
-The service polls the `/healthz` endpoint to confirm the application is accepting requests:
+The service polls the `/healthz` endpoint to confirm the application is accepting requests, with a fallback to `/` to support the first-time setup wizard:
 
 ```yaml
 healthcheck:
-  test: ["CMD-SHELL", "wget -q --spider http://localhost:3000/healthz || exit 1"]
+  test: ["CMD-SHELL", "wget -q --spider http://localhost:3000/healthz || wget -q --spider http://localhost:3000/ || exit 1"]
   interval: 30s
   timeout: 10s
-  retries: 5
-  start_period: 60s
+  retries: 10
+  start_period: 120s
 ```
 
-`caddy` declares `condition: service_healthy` on `wikijs`, so it will not proxy traffic until Wiki.js reports ready.
+The extended `start_period` and `retries` allow for first-time database initialization and the setup wizard without prematurely marking the container unhealthy. `caddy` declares `condition: service_healthy` on `wikijs`, so it will not proxy traffic until Wiki.js reports ready.
 
 ### Database Relationship
 

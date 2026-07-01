@@ -47,15 +47,14 @@ services:
       GOOGLE_OAUTH_CALLBACK_URL: ${GOOGLE_OAUTH_CALLBACK_URL:?GOOGLE_OAUTH_CALLBACK_URL is required}
     volumes:
       - wikijs_data:/wiki/data
-      - ./config/wikijs:/wiki/config:ro
     networks:
       - internal
     healthcheck:
       test: ["CMD-SHELL", "wget -q --spider http://localhost:3000/healthz || wget -q --spider http://localhost:3000/ || exit 1"]
       interval: 30s
       timeout: 10s
-      retries: 5
-      start_period: 60s
+      retries: 10
+      start_period: 120s
 
   postgres:
     image: postgres:16-alpine

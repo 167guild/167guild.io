@@ -82,7 +82,13 @@ guild backup
 guild restore <backup-dir>
 
 guild status
+guild ps
 guild logs
+guild logs caddy
+guild logs wikijs
+guild logs postgres
+guild restart
+guild restart caddy
 guild health
 ```
 
@@ -130,7 +136,7 @@ guild deploy
 - `guild doctor` for local prerequisites.
 - `guild gcp doctor` for GCP account and project checks.
 - `guild release doctor` for release config checks.
-- `guild logs` for service logs.
+- `guild logs` or `guild logs wikijs` for service logs.
 - `guild health` for runtime health verification.
 
 ## Extension Guide

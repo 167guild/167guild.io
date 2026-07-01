@@ -65,6 +65,8 @@ Operations
 - [x] Implement restore scripts and validate against a real backup archive
 - [x] Wire SSH deployment step in GitHub Actions deploy workflow
 - [x] Automate remote deployment bootstrap via `guild deploy` (directory creation, clone, git sync, env upload, health checks)
+- [x] Add Docker Compose wrapper commands to `guild` CLI (`guild ps`, `guild restart`, `guild logs [service]`)
+- [x] Fix Wiki.js health check timing for first-time bootstrap
 
 Release Management
 
