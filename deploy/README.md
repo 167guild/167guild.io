@@ -207,6 +207,96 @@ No manual SSH session is required for standard production deployments.
 
 `task deploy` and `task deploy:production` remain as stable entrypoints for running the deployment directly on the server (e.g., from a GitHub Actions workflow or an active SSH session).
 
+## Bootstrap vs Runtime Lifecycle
+
+Deployment operates in two distinct phases.
+
+### Bootstrap Phase
+
+On first deployment Wiki.js initializes PostgreSQL and launches the setup wizard before the application becomes fully operational. During this phase Caddy must be able to start and proxy the setup wizard so it is reachable externally.
+
+```text
+PostgreSQL starts
+
+↓
+
+Wiki.js starts (setup wizard running)
+
+↓
+
+Caddy starts (proxies setup wizard)
+
+↓
+
+Administrator completes setup wizard
+```
+
+Caddy declares `condition: service_started` on `wikijs` so it starts as soon as the Wiki.js container is running, without waiting for the full health check to pass. This allows the setup wizard to be externally accessible on first deployment.
+
+### Runtime Phase
+
+After the administrator completes setup, Wiki.js becomes fully operational and its health check passes on every subsequent start.
+
+```text
+PostgreSQL healthy
+
+↓
+
+Wiki.js healthy
+
+↓
+
+Caddy starts
+```
+
+Runtime health checks remain active on all services. Docker will mark Wiki.js as unhealthy if the application stops responding after setup is complete.
+
+## Reset Workflow
+
+`guild reset` safely removes all project containers, networks, and volumes on the production VM while preserving the Git repository and `.env.production`.
+
+```bash
+guild reset
+```
+
+This is useful when:
+
+- recovering from a failed first deployment
+- clearing state before a clean redeploy
+- removing all application data for a fresh start
+
+The equivalent Taskfile command (run directly on the server):
+
+```bash
+task deploy:reset
+```
+
+## Redeploy Workflow
+
+`guild redeploy` performs a reset followed by a clean deployment in a single step:
+
+```bash
+guild redeploy
+```
+
+Workflow:
+
+```text
+guild reset
+
+↓
+
+guild deploy
+```
+
+The equivalent Taskfile command (run directly on the server):
+
+```bash
+task deploy:redeploy
+```
+
+Use `guild redeploy` for first deployments where the previous state may be inconsistent, or when recovering from a broken stack.
+
 ## Upgrade Procedure
 
 1. Pull latest source.

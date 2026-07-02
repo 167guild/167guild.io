@@ -238,10 +238,12 @@ Wiki.js waits for PostgreSQL to pass its health check before starting:
 ```
 postgres (healthy)
     └─→ wikijs (starts, runs health check)
-            └─→ caddy (healthy wikijs required before proxying)
+            └─→ caddy (starts once wikijs container is running)
 ```
 
 The service declares `condition: service_healthy` on `postgres` so it will not attempt to connect to the database until PostgreSQL is fully ready.
+
+`caddy` declares `condition: service_started` on `wikijs` so it starts as soon as the Wiki.js container is running. This allows Caddy to proxy the Wiki.js setup wizard during first deployment before the full health check passes.
 
 ### Health Check
 
@@ -256,7 +258,7 @@ healthcheck:
   start_period: 120s
 ```
 
-The extended `start_period` and `retries` allow for first-time database initialization and the setup wizard without prematurely marking the container unhealthy. `caddy` declares `condition: service_healthy` on `wikijs`, so it will not proxy traffic until Wiki.js reports ready.
+The extended `start_period` and `retries` allow for first-time database initialization and the setup wizard without prematurely marking the container unhealthy. `caddy` declares `condition: service_started` on `wikijs`, so it starts proxying as soon as the Wiki.js container is running, making the setup wizard externally accessible during first deployment.
 
 ### Database Relationship
 
