@@ -217,9 +217,10 @@ TypeError: Cannot read properties of undefined (reading 'sendError')
     at /wiki/server/setup.js:394:20
 ```
 
-**Cause:** Upstream bug in Wiki.js 2.5.306. The setup server's error handler is invoked
-when the browser pre-fetches static resources (favicon, fonts) before installation is
-submitted.
+**Cause:** Upstream bug in Wiki.js 2.5.306. The setup wizard's error handler calls
+`res.sendError()`, which does not exist on the standard Express response object during
+setup mode. The error fires when the browser pre-fetches static resources (favicon, fonts)
+that trigger the 404 error handler before installation is submitted.
 
 **Impact:** None. The error is logged but installation completes successfully.
 
