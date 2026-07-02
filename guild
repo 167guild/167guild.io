@@ -36,6 +36,7 @@ VM:
 
 Deployment:
   guild deploy
+  guild reset
   guild redeploy
   guild rollback <git-ref>
   guild verify
@@ -135,6 +136,9 @@ case "${command}" in
     ;;
   deploy)
     run_script "${REPO_ROOT}/scripts/deploy/deploy.sh" "$@"
+    ;;
+  reset)
+    run_script "${REPO_ROOT}/scripts/deploy/reset.sh" "$@"
     ;;
   redeploy)
     run_script "${REPO_ROOT}/scripts/deploy/redeploy.sh" "$@"

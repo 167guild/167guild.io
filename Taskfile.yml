@@ -105,6 +105,22 @@ tasks:
       - '{{.COMPOSE_PRODUCTION_CMD}} config >/dev/null'
       - '{{.COMPOSE_PRODUCTION_CMD}} up -d --build --remove-orphans'
 
+  'deploy:reset':
+    desc: Stop and remove project containers, networks, and volumes (preserves .env.production and repository)
+    preconditions:
+      - sh: test -f {{.PRODUCTION_ENV_FILE}}
+        msg: ".env.production is required. See deploy/README.md."
+      - sh: test -f {{.PRODUCTION_COMPOSE_FILE}}
+        msg: "{{.PRODUCTION_COMPOSE_FILE}} is required."
+    cmds:
+      - '{{.COMPOSE_PRODUCTION_CMD}} down --volumes --remove-orphans'
+
+  'deploy:redeploy':
+    desc: Reset the production stack and perform a clean deployment
+    cmds:
+      - task: deploy:reset
+      - task: deploy:production
+
   stop:
     desc: Stop production services without removing containers
     cmds:

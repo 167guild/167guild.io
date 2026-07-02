@@ -19,7 +19,7 @@ flowchart LR
 
 | Service | Depends On | Network Exposure | Persistent Storage |
 | --- | --- | --- | --- |
-| Caddy | Wiki.js health | Public ports `80/443` | `caddy_data`, `caddy_config` |
+| Caddy | Wiki.js started | Public ports `80/443` | `caddy_data`, `caddy_config` |
 | Wiki.js | PostgreSQL health | Internal only | `wikijs_data` |
 | PostgreSQL | None | Internal only | `postgres_data` |
 

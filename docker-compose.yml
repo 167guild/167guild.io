@@ -10,7 +10,7 @@ services:
       WIKI_UPSTREAM: ${WIKI_UPSTREAM:-wikijs:3000}
     depends_on:
       wikijs:
-        condition: service_healthy
+        condition: service_started
     ports:
       - "80:80"
       - "443:443"

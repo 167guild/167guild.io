@@ -71,6 +71,7 @@ guild vm verify
 guild vm info
 
 guild deploy
+guild reset
 guild redeploy
 guild rollback <git-ref>
 guild verify
@@ -120,6 +121,40 @@ guild gcp create-vm
 guild gcp firewall
 guild vm bootstrap
 guild deploy
+```
+
+## Reset Workflow
+
+`guild reset` safely removes all project containers, networks, and volumes from the production VM while preserving the Git repository and `.env.production`.
+
+```bash
+guild reset
+```
+
+Use this when you need a clean slate without losing deployment configuration. Suitable before a first deployment or after a failed bootstrap.
+
+## Redeploy Workflow
+
+`guild redeploy` performs a reset followed by a clean deployment in one step:
+
+```bash
+guild redeploy
+```
+
+This is the recommended workflow for first deployments and when recovering from a broken state:
+
+```text
+guild reset
+
+↓
+
+guild deploy
+```
+
+The equivalent Taskfile workflow runs entirely on the server:
+
+```bash
+task deploy:redeploy
 ```
 
 ## VM Lifecycle
