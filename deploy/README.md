@@ -149,13 +149,37 @@ Platform Administrator responsibilities:
 
 ## Group Bootstrap and Onboarding
 
-Seed custom groups after first boot initializes Wiki.js schema:
+After the setup wizard completes, use `task bootstrap` to automate group and content creation:
 
 ```bash
-docker compose exec -T postgres psql \
-  -U "${POSTGRES_USER}" \
-  -d "${POSTGRES_DB}" \
+# Add to .env.production (credentials chosen during the setup wizard):
+# WIKI_ADMIN_EMAIL=admin@example.com
+# WIKI_ADMIN_PASSWORD=your-admin-password
+
+task bootstrap
+```
+
+This command:
+
+- Seeds the `Dungeon Master`, `Player`, and `Viewer` groups into PostgreSQL.
+- Creates starter wiki pages (Home, Getting Started, World, Characters, Campaign, Lore, DM Notes) via the Wiki.js GraphQL API.
+
+The script is idempotent — re-running it safely skips existing groups and pages.
+
+To run the steps individually:
+
+```bash
+# Seed custom groups only
+docker compose --env-file .env.production -f docker-compose.yml \
+  -f deploy/production/docker-compose.production.yml \
+  exec -T postgres psql \
+  -U "${POSTGRES_USER}" -d "${POSTGRES_DB}" \
   < scripts/bootstrap/seed-groups.sql
+
+# Seed starter content only
+WIKI_ADMIN_EMAIL=admin@example.com \
+WIKI_ADMIN_PASSWORD=your-password \
+bash scripts/bootstrap/seed-content.sh
 ```
 
 Initial role assignment targets:
@@ -169,6 +193,45 @@ Dungeon Master responsibilities:
 - Manage hidden `/dm/` planning content.
 - Maintain lore and campaign materials.
 - Review and curate player-submitted content.
+
+## Known First-Boot Issues
+
+These issues are observed during first deployment and are non-blocking. No manual fix is required.
+
+### Locale Sync Failure
+
+```text
+Syncing locales with Graph endpoint: [ FAILED ]
+fetch failed
+```
+
+**Cause:** Wiki.js contacts `graph.requarks.io` on startup to download updated locale files.
+This external endpoint is not always reachable from the production VM.
+
+**Impact:** None. The bundled English locale works correctly.
+
+### Setup Wizard Error Logs (sendError TypeError)
+
+```text
+TypeError: Cannot read properties of undefined (reading 'sendError')
+    at /wiki/server/setup.js:394:20
+```
+
+**Cause:** Upstream bug in Wiki.js 2.5.306. The setup server's error handler is invoked
+when the browser pre-fetches static resources (favicon, fonts) before installation is
+submitted.
+
+**Impact:** None. The error is logged but installation completes successfully.
+
+### Literal Localization Keys After Installation
+
+**Symptom:** The browser briefly shows raw keys (`welcome.title`, `fields.email`) instead
+of translated text immediately after the setup wizard completes.
+
+**Cause:** Wiki.js restarts after installation (~7–10 seconds). If the browser follows the
+post-install redirect during this window, Vue.js may render before i18n initialises.
+
+**Resolution:** Wait for the page to finish loading or refresh the browser.
 
 ## HTTPS and SSL Lifecycle
 

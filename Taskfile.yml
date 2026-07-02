@@ -145,3 +145,11 @@ tasks:
     desc: Run production health checks
     cmds:
       - bash deploy/scripts/health-check.sh {{.PRODUCTION_ENV_FILE}}
+
+  bootstrap:
+    desc: Seed initial wiki content and groups after first boot (requires WIKI_ADMIN_EMAIL and WIKI_ADMIN_PASSWORD)
+    preconditions:
+      - sh: test -f {{.PRODUCTION_ENV_FILE}}
+        msg: ".env.production is required. See deploy/README.md."
+    cmds:
+      - bash scripts/bootstrap/bootstrap.sh {{.PRODUCTION_ENV_FILE}}

@@ -41,6 +41,9 @@ Deployment:
   guild rollback <git-ref>
   guild verify
 
+Bootstrap (first boot):
+  guild bootstrap [env-file]
+
 Release:
   guild release doctor
   guild release verify
@@ -148,6 +151,9 @@ case "${command}" in
     ;;
   verify)
     run_script "${REPO_ROOT}/scripts/deploy/verify.sh" "$@"
+    ;;
+  bootstrap)
+    run_script "${REPO_ROOT}/scripts/bootstrap/bootstrap.sh" "$@"
     ;;
   release)
     subcommand="${1:-}"
