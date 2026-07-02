@@ -36,6 +36,21 @@ if ! "${COMPOSE_CMD[@]}" exec -T wikijs wget -q --spider http://localhost:3000/h
   exit 1
 fi
 
+echo "🔎 Checking Wiki.js GraphQL endpoint..."
+# A successful GraphQL introspection response confirms the API is initialised.
+graphql_response="$("${COMPOSE_CMD[@]}" exec -T wikijs \
+  wget -q -O- --timeout=10 \
+  --header='Content-Type: application/json' \
+  --post-data='{"query":"{ __typename }"}' \
+  http://localhost:3000/graphql 2>/dev/null || true)"
+if echo "${graphql_response}" | grep -q '"__typename"'; then
+  echo "✅ Wiki.js GraphQL endpoint is responding."
+else
+  echo "⚠️  Wiki.js GraphQL endpoint did not return a valid response."
+  echo "   This may indicate the application is still initialising after first boot."
+  echo "   If Wiki.js recently restarted, wait 30 seconds and re-run: task health"
+fi
+
 echo "🔎 Checking PostgreSQL readiness..."
 if ! "${COMPOSE_CMD[@]}" exec -T postgres pg_isready -U "${POSTGRES_USER}" -d "${POSTGRES_DB}"; then
   echo "❌ PostgreSQL readiness check failed."

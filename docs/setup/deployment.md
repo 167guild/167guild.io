@@ -36,6 +36,93 @@ After containers are healthy for the first time:
 7. Sign back in with the emergency admin account, open **Administration → Users**, and assign `szmyty@gmail.com` to **Administrators**.
 8. Confirm `szmyty@gmail.com` can access the full Admin area.
 
+## Known First-Boot Issues
+
+### Localization Keys Displayed Literally
+
+**Symptom:** After the setup wizard completes and Wiki.js restarts, the browser may briefly
+display raw translation keys such as `welcome.title`, `welcome.subtitle`, or `fields.email`
+instead of translated text.
+
+**Root cause:** This is a known cosmetic issue in Wiki.js 2.5.306. The Vue.js frontend can
+render components before the i18n module finishes loading during the post-installation restart.
+
+**Resolution:** Refresh the page. The translated UI appears after the full runtime
+initialises (~10–15 seconds after Wiki.js restarts).
+
+### Locale Sync Failure on Startup
+
+**Symptom:** The following errors appear in the Wiki.js container logs after first boot:
+
+```text
+Syncing locales with Graph endpoint: [ FAILED ]
+fetch failed
+Fetching latest updates from Graph endpoint: [ FAILED ]
+fetch failed
+```
+
+**Root cause:** Wiki.js attempts to contact `graph.requarks.io` on startup to download
+updated locale files and check for new versions. This endpoint is an external service that
+may be unreachable from the production VM (e.g., due to outbound network policies or
+temporary service unavailability).
+
+**Impact:** None. The bundled English locale works correctly. No user-visible text is
+affected by this failure.
+
+**Resolution:** No action required. These errors are logged once on startup and do not
+recur. They do not affect application functionality.
+
+### Setup Wizard Error Logs (sendError TypeError)
+
+**Symptom:** During the setup wizard, the following stack trace appears in logs:
+
+```text
+TypeError: Cannot read properties of undefined (reading 'sendError')
+    at /wiki/server/setup.js:394:20
+```
+
+**Root cause:** This is a known upstream bug in Wiki.js 2.5.306. The setup server's error
+handler calls `res.sendError()`, which does not exist on the standard Express response
+object. The error is triggered when the browser pre-fetches resources (favicon, fonts)
+during setup.
+
+**Impact:** None. The stack trace is logged but the installation completes successfully.
+
+**Resolution:** No action required. This is non-fatal and does not affect the setup result.
+
+## Bootstrap Automation
+
+After the setup wizard completes and Wiki.js is running, automate the initial content and
+group configuration:
+
+### 1. Set bootstrap credentials
+
+Add to `.env.production` (values chosen during the setup wizard):
+
+```bash
+WIKI_ADMIN_EMAIL=admin@example.com
+WIKI_ADMIN_PASSWORD=your-admin-password
+```
+
+### 2. Seed custom groups and initial content
+
+```bash
+task bootstrap
+```
+
+This command:
+
+- Seeds the `Dungeon Master`, `Player`, and `Viewer` groups into PostgreSQL.
+- Creates starter wiki pages (Home, Getting Started, World, Characters, Campaign, Lore, DM Notes) via the Wiki.js GraphQL API.
+
+The script is idempotent: re-running it safely skips existing groups and pages.
+
+### 3. Remove bootstrap credentials
+
+After bootstrap completes, remove or comment out the `WIKI_ADMIN_EMAIL` and
+`WIKI_ADMIN_PASSWORD` lines from `.env.production`. They are not used by the running
+application.
+
 ## Group Bootstrap
 
 After first boot initializes the Wiki.js schema, seed custom groups:
