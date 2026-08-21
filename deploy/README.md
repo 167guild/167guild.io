@@ -137,9 +137,9 @@ After the first successful `task deploy:production`:
    - `GOOGLE_OAUTH_CLIENT_ID`
    - `GOOGLE_OAUTH_CLIENT_SECRET`
    - `GOOGLE_OAUTH_CALLBACK_URL`
-4. Sign in with `szmyty@gmail.com` through Google.
-5. Assign `szmyty@gmail.com` to the built-in **Administrators** group.
-6. Verify `szmyty@gmail.com` can access **Administration**.
+4. Sign in with `platform-admin@example.invalid` through Google.
+5. Assign `platform-admin@example.invalid` to the built-in **Administrators** group.
+6. Verify `platform-admin@example.invalid` can access **Administration**.
 
 Platform Administrator responsibilities:
 
@@ -182,11 +182,11 @@ WIKI_ADMIN_PASSWORD=your-password \
 bash scripts/bootstrap/seed-content.sh
 ```
 
-Initial role assignment targets:
+Example role assignment targets:
 
-- **Platform Administrator**: `szmyty@gmail.com`
+- **Platform Administrator**: `platform-admin@example.invalid`
 - **Dungeon Master**: placeholder DM account listed in `docs/authorization.md#placeholder-accounts` (replace with final DM email)
-- **Players**: Alan (Starwhisper), Kevin, Christian, and Tom using accounts listed in `docs/authorization.md#placeholder-accounts`
+- **Players**: Player fixture one, Player fixture two, Player fixture three, and Player fixture four using accounts listed in `docs/authorization.md#placeholder-accounts`
 
 Dungeon Master responsibilities:
 
@@ -466,9 +466,9 @@ Version updates should be explicit and reviewed in pull requests to keep deploym
 - [ ] PostgreSQL readiness check succeeds (`guild health`)
 - [ ] Google OAuth login flow succeeds in browser
 - [ ] Google OAuth failure path is tested (`redirect_uri_mismatch` and disabled strategy checks)
-- [ ] Platform Administrator bootstrap is verified for `szmyty@gmail.com`
+- [ ] Platform Administrator bootstrap is verified for `platform-admin@example.invalid`
 - [ ] Dungeon Master bootstrap is verified for the account listed in `docs/authorization.md#placeholder-accounts`
-- [ ] Player bootstrap is verified for Alan (Starwhisper), Kevin, Christian, and Tom accounts from `docs/authorization.md#placeholder-accounts`
+- [ ] Player bootstrap is verified for Player fixture one, Player fixture two, Player fixture three, and Player fixture four accounts from `docs/authorization.md#placeholder-accounts`
 - [ ] Group membership is verified for Administrators, Dungeon Master, Player, and Viewer
 - [ ] Namespace permissions are verified (`/dm/`, `/characters/`, `/journals/`, `/lore/`)
 - [ ] First content pages are created and validated for expected role visibility
