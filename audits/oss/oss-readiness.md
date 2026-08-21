@@ -110,8 +110,8 @@ The following components contain 167 Guild campaign-specific content that must b
 | `.env.example` | `167guild-wiki` project name |
 | `.env.production.example` | `167guild.io` domain, `167guild-wiki` project name |
 | `docker-compose.yml` | `167guild-wiki` default project name |
-| `docs/authorization.md` | Player names (Alan, Kevin, Christian, Tom, Mitchell), email addresses |
-| `scripts/bootstrap/seed-groups.sql` | Player names, email addresses in comments |
+| `docs/authorization.md` | member identities and email addresses |
+| `scripts/bootstrap/seed-groups.sql` | Player names, identity-specific member mappings in comments |
 
 ---
 
