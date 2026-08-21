@@ -32,9 +32,9 @@ After containers are healthy for the first time:
 3. Sign in to the Wiki.js Admin panel.
 4. Configure Google OAuth in **Administration → Authentication** (see `docs/setup/oauth.md`).
 5. Sign out of the emergency admin account.
-6. Sign in with `szmyty@gmail.com` via Google.
-7. Sign back in with the emergency admin account, open **Administration → Users**, and assign `szmyty@gmail.com` to **Administrators**.
-8. Confirm `szmyty@gmail.com` can access the full Admin area.
+6. Sign in with `platform-admin@example.invalid` via Google.
+7. Sign back in with the emergency admin account, open **Administration → Users**, and assign `platform-admin@example.invalid` to **Administrators**.
+8. Confirm `platform-admin@example.invalid` can access the full Admin area.
 
 ## Known First-Boot Issues
 
@@ -136,24 +136,24 @@ docker compose exec -T postgres psql \
 
 Then assign users in **Administration → Users**:
 
-- Platform Administrator: `szmyty@gmail.com` → `Administrators`
+- Platform Administrator: `platform-admin@example.invalid` → `Administrators`
 - Dungeon Master: placeholder DM account from `docs/authorization.md#placeholder-accounts` → `Dungeon Master`
-- Players (Alan/Starwhisper, Kevin, Christian, Tom): accounts listed in `docs/authorization.md#placeholder-accounts` → `Player`
+- Players (Player fixture one, Player fixture two, Player fixture three, Player fixture four): accounts listed in `docs/authorization.md#placeholder-accounts` → `Player`
 
 Replace placeholder emails with real Google accounts when known.
 
 ## Deployment Validation Checklist
 
 - [ ] Google OAuth button is visible on login page.
-- [ ] Google login succeeds for `szmyty@gmail.com`.
-- [ ] `szmyty@gmail.com` can access Wiki.js Administration.
+- [ ] Google login succeeds for `platform-admin@example.invalid`.
+- [ ] `platform-admin@example.invalid` can access Wiki.js Administration.
 - [ ] `Dungeon Master`, `Player`, and `Viewer` groups exist after seed.
 - [ ] DM account can read/write `/dm/`.
 - [ ] Player account cannot read `/dm/` and can write `/characters/` and `/journals/`.
 - [ ] Viewer account can read public pages and cannot write.
 - [ ] Create first content pages:
   - `/lore/welcome`
-  - `/characters/starwhisper`
+  - `/characters/example-player`
   - `/journals/session-001`
   - `/dm/private-seed-note` (DM-only)
 - [ ] Verify DM-only page is hidden from Player and Viewer accounts.
@@ -163,15 +163,15 @@ Replace placeholder emails with real Google accounts when known.
 Date: 2026-06-28
 
 - [x] Google OAuth button visible on login page.
-- [x] Google login succeeds for `szmyty@gmail.com`.
-- [x] `szmyty@gmail.com` can access Wiki.js Administration.
+- [x] Google login succeeds for `platform-admin@example.invalid`.
+- [x] `platform-admin@example.invalid` can access Wiki.js Administration.
 - [x] `Dungeon Master`, `Player`, and `Viewer` groups exist after seed.
 - [x] DM account can read/write `/dm/`.
 - [x] Player account cannot read `/dm/` and can write `/characters/` and `/journals/`.
 - [x] Viewer account can read public pages and cannot write.
 - [x] Created first content pages:
   - `/lore/welcome`
-  - `/characters/starwhisper`
+  - `/characters/example-player`
   - `/journals/session-001`
   - `/dm/private-seed-note` (DM-only)
 - [x] Verified DM-only page is hidden from Player and Viewer accounts.
