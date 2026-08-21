@@ -199,7 +199,7 @@ A new engineer following this checklist should be able to deploy from scratch:
 
 - [ ] Sign in with Google OAuth and confirm login flow works
 - [ ] Run group seed script: `docker compose exec -T postgres psql -U wikijs -d wikidb < scripts/bootstrap/seed-groups.sql`
-- [ ] Assign Alan (`szmyty@gmail.com`) to the `Administrators` group in Wiki.js Admin → Users
+- [ ] Assign Platform administrator fixture (`platform-admin@example.invalid`) to the `Administrators` group in Wiki.js Admin → Users
 - [ ] Assign Dungeon Master to `Dungeon Master` group (replace placeholder email with real account)
 - [ ] Assign Players to `Player` group (replace placeholder emails with real accounts)
 - [ ] Verify `/dm/` namespace is inaccessible to Players and Viewers

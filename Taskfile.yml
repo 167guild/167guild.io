@@ -39,6 +39,7 @@ tasks:
         while IFS= read -r -d '' file; do
           bash -n "$file"
         done < <(find scripts deploy/scripts .devcontainer -type f -name '*.sh' -print0)
+      - python3 scripts/verify-public-fixtures.py
       - docker compose --env-file .env.example config >/dev/null
       - docker compose --env-file deploy/examples/.env.production.example -f {{.COMPOSE_FILE}} -f {{.PRODUCTION_COMPOSE_FILE}} config >/dev/null
       - |
