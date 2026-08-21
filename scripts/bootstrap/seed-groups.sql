@@ -185,29 +185,15 @@ WHERE NOT EXISTS (
 -- Post-seed instructions
 -- =============================================================================
 --
--- After running this seed:
+-- This script creates role definitions only. Production user identities and
+-- group assignments are private deployment state and must not be committed.
 --
 -- 1. Open the Wiki.js Admin panel.
--- 2. Navigate to Admin → Users.
--- 3. Assign users to their groups (see docs/authorization.md for details).
+-- 2. Navigate to Admin -> Users.
+-- 3. Assign approved users to the minimum required groups.
+-- 4. Verify the deny-by-default and /dm/ namespace rules.
+-- 5. Record identity-to-role mappings outside this public repository.
 --
--- Initial group assignments:
---
---   Platform Administrator:
---     - Alan (szmyty@gmail.com) → Administrators (built-in system group)
---
---   Dungeon Master:
---     - Mitchell (placeholder-dm@gmail.com) → Dungeon Master
---       Replace placeholder-dm@gmail.com with Mitchell's actual Google account.
---
---   Player:
---     - Alan/Starwhisper (szmyty@gmail.com) → Player
---     - Kevin (placeholder-kevin@gmail.com) → Player
---       Replace with Kevin's actual Google account.
---     - Christian (placeholder-christian@gmail.com) → Player
---       Replace with Christian's actual Google account.
---     - Tom (placeholder-tom@gmail.com) → Player
---       Replace with Tom's actual Google account.
---
--- See docs/authorization.md for the full onboarding process.
+-- Public documentation uses synthetic role fixtures from reserved domains.
+-- See docs/authorization.md for the complete policy.
 -- =============================================================================
